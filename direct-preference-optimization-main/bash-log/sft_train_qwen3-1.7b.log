@@ -1,0 +1,92 @@
+no FSDP port specified; using open port for FSDP: 59843
+seed: 0
+exp_name: qwen3-1.7b-sft-test
+batch_size: 16
+eval_batch_size: 8
+debug: false
+fsdp_port: 59843
+datasets:
+- /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/dataset/temp/train.jsonl
+wandb:
+  enabled: true
+  entity: null
+  project: direct-preference-optimization
+local_dirs:
+- /scr-ssd
+- /scr
+- .cache
+sample_during_eval: false
+n_eval_model_samples: 16
+do_first_eval: true
+local_run_dir: .cache/root/qwen3-1.7b-sft-test
+lr: 5.0e-07
+gradient_accumulation_steps: 4
+max_grad_norm: 10.0
+max_length: 512
+max_prompt_length: 256
+n_epochs: 2
+n_examples: null
+n_eval_examples: 256
+trainer: FSDPTrainer
+optimizer: RMSprop
+warmup_steps: 150
+activation_checkpointing: false
+eval_every: 20000
+minimum_log_interval_secs: 1.0
+model:
+  name_or_path: /fs-computility/llmit_d/shared/zhangchi/wjc/Qwen3-1.7B
+  tokenizer_name_or_path: null
+  archive: null
+  block_name: Qwen3DecoderLayer
+  policy_dtype: float32
+  fsdp_policy_mp: bfloat16
+  reference_dtype: float16
+loss:
+  name: sft
+
+================================================================================
+Writing to di-20250424135907-nk9n7:.cache/root/qwen3-1.7b-sft-test
+================================================================================
+building policy
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.40it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  2.78it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  2.42it/s]
+starting 4 processes for FSDP training
+setting RLIMIT_NOFILE soft limit to 1048576 from 1048576
+[rank1]:[W702 13:02:04.414883518 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank2]:[W702 13:02:09.706547405 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank3]:[W702 13:02:13.840302555 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank0]:[W702 13:02:13.840568210 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+0 initializing distributed
+Creating trainer on process 0 with world size 4
+Loading tokenizer /fs-computility/llmit_d/shared/zhangchi/wjc/Qwen3-1.7B
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 3.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 0% | 内存使用 4959.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 0% | 内存使用 4959.0 MB / 81251.2 MB
+Loaded train data iterator
+[GPU Monitor] GPU 3: 利用率 2% | 内存使用 417.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 0% | 内存使用 0.1 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 0% | 内存使用 0.1 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 0% | 内存使用 0.1 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 0% | 内存使用 0.1 MB / 81251.2 MB
+Finished generating 256 examples on test split
+Loaded 32 eval batches of size 8
+Sharding policy with FSDP...
+Loaded model on rank 0
+Using RMSprop optimizer
+=== Running evaluation after 0 train examples ===
+Computing eval metrics:   0%|          | 0/32 [00:00<?, ?it/s]Computing eval metrics:   3%|▎         | 1/32 [00:00<00:15,  1.98it/s]Computing eval metrics:   9%|▉         | 3/32 [00:00<00:05,  5.54it/s]Computing eval metrics:  16%|█▌        | 5/32 [00:00<00:03,  8.28it/s]Computing eval metrics:  22%|██▏       | 7/32 [00:00<00:02, 10.50it/s]Computing eval metrics:  28%|██▊       | 9/32 [00:01<00:01, 11.87it/s]Computing eval metrics:  34%|███▍      | 11/32 [00:01<00:01, 12.55it/s]Computing eval metrics:  41%|████      | 13/32 [00:01<00:01, 13.61it/s]Computing eval metrics:  47%|████▋     | 15/32 [00:01<00:01, 14.05it/s]Computing eval metrics:  53%|█████▎    | 17/32 [00:01<00:01, 14.67it/s]Computing eval metrics:  59%|█████▉    | 19/32 [00:01<00:00, 15.15it/s]Computing eval metrics:  66%|██████▌   | 21/32 [00:01<00:00, 15.43it/s]Computing eval metrics:  72%|███████▏  | 23/32 [00:01<00:00, 15.69it/s]Computing eval metrics:  78%|███████▊  | 25/32 [00:02<00:00, 15.88it/s]Computing eval metrics:  84%|████████▍ | 27/32 [00:02<00:00, 15.98it/s]Computing eval metrics:  91%|█████████ | 29/32 [00:02<00:00, 16.12it/s]Computing eval metrics:  97%|█████████▋| 31/32 [00:02<00:00, 16.19it/s]Computing eval metrics: 100%|██████████| 32/32 [00:02<00:00, 13.00it/s]
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(

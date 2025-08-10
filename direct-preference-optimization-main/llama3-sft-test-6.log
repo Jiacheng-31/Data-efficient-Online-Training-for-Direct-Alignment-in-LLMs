@@ -1,0 +1,844 @@
+WARNING: eval_every must be divisible by batch_size
+Setting eval_every to 19968
+no FSDP port specified; using open port for FSDP: 60395
+seed: 0
+exp_name: llama3-8b-test-6-sft
+batch_size: 128
+eval_batch_size: 8
+debug: false
+fsdp_port: 60395
+datasets:
+- /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/dataset/ultra-3000.jsonl
+wandb:
+  enabled: true
+  entity: null
+  project: direct-preference-optimization
+local_dirs:
+- /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache
+sample_during_eval: false
+n_eval_model_samples: 16
+do_first_eval: true
+local_run_dir: /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache/root/llama3-8b-test-6-sft
+lr: 5.0e-06
+gradient_accumulation_steps: 8
+max_grad_norm: 10.0
+max_length: 2048
+max_prompt_length: 512
+n_epochs: 1
+n_examples: null
+n_eval_examples: 256
+trainer: FSDPTrainer
+optimizer: RMSprop
+warmup_steps: 150
+activation_checkpointing: false
+eval_every: 19968
+minimum_log_interval_secs: 1.0
+model:
+  name_or_path: /fs-computility/llmit_d/shared/zhangchi/wjc/Llama3-8B-Base
+  tokenizer_name_or_path: /fs-computility/llmit_d/shared/zhangchi/wjc/Llama3-8B-Base
+  archive: null
+  block_name: LlamaDecoderLayer
+  reference_name_or_path: null
+  policy_dtype: float32
+  fsdp_policy_mp: bfloat16
+  reference_dtype: float16
+loss:
+  name: sft
+
+================================================================================
+Writing to t-20250801153619-kt7nx-worker-0:/fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache/root/llama3-8b-test-6-sft
+================================================================================
+building policy
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:06<00:19,  6.45s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:14<00:14,  7.17s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:21<00:07,  7.46s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:22<00:00,  4.78s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:22<00:00,  5.65s/it]
+starting 8 processes for FSDP training
+setting RLIMIT_NOFILE soft limit to 1048576 from 1048576
+[rank1]:[W801 07:44:22.280846320 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank2]:[W801 07:44:28.888657092 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank3]:[W801 07:44:31.053194593 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank4]:[W801 07:44:35.548947756 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank5]:[W801 07:44:39.598540667 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank6]:[W801 07:44:44.447937213 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank7]:[W801 07:44:48.242944766 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank0]:[W801 07:44:48.243309024 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+t-20250801153619-kt7nx-worker-0:2322:2322 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250801153619-kt7nx-worker-0:2322:2322 [0] NCCL INFO Bootstrap : Using eth1:172.30.27.144<0>
+t-20250801153619-kt7nx-worker-0:2322:2322 [0] NCCL INFO NET/Plugin: Failed to find ncclNetPlugin_v8 symbol.
+t-20250801153619-kt7nx-worker-0:2322:2322 [0] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v6 (v6)
+t-20250801153619-kt7nx-worker-0:2322:2322 [0] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin_v8 symbol.
+t-20250801153619-kt7nx-worker-0:2322:2322 [0] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin symbol (>= v5). ncclCollNetPlugin symbols v4 and lower are not supported.
+t-20250801153619-kt7nx-worker-0:2322:2322 [0] NCCL INFO cudaDriverVersion 12040
+NCCL version 2.21.5+cuda12.4
+0 initializing distributed
+Creating trainer on process 0 with world size 8
+Loading tokenizer /fs-computility/llmit_d/shared/zhangchi/wjc/Llama3-8B-Base
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 3.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 0% | 内存使用 13571.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 0% | 内存使用 13571.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 0% | 内存使用 13571.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 0% | 内存使用 13571.0 MB / 81251.2 MB
+Loaded train data iterator
+[GPU Monitor] GPU 5: 利用率 0% | 内存使用 13571.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 22% | 内存使用 4207.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 2% | 内存使用 417.0 MB / 81251.2 MB
+Finished generating 256 examples on test split
+Loaded 32 eval batches of size 8
+Sharding policy with FSDP...
+Loaded model on rank 0
+Using RMSprop optimizer
+=== Running evaluation after 0 train examples ===
+Computing eval metrics:   0%|          | 0/32 [00:00<?, ?it/s]Computing eval metrics:   3%|▎         | 1/32 [00:00<00:22,  1.35it/s]Computing eval metrics:   6%|▋         | 2/32 [00:00<00:11,  2.54it/s]Computing eval metrics:   9%|▉         | 3/32 [00:01<00:08,  3.62it/s]Computing eval metrics:  12%|█▎        | 4/32 [00:01<00:06,  4.21it/s]Computing eval metrics:  16%|█▌        | 5/32 [00:01<00:05,  5.01it/s]Computing eval metrics:  19%|█▉        | 6/32 [00:01<00:04,  5.40it/s]Computing eval metrics:  22%|██▏       | 7/32 [00:01<00:04,  6.01it/s]Computing eval metrics:  25%|██▌       | 8/32 [00:01<00:03,  6.59it/s]Computing eval metrics:  28%|██▊       | 9/32 [00:01<00:03,  7.32it/s]Computing eval metrics:  31%|███▏      | 10/32 [00:01<00:02,  7.72it/s]Computing eval metrics:  34%|███▍      | 11/32 [00:02<00:02,  7.70it/s]Computing eval metrics:  38%|███▊      | 12/32 [00:02<00:02,  7.73it/s]Computing eval metrics:  41%|████      | 13/32 [00:02<00:02,  7.91it/s]Computing eval metrics:  44%|████▍     | 14/32 [00:02<00:02,  7.87it/s]Computing eval metrics:  47%|████▋     | 15/32 [00:02<00:02,  7.49it/s]Computing eval metrics:  50%|█████     | 16/32 [00:02<00:02,  7.69it/s]Computing eval metrics:  53%|█████▎    | 17/32 [00:02<00:01,  7.80it/s]Computing eval metrics:  56%|█████▋    | 18/32 [00:02<00:01,  7.80it/s]Computing eval metrics:  59%|█████▉    | 19/32 [00:03<00:01,  7.47it/s]Computing eval metrics:  62%|██████▎   | 20/32 [00:03<00:01,  8.06it/s]Computing eval metrics:  66%|██████▌   | 21/32 [00:03<00:01,  7.78it/s]Computing eval metrics:  69%|██████▉   | 22/32 [00:03<00:01,  7.87it/s]Computing eval metrics:  72%|███████▏  | 23/32 [00:03<00:01,  7.86it/s]Computing eval metrics:  75%|███████▌  | 24/32 [00:03<00:01,  7.65it/s]Computing eval metrics:  78%|███████▊  | 25/32 [00:03<00:00,  7.94it/s]Computing eval metrics:  84%|████████▍ | 27/32 [00:04<00:00,  8.00it/s]Computing eval metrics:  88%|████████▊ | 28/32 [00:04<00:00,  7.29it/s]Computing eval metrics:  91%|█████████ | 29/32 [00:04<00:00,  7.26it/s]Computing eval metrics:  94%|█████████▍| 30/32 [00:04<00:00,  7.54it/s]Computing eval metrics:  97%|█████████▋| 31/32 [00:04<00:00,  7.77it/s]Computing eval metrics: 100%|██████████| 32/32 [00:04<00:00,  7.78it/s]Computing eval metrics: 100%|██████████| 32/32 [00:04<00:00,  6.65it/s]
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+1 initializing distributed
+Creating trainer on process 1 with world size 8
+6 initializing distributed
+Creating trainer on process 6 with world size 8
+t-20250801153619-kt7nx-worker-0:2407:2407 [1] NCCL INFO cudaDriverVersion 12040
+t-20250801153619-kt7nx-worker-0:2407:2407 [1] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250801153619-kt7nx-worker-0:2407:2407 [1] NCCL INFO Bootstrap : Using eth1:172.30.27.144<0>
+t-20250801153619-kt7nx-worker-0:2407:2407 [1] NCCL INFO NET/Plugin: Failed to find ncclNetPlugin_v8 symbol.
+t-20250801153619-kt7nx-worker-0:2407:2407 [1] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v6 (v6)
+t-20250801153619-kt7nx-worker-0:2407:2407 [1] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin_v8 symbol.
+t-20250801153619-kt7nx-worker-0:2407:2407 [1] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin symbol (>= v5). ncclCollNetPlugin symbols v4 and lower are not supported.
+t-20250801153619-kt7nx-worker-0:2407:2407 [1] NCCL INFO Comm config Blocking set to 1
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Plugin Path : /usr/local/nccl-rdma-sharp-plugins/lib/libnccl-net.so
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO P2P plugin IBext
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO NCCL_IB_PCI_RELAXED_ORDERING set by environment to 1.
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO NET/IB : Using [0]mlx5_1:1/RoCE [1]mlx5_2:1/RoCE [2]mlx5_3:1/RoCE [3]mlx5_4:1/RoCE [RO]; OOB eth1:172.30.27.144<0>
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Using non-device net plugin version 0
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Using network IBext
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO ncclCommInitRank comm 0x11037c10 rank 1 nranks 8 cudaDev 1 nvmlDev 1 busId 52000 commId 0xdc8028fd3fd82855 - Init START
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Setting affinity for GPU 1 to ffffffff,00000000,ffffffff
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO NVLS multicast support is not available on dev 1
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO comm 0x11037c10 rank 1 nRanks 8 nNodes 1 localRanks 8 localRank 1 MNNVL 0
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Trees [0] 2/-1/-1->1->0 [1] 2/-1/-1->1->0 [2] 2/-1/-1->1->0 [3] 2/-1/-1->1->0 [4] 2/-1/-1->1->0 [5] 2/-1/-1->1->0 [6] 2/-1/-1->1->0 [7] 2/-1/-1->1->0 [8] 2/-1/-1->1->0 [9] 2/-1/-1->1->0 [10] 2/-1/-1->1->0 [11] 2/-1/-1->1->0 [12] 2/-1/-1->1->0 [13] 2/-1/-1->1->0 [14] 2/-1/-1->1->0 [15] 2/-1/-1->1->0
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO P2P Chunksize set to 524288
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 00/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 01/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 02/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 03/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 04/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 05/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 06/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 07/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 08/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 09/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 10/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 11/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 12/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 13/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 14/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 15/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Connected all rings
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 00/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 01/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 02/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 03/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 04/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 05/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 06/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 07/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 08/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 09/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 10/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 11/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 12/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 13/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 14/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Channel 15/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO Connected all trees
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO TUNER/Plugin: Failed to find ncclTunerPlugin_v2, using internal tuner instead.
+t-20250801153619-kt7nx-worker-0:2407:3569 [1] NCCL INFO ncclCommInitRank comm 0x11037c10 rank 1 nranks 8 cudaDev 1 nvmlDev 1 busId 52000 commId 0xdc8028fd3fd82855 - Init COMPLETE
+7 initializing distributed
+Creating trainer on process 7 with world size 8
+2 initializing distributed
+Creating trainer on process 2 with world size 8
+t-20250801153619-kt7nx-worker-0:3253:3253 [7] NCCL INFO cudaDriverVersion 12040
+t-20250801153619-kt7nx-worker-0:3253:3253 [7] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250801153619-kt7nx-worker-0:3253:3253 [7] NCCL INFO Bootstrap : Using eth1:172.30.27.144<0>
+t-20250801153619-kt7nx-worker-0:3253:3253 [7] NCCL INFO NET/Plugin: Failed to find ncclNetPlugin_v8 symbol.
+t-20250801153619-kt7nx-worker-0:3253:3253 [7] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v6 (v6)
+t-20250801153619-kt7nx-worker-0:3253:3253 [7] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin_v8 symbol.
+t-20250801153619-kt7nx-worker-0:3253:3253 [7] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin symbol (>= v5). ncclCollNetPlugin symbols v4 and lower are not supported.
+t-20250801153619-kt7nx-worker-0:3253:3253 [7] NCCL INFO Comm config Blocking set to 1
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Plugin Path : /usr/local/nccl-rdma-sharp-plugins/lib/libnccl-net.so
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO P2P plugin IBext
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO NCCL_IB_PCI_RELAXED_ORDERING set by environment to 1.
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO NET/IB : Using [0]mlx5_1:1/RoCE [1]mlx5_2:1/RoCE [2]mlx5_3:1/RoCE [3]mlx5_4:1/RoCE [RO]; OOB eth1:172.30.27.144<0>
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Using non-device net plugin version 0
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Using network IBext
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO ncclCommInitRank comm 0xe3a7940 rank 7 nranks 8 cudaDev 7 nvmlDev 7 busId d8000 commId 0xdc8028fd3fd82855 - Init START
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Setting affinity for GPU 7 to ffffffff,00000000,ffffffff,00000000
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO NVLS multicast support is not available on dev 7
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO comm 0xe3a7940 rank 7 nRanks 8 nNodes 1 localRanks 8 localRank 7 MNNVL 0
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Trees [0] -1/-1/-1->7->6 [1] -1/-1/-1->7->6 [2] -1/-1/-1->7->6 [3] -1/-1/-1->7->6 [4] -1/-1/-1->7->6 [5] -1/-1/-1->7->6 [6] -1/-1/-1->7->6 [7] -1/-1/-1->7->6 [8] -1/-1/-1->7->6 [9] -1/-1/-1->7->6 [10] -1/-1/-1->7->6 [11] -1/-1/-1->7->6 [12] -1/-1/-1->7->6 [13] -1/-1/-1->7->6 [14] -1/-1/-1->7->6 [15] -1/-1/-1->7->6
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO P2P Chunksize set to 524288
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 00/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 01/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 02/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 03/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 04/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 05/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 06/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 07/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 08/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 09/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 10/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 11/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 12/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 13/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 14/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 15/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Connected all rings
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 00/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 01/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 02/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 03/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 04/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 05/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 06/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 07/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 08/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 09/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 10/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 11/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 12/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 13/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 14/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Channel 15/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO Connected all trees
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO TUNER/Plugin: Failed to find ncclTunerPlugin_v2, using internal tuner instead.
+t-20250801153619-kt7nx-worker-0:3253:3566 [7] NCCL INFO ncclCommInitRank comm 0xe3a7940 rank 7 nranks 8 cudaDev 7 nvmlDev 7 busId d8000 commId 0xdc8028fd3fd82855 - Init COMPLETE
+5 initializing distributed
+Creating trainer on process 5 with world size 8
+3 initializing distributed
+Creating trainer on process 3 with world size 8
+t-20250801153619-kt7nx-worker-0:2948:2948 [5] NCCL INFO cudaDriverVersion 12040
+t-20250801153619-kt7nx-worker-0:2948:2948 [5] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250801153619-kt7nx-worker-0:2948:2948 [5] NCCL INFO Bootstrap : Using eth1:172.30.27.144<0>
+t-20250801153619-kt7nx-worker-0:2948:2948 [5] NCCL INFO NET/Plugin: Failed to find ncclNetPlugin_v8 symbol.
+t-20250801153619-kt7nx-worker-0:2948:2948 [5] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v6 (v6)
+t-20250801153619-kt7nx-worker-0:2948:2948 [5] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin_v8 symbol.
+t-20250801153619-kt7nx-worker-0:2948:2948 [5] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin symbol (>= v5). ncclCollNetPlugin symbols v4 and lower are not supported.
+t-20250801153619-kt7nx-worker-0:2948:2948 [5] NCCL INFO Comm config Blocking set to 1
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Plugin Path : /usr/local/nccl-rdma-sharp-plugins/lib/libnccl-net.so
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO P2P plugin IBext
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO NCCL_IB_PCI_RELAXED_ORDERING set by environment to 1.
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO NET/IB : Using [0]mlx5_1:1/RoCE [1]mlx5_2:1/RoCE [2]mlx5_3:1/RoCE [3]mlx5_4:1/RoCE [RO]; OOB eth1:172.30.27.144<0>
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Using non-device net plugin version 0
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Using network IBext
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO ncclCommInitRank comm 0x11a119b0 rank 5 nranks 8 cudaDev 5 nvmlDev 5 busId b7000 commId 0xdc8028fd3fd82855 - Init START
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Setting affinity for GPU 5 to ffffffff,00000000,ffffffff,00000000
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO NVLS multicast support is not available on dev 5
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO comm 0x11a119b0 rank 5 nRanks 8 nNodes 1 localRanks 8 localRank 5 MNNVL 0
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Trees [0] 6/-1/-1->5->4 [1] 6/-1/-1->5->4 [2] 6/-1/-1->5->4 [3] 6/-1/-1->5->4 [4] 6/-1/-1->5->4 [5] 6/-1/-1->5->4 [6] 6/-1/-1->5->4 [7] 6/-1/-1->5->4 [8] 6/-1/-1->5->4 [9] 6/-1/-1->5->4 [10] 6/-1/-1->5->4 [11] 6/-1/-1->5->4 [12] 6/-1/-1->5->4 [13] 6/-1/-1->5->4 [14] 6/-1/-1->5->4 [15] 6/-1/-1->5->4
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO P2P Chunksize set to 524288
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 00/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 01/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 02/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 03/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 04/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 05/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 06/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 07/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 08/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 09/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 10/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 11/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 12/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 13/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 14/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 15/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Connected all rings
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 00/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 01/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 02/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 03/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 04/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 05/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 06/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 07/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 08/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 09/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 10/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 11/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 12/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 13/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 14/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Channel 15/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO Connected all trees
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO TUNER/Plugin: Failed to find ncclTunerPlugin_v2, using internal tuner instead.
+t-20250801153619-kt7nx-worker-0:2948:3568 [5] NCCL INFO ncclCommInitRank comm 0x11a119b0 rank 5 nranks 8 cudaDev 5 nvmlDev 5 busId b7000 commId 0xdc8028fd3fd82855 - Init COMPLETE
+4 initializing distributed
+Creating trainer on process 4 with world size 8
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 16475.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 0% | 内存使用 16571.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 0% | 内存使用 16571.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 0% | 内存使用 16571.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 0% | 内存使用 14313.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 0% | 内存使用 14565.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 0% | 内存使用 16571.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 0% | 内存使用 14217.0 MB / 81251.2 MB
+Eval after 0 examples: {'logps_eval/chosen': '-300.62', 'loss/eval': '300.62'}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 48475.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 48153.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 98% | 内存使用 48571.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 98% | 内存使用 48153.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 48625.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 48153.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 48571.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 98% | 内存使用 48109.0 MB / 81251.2 MB
+Train stats after 128 examples: {'logps_train/chosen': '-305.07', 'loss/train': '305.07', 'examples_per_second': '17.334', 'grad_norm': '2251.2', 'counters/examples': 128, 'counters/updates': 1}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 57477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 57155.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 57573.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 57155.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 57627.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 57155.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 98% | 内存使用 57573.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 57111.0 MB / 81251.2 MB
+Train stats after 256 examples: {'logps_train/chosen': '-296.05', 'loss/train': '296.05', 'examples_per_second': '16.981', 'grad_norm': '1885.1', 'counters/examples': 256, 'counters/updates': 2}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 98% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 98% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 98% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 98% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 97% | 内存使用 64515.0 MB / 81251.2 MB
+Train stats after 384 examples: {'logps_train/chosen': '-274.3', 'loss/train': '274.3', 'examples_per_second': '13.294', 'grad_norm': '1580.9', 'counters/examples': 384, 'counters/updates': 3}
+Train stats after 512 examples: {'logps_train/chosen': '-314.57', 'loss/train': '314.57', 'examples_per_second': '21.681', 'grad_norm': '1923.9', 'counters/examples': 512, 'counters/updates': 4}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 99% | 内存使用 64515.0 MB / 81251.2 MB
+Train stats after 640 examples: {'logps_train/chosen': '-277', 'loss/train': '277', 'examples_per_second': '18.221', 'grad_norm': '1563.5', 'counters/examples': 640, 'counters/updates': 5}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 98% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 98% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 97% | 内存使用 64515.0 MB / 81251.2 MB
+Train stats after 768 examples: {'logps_train/chosen': '-297.49', 'loss/train': '297.49', 'examples_per_second': '20.69', 'grad_norm': '1260.5', 'counters/examples': 768, 'counters/updates': 6}
+Train stats after 896 examples: {'logps_train/chosen': '-291.79', 'loss/train': '291.79', 'examples_per_second': '17.453', 'grad_norm': '1224.7', 'counters/examples': 896, 'counters/updates': 7}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 64515.0 MB / 81251.2 MB
+Train stats after 1024 examples: {'logps_train/chosen': '-239.48', 'loss/train': '239.48', 'examples_per_second': '20.021', 'grad_norm': '848.04', 'counters/examples': 1024, 'counters/updates': 8}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 98% | 内存使用 64515.0 MB / 81251.2 MB
+Train stats after 1152 examples: {'logps_train/chosen': '-301.41', 'loss/train': '301.41', 'examples_per_second': '19.423', 'grad_norm': '828.91', 'counters/examples': 1152, 'counters/updates': 9}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 98% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 99% | 内存使用 64515.0 MB / 81251.2 MB
+Train stats after 1280 examples: {'logps_train/chosen': '-258.61', 'loss/train': '258.61', 'examples_per_second': '17.012', 'grad_norm': '752.96', 'counters/examples': 1280, 'counters/updates': 10}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 64515.0 MB / 81251.2 MB
+Train stats after 1408 examples: {'logps_train/chosen': '-285.03', 'loss/train': '285.03', 'examples_per_second': '17.623', 'grad_norm': '651.63', 'counters/examples': 1408, 'counters/updates': 11}
+Train stats after 1536 examples: {'logps_train/chosen': '-278.38', 'loss/train': '278.38', 'examples_per_second': '19.539', 'grad_norm': '600.25', 'counters/examples': 1536, 'counters/updates': 12}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 98% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 98% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 97% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 98% | 内存使用 64515.0 MB / 81251.2 MB
+Train stats after 1664 examples: {'logps_train/chosen': '-273.52', 'loss/train': '273.52', 'examples_per_second': '16.811', 'grad_norm': '567.12', 'counters/examples': 1664, 'counters/updates': 13}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 98% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 97% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 97% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 98% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 98% | 内存使用 64515.0 MB / 81251.2 MB
+Train stats after 1792 examples: {'logps_train/chosen': '-247.01', 'loss/train': '247.01', 'examples_per_second': '18.083', 'grad_norm': '647.85', 'counters/examples': 1792, 'counters/updates': 14}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 64515.0 MB / 81251.2 MB
+Train stats after 1920 examples: {'logps_train/chosen': '-264.05', 'loss/train': '264.05', 'examples_per_second': '17.888', 'grad_norm': '589.19', 'counters/examples': 1920, 'counters/updates': 15}
+Train stats after 2048 examples: {'logps_train/chosen': '-307.92', 'loss/train': '307.92', 'examples_per_second': '17.588', 'grad_norm': '554.57', 'counters/examples': 2048, 'counters/updates': 16}
+[GPU Monitor] GPU 0: 利用率 65% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 0% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 6% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 69% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 44% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 0% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 0% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 0% | 内存使用 64515.0 MB / 81251.2 MB
+Train stats after 2176 examples: {'logps_train/chosen': '-279.65', 'loss/train': '279.65', 'examples_per_second': '14.088', 'grad_norm': '541.43', 'counters/examples': 2176, 'counters/updates': 17}
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 0% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 0% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 0% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 0% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 0% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 0% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 0% | 内存使用 64515.0 MB / 81251.2 MB
+Train stats after 2304 examples: {'logps_train/chosen': '-249.83', 'loss/train': '249.83', 'examples_per_second': '17.746', 'grad_norm': '501.47', 'counters/examples': 2304, 'counters/updates': 18}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 98% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 99% | 内存使用 64515.0 MB / 81251.2 MB
+Train stats after 2432 examples: {'logps_train/chosen': '-309.54', 'loss/train': '309.54', 'examples_per_second': '19.673', 'grad_norm': '518.77', 'counters/examples': 2432, 'counters/updates': 19}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 99% | 内存使用 64515.0 MB / 81251.2 MB
+Train stats after 2560 examples: {'logps_train/chosen': '-290.76', 'loss/train': '290.76', 'examples_per_second': '14.633', 'grad_norm': '536.06', 'counters/examples': 2560, 'counters/updates': 20}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 99% | 内存使用 64515.0 MB / 81251.2 MB
+Train stats after 2688 examples: {'logps_train/chosen': '-302.93', 'loss/train': '302.93', 'examples_per_second': '16.272', 'grad_norm': '566.19', 'counters/examples': 2688, 'counters/updates': 21}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 99% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 99% | 内存使用 64515.0 MB / 81251.2 MB
+Train stats after 2816 examples: {'logps_train/chosen': '-324.27', 'loss/train': '324.27', 'examples_per_second': '19.369', 'grad_norm': '536.54', 'counters/examples': 2816, 'counters/updates': 22}
+Train stats after 2944 examples: {'logps_train/chosen': '-293.38', 'loss/train': '293.38', 'examples_per_second': '15.302', 'grad_norm': '577.11', 'counters/examples': 2944, 'counters/updates': 23}
+Finished generating 1 epochs on train split
+[GPU Monitor] GPU 0: 利用率 8% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 64515.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 14% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 64515.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 34% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 64515.0 MB / 81251.2 MB
+Writing checkpoint to /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache/root/llama3-8b-test-6-sft/LATEST/policy.pt ...
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 64515.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 64515.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 9% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 64515.0 MB / 81251.2 MB
+Writing checkpoint to /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache/root/llama3-8b-test-6-sft/LATEST/optimizer.pt ...
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 64515.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 64881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 65031.0 MB / 81251.2 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 64559.0 MB / 81251.2 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 64977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 64515.0 MB / 81251.2 MB
+Writing checkpoint to /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache/root/llama3-8b-test-6-sft/LATEST/scheduler.pt ...
+t-20250801153619-kt7nx-worker-0:3103:3103 [6] NCCL INFO cudaDriverVersion 12040
+t-20250801153619-kt7nx-worker-0:3103:3103 [6] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250801153619-kt7nx-worker-0:3103:3103 [6] NCCL INFO Bootstrap : Using eth1:172.30.27.144<0>
+t-20250801153619-kt7nx-worker-0:3103:3103 [6] NCCL INFO NET/Plugin: Failed to find ncclNetPlugin_v8 symbol.
+t-20250801153619-kt7nx-worker-0:3103:3103 [6] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v6 (v6)
+t-20250801153619-kt7nx-worker-0:3103:3103 [6] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin_v8 symbol.
+t-20250801153619-kt7nx-worker-0:3103:3103 [6] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin symbol (>= v5). ncclCollNetPlugin symbols v4 and lower are not supported.
+t-20250801153619-kt7nx-worker-0:3103:3103 [6] NCCL INFO Comm config Blocking set to 1
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Plugin Path : /usr/local/nccl-rdma-sharp-plugins/lib/libnccl-net.so
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO P2P plugin IBext
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO NCCL_IB_PCI_RELAXED_ORDERING set by environment to 1.
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO NET/IB : Using [0]mlx5_1:1/RoCE [1]mlx5_2:1/RoCE [2]mlx5_3:1/RoCE [3]mlx5_4:1/RoCE [RO]; OOB eth1:172.30.27.144<0>
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Using non-device net plugin version 0
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Using network IBext
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO ncclCommInitRank comm 0x10024240 rank 6 nranks 8 cudaDev 6 nvmlDev 6 busId d5000 commId 0xdc8028fd3fd82855 - Init START
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Setting affinity for GPU 6 to ffffffff,00000000,ffffffff,00000000
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO NVLS multicast support is not available on dev 6
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO comm 0x10024240 rank 6 nRanks 8 nNodes 1 localRanks 8 localRank 6 MNNVL 0
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Trees [0] 7/-1/-1->6->5 [1] 7/-1/-1->6->5 [2] 7/-1/-1->6->5 [3] 7/-1/-1->6->5 [4] 7/-1/-1->6->5 [5] 7/-1/-1->6->5 [6] 7/-1/-1->6->5 [7] 7/-1/-1->6->5 [8] 7/-1/-1->6->5 [9] 7/-1/-1->6->5 [10] 7/-1/-1->6->5 [11] 7/-1/-1->6->5 [12] 7/-1/-1->6->5 [13] 7/-1/-1->6->5 [14] 7/-1/-1->6->5 [15] 7/-1/-1->6->5
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO P2P Chunksize set to 524288
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 00/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 01/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 02/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 03/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 04/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 05/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 06/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 07/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 08/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 09/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 10/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 11/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 12/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 13/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 14/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 15/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Connected all rings
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 00/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 01/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 02/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 03/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 04/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 05/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 06/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 07/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 08/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 09/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 10/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 11/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 12/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 13/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 14/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Channel 15/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO Connected all trees
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO TUNER/Plugin: Failed to find ncclTunerPlugin_v2, using internal tuner instead.
+t-20250801153619-kt7nx-worker-0:3103:3570 [6] NCCL INFO ncclCommInitRank comm 0x10024240 rank 6 nranks 8 cudaDev 6 nvmlDev 6 busId d5000 commId 0xdc8028fd3fd82855 - Init COMPLETE
+t-20250801153619-kt7nx-worker-0:2493:2493 [2] NCCL INFO cudaDriverVersion 12040
+t-20250801153619-kt7nx-worker-0:2493:2493 [2] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250801153619-kt7nx-worker-0:2493:2493 [2] NCCL INFO Bootstrap : Using eth1:172.30.27.144<0>
+t-20250801153619-kt7nx-worker-0:2493:2493 [2] NCCL INFO NET/Plugin: Failed to find ncclNetPlugin_v8 symbol.
+t-20250801153619-kt7nx-worker-0:2493:2493 [2] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v6 (v6)
+t-20250801153619-kt7nx-worker-0:2493:2493 [2] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin_v8 symbol.
+t-20250801153619-kt7nx-worker-0:2493:2493 [2] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin symbol (>= v5). ncclCollNetPlugin symbols v4 and lower are not supported.
+t-20250801153619-kt7nx-worker-0:2493:2493 [2] NCCL INFO Comm config Blocking set to 1
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Plugin Path : /usr/local/nccl-rdma-sharp-plugins/lib/libnccl-net.so
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO P2P plugin IBext
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO NCCL_IB_PCI_RELAXED_ORDERING set by environment to 1.
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO NET/IB : Using [0]mlx5_1:1/RoCE [1]mlx5_2:1/RoCE [2]mlx5_3:1/RoCE [3]mlx5_4:1/RoCE [RO]; OOB eth1:172.30.27.144<0>
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Using non-device net plugin version 0
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Using network IBext
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO ncclCommInitRank comm 0x10d092c0 rank 2 nranks 8 cudaDev 2 nvmlDev 2 busId 69000 commId 0xdc8028fd3fd82855 - Init START
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Setting affinity for GPU 2 to ffffffff,00000000,ffffffff
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO NVLS multicast support is not available on dev 2
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO comm 0x10d092c0 rank 2 nRanks 8 nNodes 1 localRanks 8 localRank 2 MNNVL 0
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Trees [0] 3/-1/-1->2->1 [1] 3/-1/-1->2->1 [2] 3/-1/-1->2->1 [3] 3/-1/-1->2->1 [4] 3/-1/-1->2->1 [5] 3/-1/-1->2->1 [6] 3/-1/-1->2->1 [7] 3/-1/-1->2->1 [8] 3/-1/-1->2->1 [9] 3/-1/-1->2->1 [10] 3/-1/-1->2->1 [11] 3/-1/-1->2->1 [12] 3/-1/-1->2->1 [13] 3/-1/-1->2->1 [14] 3/-1/-1->2->1 [15] 3/-1/-1->2->1
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO P2P Chunksize set to 524288
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 00/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 01/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 02/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 03/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 04/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 05/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 06/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 07/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 08/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 09/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 10/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 11/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 12/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 13/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 14/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 15/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Connected all rings
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 00/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 01/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 02/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 03/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 04/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 05/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 06/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 07/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 08/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 09/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 10/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 11/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 12/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 13/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 14/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Channel 15/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO Connected all trees
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO TUNER/Plugin: Failed to find ncclTunerPlugin_v2, using internal tuner instead.
+t-20250801153619-kt7nx-worker-0:2493:3572 [2] NCCL INFO ncclCommInitRank comm 0x10d092c0 rank 2 nranks 8 cudaDev 2 nvmlDev 2 busId 69000 commId 0xdc8028fd3fd82855 - Init COMPLETE
+t-20250801153619-kt7nx-worker-0:2645:2645 [3] NCCL INFO cudaDriverVersion 12040
+t-20250801153619-kt7nx-worker-0:2645:2645 [3] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250801153619-kt7nx-worker-0:2645:2645 [3] NCCL INFO Bootstrap : Using eth1:172.30.27.144<0>
+t-20250801153619-kt7nx-worker-0:2645:2645 [3] NCCL INFO NET/Plugin: Failed to find ncclNetPlugin_v8 symbol.
+t-20250801153619-kt7nx-worker-0:2645:2645 [3] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v6 (v6)
+t-20250801153619-kt7nx-worker-0:2645:2645 [3] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin_v8 symbol.
+t-20250801153619-kt7nx-worker-0:2645:2645 [3] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin symbol (>= v5). ncclCollNetPlugin symbols v4 and lower are not supported.
+t-20250801153619-kt7nx-worker-0:2645:2645 [3] NCCL INFO Comm config Blocking set to 1
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Plugin Path : /usr/local/nccl-rdma-sharp-plugins/lib/libnccl-net.so
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO P2P plugin IBext
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO NCCL_IB_PCI_RELAXED_ORDERING set by environment to 1.
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO NET/IB : Using [0]mlx5_1:1/RoCE [1]mlx5_2:1/RoCE [2]mlx5_3:1/RoCE [3]mlx5_4:1/RoCE [RO]; OOB eth1:172.30.27.144<0>
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Using non-device net plugin version 0
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Using network IBext
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO ncclCommInitRank comm 0x102bff00 rank 3 nranks 8 cudaDev 3 nvmlDev 3 busId 6f000 commId 0xdc8028fd3fd82855 - Init START
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Setting affinity for GPU 3 to ffffffff,00000000,ffffffff
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO NVLS multicast support is not available on dev 3
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO comm 0x102bff00 rank 3 nRanks 8 nNodes 1 localRanks 8 localRank 3 MNNVL 0
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Trees [0] 4/-1/-1->3->2 [1] 4/-1/-1->3->2 [2] 4/-1/-1->3->2 [3] 4/-1/-1->3->2 [4] 4/-1/-1->3->2 [5] 4/-1/-1->3->2 [6] 4/-1/-1->3->2 [7] 4/-1/-1->3->2 [8] 4/-1/-1->3->2 [9] 4/-1/-1->3->2 [10] 4/-1/-1->3->2 [11] 4/-1/-1->3->2 [12] 4/-1/-1->3->2 [13] 4/-1/-1->3->2 [14] 4/-1/-1->3->2 [15] 4/-1/-1->3->2
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO P2P Chunksize set to 524288
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 00/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 01/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 02/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 03/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 04/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 05/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 06/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 07/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 08/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 09/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 10/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 11/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 12/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 13/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 14/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 15/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Connected all rings
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 00/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 01/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 02/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 03/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 04/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 05/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 06/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 07/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 08/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 09/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 10/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 11/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 12/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 13/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 14/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Channel 15/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO Connected all trees
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO TUNER/Plugin: Failed to find ncclTunerPlugin_v2, using internal tuner instead.
+t-20250801153619-kt7nx-worker-0:2645:3571 [3] NCCL INFO ncclCommInitRank comm 0x102bff00 rank 3 nranks 8 cudaDev 3 nvmlDev 3 busId 6f000 commId 0xdc8028fd3fd82855 - Init COMPLETE
+t-20250801153619-kt7nx-worker-0:2797:2797 [4] NCCL INFO cudaDriverVersion 12040
+t-20250801153619-kt7nx-worker-0:2797:2797 [4] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250801153619-kt7nx-worker-0:2797:2797 [4] NCCL INFO Bootstrap : Using eth1:172.30.27.144<0>
+t-20250801153619-kt7nx-worker-0:2797:2797 [4] NCCL INFO NET/Plugin: Failed to find ncclNetPlugin_v8 symbol.
+t-20250801153619-kt7nx-worker-0:2797:2797 [4] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v6 (v6)
+t-20250801153619-kt7nx-worker-0:2797:2797 [4] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin_v8 symbol.
+t-20250801153619-kt7nx-worker-0:2797:2797 [4] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin symbol (>= v5). ncclCollNetPlugin symbols v4 and lower are not supported.
+t-20250801153619-kt7nx-worker-0:2797:2797 [4] NCCL INFO Comm config Blocking set to 1
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Plugin Path : /usr/local/nccl-rdma-sharp-plugins/lib/libnccl-net.so
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO P2P plugin IBext
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO NCCL_IB_PCI_RELAXED_ORDERING set by environment to 1.
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO NET/IB : Using [0]mlx5_1:1/RoCE [1]mlx5_2:1/RoCE [2]mlx5_3:1/RoCE [3]mlx5_4:1/RoCE [RO]; OOB eth1:172.30.27.144<0>
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Using non-device net plugin version 0
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Using network IBext
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO ncclCommInitRank comm 0x10aa7690 rank 4 nranks 8 cudaDev 4 nvmlDev 4 busId b3000 commId 0xdc8028fd3fd82855 - Init START
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Setting affinity for GPU 4 to ffffffff,00000000,ffffffff,00000000
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO NVLS multicast support is not available on dev 4
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO comm 0x10aa7690 rank 4 nRanks 8 nNodes 1 localRanks 8 localRank 4 MNNVL 0
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Trees [0] 5/-1/-1->4->3 [1] 5/-1/-1->4->3 [2] 5/-1/-1->4->3 [3] 5/-1/-1->4->3 [4] 5/-1/-1->4->3 [5] 5/-1/-1->4->3 [6] 5/-1/-1->4->3 [7] 5/-1/-1->4->3 [8] 5/-1/-1->4->3 [9] 5/-1/-1->4->3 [10] 5/-1/-1->4->3 [11] 5/-1/-1->4->3 [12] 5/-1/-1->4->3 [13] 5/-1/-1->4->3 [14] 5/-1/-1->4->3 [15] 5/-1/-1->4->3
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO P2P Chunksize set to 524288
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 00/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 01/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 02/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 03/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 04/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 05/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 06/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 07/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 08/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 09/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 10/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 11/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 12/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 13/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 14/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 15/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Connected all rings
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 00/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 01/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 02/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 03/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 04/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 05/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 06/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 07/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 08/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 09/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 10/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 11/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 12/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 13/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 14/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Channel 15/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO Connected all trees
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO TUNER/Plugin: Failed to find ncclTunerPlugin_v2, using internal tuner instead.
+t-20250801153619-kt7nx-worker-0:2797:3567 [4] NCCL INFO ncclCommInitRank comm 0x10aa7690 rank 4 nranks 8 cudaDev 4 nvmlDev 4 busId b3000 commId 0xdc8028fd3fd82855 - Init COMPLETE
+t-20250801153619-kt7nx-worker-0:2322:2322 [0] NCCL INFO Comm config Blocking set to 1
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Plugin Path : /usr/local/nccl-rdma-sharp-plugins/lib/libnccl-net.so
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO P2P plugin IBext
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO NCCL_IB_PCI_RELAXED_ORDERING set by environment to 1.
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO NET/IB : Using [0]mlx5_1:1/RoCE [1]mlx5_2:1/RoCE [2]mlx5_3:1/RoCE [3]mlx5_4:1/RoCE [RO]; OOB eth1:172.30.27.144<0>
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Using non-device net plugin version 0
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Using network IBext
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO ncclCommInitRank comm 0xf70fdd0 rank 0 nranks 8 cudaDev 0 nvmlDev 0 busId 4d000 commId 0xdc8028fd3fd82855 - Init START
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Setting affinity for GPU 0 to ffffffff,00000000,ffffffff
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO NVLS multicast support is not available on dev 0
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO comm 0xf70fdd0 rank 0 nRanks 8 nNodes 1 localRanks 8 localRank 0 MNNVL 0
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 00/16 :    0   1   2   3   4   5   6   7
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 01/16 :    0   1   2   3   4   5   6   7
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 02/16 :    0   1   2   3   4   5   6   7
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 03/16 :    0   1   2   3   4   5   6   7
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 04/16 :    0   1   2   3   4   5   6   7
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 05/16 :    0   1   2   3   4   5   6   7
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 06/16 :    0   1   2   3   4   5   6   7
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 07/16 :    0   1   2   3   4   5   6   7
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 08/16 :    0   1   2   3   4   5   6   7
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 09/16 :    0   1   2   3   4   5   6   7
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 10/16 :    0   1   2   3   4   5   6   7
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 11/16 :    0   1   2   3   4   5   6   7
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 12/16 :    0   1   2   3   4   5   6   7
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 13/16 :    0   1   2   3   4   5   6   7
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 14/16 :    0   1   2   3   4   5   6   7
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 15/16 :    0   1   2   3   4   5   6   7
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1 [2] 1/-1/-1->0->-1 [3] 1/-1/-1->0->-1 [4] 1/-1/-1->0->-1 [5] 1/-1/-1->0->-1 [6] 1/-1/-1->0->-1 [7] 1/-1/-1->0->-1 [8] 1/-1/-1->0->-1 [9] 1/-1/-1->0->-1 [10] 1/-1/-1->0->-1 [11] 1/-1/-1->0->-1 [12] 1/-1/-1->0->-1 [13] 1/-1/-1->0->-1 [14] 1/-1/-1->0->-1 [15] 1/-1/-1->0->-1
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO P2P Chunksize set to 524288
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 02/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 03/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 04/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 05/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 06/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 07/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 08/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 09/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 10/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 11/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 12/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 13/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 14/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Channel 15/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Connected all rings
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO Connected all trees
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO TUNER/Plugin: Failed to find ncclTunerPlugin_v2, using internal tuner instead.
+t-20250801153619-kt7nx-worker-0:2322:3565 [0] NCCL INFO ncclCommInitRank comm 0xf70fdd0 rank 0 nranks 8 cudaDev 0 nvmlDev 0 busId 4d000 commId 0xdc8028fd3fd82855 - Init COMPLETE

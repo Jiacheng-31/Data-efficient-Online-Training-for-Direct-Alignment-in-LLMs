@@ -1,0 +1,1146 @@
+WARNING: eval_every must be divisible by batch_size
+Setting eval_every to 19968
+no FSDP port specified; using open port for FSDP: 53839
+seed: 0
+exp_name: llama3-8b-sftdpo-warmup-hh-helpful-sft
+batch_size: 128
+eval_batch_size: 8
+debug: false
+fsdp_port: 53839
+datasets:
+- /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/dataset/hh-help-10000.jsonl
+wandb:
+  enabled: true
+  entity: null
+  project: direct-preference-optimization
+local_dirs:
+- /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache
+sample_during_eval: false
+n_eval_model_samples: 16
+do_first_eval: true
+local_run_dir: /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache/root/llama3-8b-sftdpo-warmup-hh-helpful-sft
+lr: 5.0e-06
+gradient_accumulation_steps: 8
+max_grad_norm: 10.0
+max_length: 2048
+max_prompt_length: 512
+n_epochs: 1
+n_examples: null
+n_eval_examples: 256
+trainer: FSDPTrainer
+optimizer: RMSprop
+warmup_steps: 150
+activation_checkpointing: false
+eval_every: 19968
+minimum_log_interval_secs: 1.0
+model:
+  name_or_path: /fs-computility/llmit_d/shared/zhangchi/wjc/Llama3-8B-Base
+  tokenizer_name_or_path: /fs-computility/llmit_d/shared/zhangchi/wjc/Llama3-8B-Base
+  archive: null
+  block_name: LlamaDecoderLayer
+  policy_dtype: float32
+  fsdp_policy_mp: bfloat16
+  reference_dtype: float16
+loss:
+  name: sft
+
+================================================================================
+Writing to t-20250727224157-jr2mh-worker-0:/fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache/root/llama3-8b-sftdpo-warmup-hh-helpful-sft
+================================================================================
+building policy
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:06<00:18,  6.14s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:14<00:14,  7.16s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:21<00:07,  7.12s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:21<00:00,  4.47s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:21<00:00,  5.37s/it]
+starting 8 processes for FSDP training
+setting RLIMIT_NOFILE soft limit to 1048576 from 1048576
+[rank1]:[W727 14:49:37.950604153 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank2]:[W727 14:49:42.740711767 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank3]:[W727 14:49:45.032914369 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank4]:[W727 14:49:49.284861445 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank5]:[W727 14:49:54.382398436 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank6]:[W727 14:49:58.291506105 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank7]:[W727 14:50:02.564856613 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank0]:[W727 14:50:03.859621968 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+t-20250727224157-jr2mh-worker-0:2308:2308 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250727224157-jr2mh-worker-0:2308:2308 [0] NCCL INFO Bootstrap : Using eth1:172.30.62.202<0>
+t-20250727224157-jr2mh-worker-0:2308:2308 [0] NCCL INFO NET/Plugin: Failed to find ncclNetPlugin_v8 symbol.
+t-20250727224157-jr2mh-worker-0:2308:2308 [0] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v6 (v6)
+t-20250727224157-jr2mh-worker-0:2308:2308 [0] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin_v8 symbol.
+t-20250727224157-jr2mh-worker-0:2308:2308 [0] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin symbol (>= v5). ncclCollNetPlugin symbols v4 and lower are not supported.
+t-20250727224157-jr2mh-worker-0:2308:2308 [0] NCCL INFO cudaDriverVersion 12040
+NCCL version 2.21.5+cuda12.4
+0 initializing distributed
+Creating trainer on process 0 with world size 8
+Loading tokenizer /fs-computility/llmit_d/shared/zhangchi/wjc/Llama3-8B-Base
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 696.8 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 0% | 内存使用 14268.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 0% | 内存使用 14268.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 0% | 内存使用 14268.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 0% | 内存使用 14268.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 0% | 内存使用 14268.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 26% | 内存使用 5434.2 MB / 81920.0 MB
+Loaded train data iterator
+[GPU Monitor] GPU 7: 利用率 2% | 内存使用 1114.2 MB / 81920.0 MB
+Finished generating 256 examples on test split
+Loaded 32 eval batches of size 8
+Sharding policy with FSDP...
+Loaded model on rank 0
+Using RMSprop optimizer
+=== Running evaluation after 0 train examples ===
+Computing eval metrics:   0%|          | 0/32 [00:00<?, ?it/s]Computing eval metrics:   3%|▎         | 1/32 [00:00<00:16,  1.90it/s]Computing eval metrics:   6%|▋         | 2/32 [00:00<00:10,  2.92it/s]Computing eval metrics:  12%|█▎        | 4/32 [00:00<00:05,  5.29it/s]Computing eval metrics:  19%|█▉        | 6/32 [00:01<00:03,  6.84it/s]Computing eval metrics:  25%|██▌       | 8/32 [00:01<00:03,  7.45it/s]Computing eval metrics:  31%|███▏      | 10/32 [00:01<00:02,  8.25it/s]Computing eval metrics:  38%|███▊      | 12/32 [00:01<00:02,  8.89it/s]Computing eval metrics:  41%|████      | 13/32 [00:01<00:02,  9.02it/s]Computing eval metrics:  47%|████▋     | 15/32 [00:02<00:01,  9.42it/s]Computing eval metrics:  53%|█████▎    | 17/32 [00:02<00:01,  9.72it/s]Computing eval metrics:  59%|█████▉    | 19/32 [00:02<00:01,  9.92it/s]Computing eval metrics:  66%|██████▌   | 21/32 [00:02<00:01,  9.98it/s]Computing eval metrics:  72%|███████▏  | 23/32 [00:02<00:00, 10.09it/s]Computing eval metrics:  78%|███████▊  | 25/32 [00:03<00:00, 10.09it/s]Computing eval metrics:  84%|████████▍ | 27/32 [00:03<00:00, 10.10it/s]Computing eval metrics:  91%|█████████ | 29/32 [00:03<00:00, 10.20it/s]Computing eval metrics:  97%|█████████▋| 31/32 [00:03<00:00,  9.75it/s]Computing eval metrics: 100%|██████████| 32/32 [00:03<00:00,  9.75it/s]Computing eval metrics: 100%|██████████| 32/32 [00:03<00:00,  8.54it/s]
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+7 initializing distributed
+Creating trainer on process 7 with world size 8
+2 initializing distributed
+Creating trainer on process 2 with world size 8
+t-20250727224157-jr2mh-worker-0:3233:3233 [7] NCCL INFO cudaDriverVersion 12040
+t-20250727224157-jr2mh-worker-0:3233:3233 [7] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250727224157-jr2mh-worker-0:3233:3233 [7] NCCL INFO Bootstrap : Using eth1:172.30.62.202<0>
+t-20250727224157-jr2mh-worker-0:3233:3233 [7] NCCL INFO NET/Plugin: Failed to find ncclNetPlugin_v8 symbol.
+t-20250727224157-jr2mh-worker-0:3233:3233 [7] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v6 (v6)
+t-20250727224157-jr2mh-worker-0:3233:3233 [7] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin_v8 symbol.
+t-20250727224157-jr2mh-worker-0:3233:3233 [7] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin symbol (>= v5). ncclCollNetPlugin symbols v4 and lower are not supported.
+t-20250727224157-jr2mh-worker-0:3233:3233 [7] NCCL INFO Comm config Blocking set to 1
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Plugin Path : /usr/local/nccl-rdma-sharp-plugins/lib/libnccl-net.so
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO P2P plugin IBext
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO NCCL_IB_PCI_RELAXED_ORDERING set by environment to 1.
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO NET/IB : Using [0]mlx5_1:1/RoCE [1]mlx5_2:1/RoCE [2]mlx5_3:1/RoCE [3]mlx5_4:1/RoCE [RO]; OOB eth1:172.30.62.202<0>
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Using non-device net plugin version 0
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Using network IBext
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO ncclCommInitRank comm 0x13169c70 rank 7 nranks 8 cudaDev 7 nvmlDev 7 busId c7000 commId 0x432918f850035c97 - Init START
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Setting affinity for GPU 7 to ffffffff,00000000,ffffffff,00000000
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO NVLS multicast support is not available on dev 7
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO comm 0x13169c70 rank 7 nRanks 8 nNodes 1 localRanks 8 localRank 7 MNNVL 0
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Trees [0] -1/-1/-1->7->6 [1] -1/-1/-1->7->6 [2] -1/-1/-1->7->6 [3] -1/-1/-1->7->6 [4] -1/-1/-1->7->6 [5] -1/-1/-1->7->6 [6] -1/-1/-1->7->6 [7] -1/-1/-1->7->6 [8] -1/-1/-1->7->6 [9] -1/-1/-1->7->6 [10] -1/-1/-1->7->6 [11] -1/-1/-1->7->6 [12] -1/-1/-1->7->6 [13] -1/-1/-1->7->6 [14] -1/-1/-1->7->6 [15] -1/-1/-1->7->6
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO P2P Chunksize set to 524288
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 00/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 01/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 02/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 03/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 04/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 05/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 06/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 07/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 08/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 09/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 10/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 11/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 12/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 13/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 14/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 15/0 : 7[7] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Connected all rings
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 00/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 01/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 02/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 03/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 04/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 05/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 06/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 07/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 08/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 09/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 10/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 11/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 12/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 13/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 14/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Channel 15/0 : 7[7] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO Connected all trees
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO TUNER/Plugin: Failed to find ncclTunerPlugin_v2, using internal tuner instead.
+t-20250727224157-jr2mh-worker-0:3233:3548 [7] NCCL INFO ncclCommInitRank comm 0x13169c70 rank 7 nranks 8 cudaDev 7 nvmlDev 7 busId c7000 commId 0x432918f850035c97 - Init COMPLETE
+4 initializing distributed
+Creating trainer on process 4 with world size 8
+3 initializing distributed
+Creating trainer on process 3 with world size 8
+t-20250727224157-jr2mh-worker-0:2783:2783 [4] NCCL INFO cudaDriverVersion 12040
+t-20250727224157-jr2mh-worker-0:2783:2783 [4] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250727224157-jr2mh-worker-0:2783:2783 [4] NCCL INFO Bootstrap : Using eth1:172.30.62.202<0>
+t-20250727224157-jr2mh-worker-0:2783:2783 [4] NCCL INFO NET/Plugin: Failed to find ncclNetPlugin_v8 symbol.
+t-20250727224157-jr2mh-worker-0:2783:2783 [4] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v6 (v6)
+t-20250727224157-jr2mh-worker-0:2783:2783 [4] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin_v8 symbol.
+t-20250727224157-jr2mh-worker-0:2783:2783 [4] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin symbol (>= v5). ncclCollNetPlugin symbols v4 and lower are not supported.
+t-20250727224157-jr2mh-worker-0:2783:2783 [4] NCCL INFO Comm config Blocking set to 1
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Plugin Path : /usr/local/nccl-rdma-sharp-plugins/lib/libnccl-net.so
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO P2P plugin IBext
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO NCCL_IB_PCI_RELAXED_ORDERING set by environment to 1.
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO NET/IB : Using [0]mlx5_1:1/RoCE [1]mlx5_2:1/RoCE [2]mlx5_3:1/RoCE [3]mlx5_4:1/RoCE [RO]; OOB eth1:172.30.62.202<0>
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Using non-device net plugin version 0
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Using network IBext
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO ncclCommInitRank comm 0x12085060 rank 4 nranks 8 cudaDev 4 nvmlDev 4 busId 9d000 commId 0x432918f850035c97 - Init START
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Setting affinity for GPU 4 to ffffffff,00000000,ffffffff,00000000
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO NVLS multicast support is not available on dev 4
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO comm 0x12085060 rank 4 nRanks 8 nNodes 1 localRanks 8 localRank 4 MNNVL 0
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Trees [0] 5/-1/-1->4->3 [1] 5/-1/-1->4->3 [2] 5/-1/-1->4->3 [3] 5/-1/-1->4->3 [4] 5/-1/-1->4->3 [5] 5/-1/-1->4->3 [6] 5/-1/-1->4->3 [7] 5/-1/-1->4->3 [8] 5/-1/-1->4->3 [9] 5/-1/-1->4->3 [10] 5/-1/-1->4->3 [11] 5/-1/-1->4->3 [12] 5/-1/-1->4->3 [13] 5/-1/-1->4->3 [14] 5/-1/-1->4->3 [15] 5/-1/-1->4->3
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO P2P Chunksize set to 524288
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 00/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 01/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 02/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 03/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 04/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 05/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 06/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 07/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 08/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 09/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 10/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 11/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 12/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 13/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 14/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 15/0 : 4[4] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Connected all rings
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 00/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 01/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 02/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 03/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 04/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 05/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 06/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 07/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 08/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 09/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 10/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 11/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 12/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 13/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 14/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Channel 15/0 : 4[4] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO Connected all trees
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO TUNER/Plugin: Failed to find ncclTunerPlugin_v2, using internal tuner instead.
+t-20250727224157-jr2mh-worker-0:2783:3545 [4] NCCL INFO ncclCommInitRank comm 0x12085060 rank 4 nranks 8 cudaDev 4 nvmlDev 4 busId 9d000 commId 0x432918f850035c97 - Init COMPLETE
+6 initializing distributed
+Creating trainer on process 6 with world size 8
+5 initializing distributed
+Creating trainer on process 5 with world size 8
+t-20250727224157-jr2mh-worker-0:3079:3079 [6] NCCL INFO cudaDriverVersion 12040
+t-20250727224157-jr2mh-worker-0:3079:3079 [6] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250727224157-jr2mh-worker-0:3079:3079 [6] NCCL INFO Bootstrap : Using eth1:172.30.62.202<0>
+t-20250727224157-jr2mh-worker-0:3079:3079 [6] NCCL INFO NET/Plugin: Failed to find ncclNetPlugin_v8 symbol.
+t-20250727224157-jr2mh-worker-0:3079:3079 [6] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v6 (v6)
+t-20250727224157-jr2mh-worker-0:3079:3079 [6] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin_v8 symbol.
+t-20250727224157-jr2mh-worker-0:3079:3079 [6] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin symbol (>= v5). ncclCollNetPlugin symbols v4 and lower are not supported.
+t-20250727224157-jr2mh-worker-0:3079:3079 [6] NCCL INFO Comm config Blocking set to 1
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Plugin Path : /usr/local/nccl-rdma-sharp-plugins/lib/libnccl-net.so
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO P2P plugin IBext
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO NCCL_IB_PCI_RELAXED_ORDERING set by environment to 1.
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO NET/IB : Using [0]mlx5_1:1/RoCE [1]mlx5_2:1/RoCE [2]mlx5_3:1/RoCE [3]mlx5_4:1/RoCE [RO]; OOB eth1:172.30.62.202<0>
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Using non-device net plugin version 0
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Using network IBext
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO ncclCommInitRank comm 0x12f82f60 rank 6 nranks 8 cudaDev 6 nvmlDev 6 busId c1000 commId 0x432918f850035c97 - Init START
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Setting affinity for GPU 6 to ffffffff,00000000,ffffffff,00000000
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO NVLS multicast support is not available on dev 6
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO comm 0x12f82f60 rank 6 nRanks 8 nNodes 1 localRanks 8 localRank 6 MNNVL 0
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Trees [0] 7/-1/-1->6->5 [1] 7/-1/-1->6->5 [2] 7/-1/-1->6->5 [3] 7/-1/-1->6->5 [4] 7/-1/-1->6->5 [5] 7/-1/-1->6->5 [6] 7/-1/-1->6->5 [7] 7/-1/-1->6->5 [8] 7/-1/-1->6->5 [9] 7/-1/-1->6->5 [10] 7/-1/-1->6->5 [11] 7/-1/-1->6->5 [12] 7/-1/-1->6->5 [13] 7/-1/-1->6->5 [14] 7/-1/-1->6->5 [15] 7/-1/-1->6->5
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO P2P Chunksize set to 524288
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 00/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 01/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 02/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 03/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 04/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 05/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 06/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 07/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 08/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 09/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 10/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 11/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 12/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 13/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 14/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 15/0 : 6[6] -> 7[7] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Connected all rings
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 00/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 01/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 02/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 03/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 04/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 05/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 06/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 07/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 08/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 09/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 10/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 11/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 12/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 13/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 14/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Channel 15/0 : 6[6] -> 5[5] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO Connected all trees
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO TUNER/Plugin: Failed to find ncclTunerPlugin_v2, using internal tuner instead.
+t-20250727224157-jr2mh-worker-0:3079:3550 [6] NCCL INFO ncclCommInitRank comm 0x12f82f60 rank 6 nranks 8 cudaDev 6 nvmlDev 6 busId c1000 commId 0x432918f850035c97 - Init COMPLETE
+1 initializing distributed
+Creating trainer on process 1 with world size 8
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 28098.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 27250.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 98% | 内存使用 28612.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 98% | 内存使用 28612.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 98% | 内存使用 27668.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 98% | 内存使用 28666.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 98% | 内存使用 28612.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 99% | 内存使用 28516.2 MB / 81920.0 MB
+Eval after 0 examples: {'logps_eval/chosen': '-132.06', 'loss/eval': '132.06'}
+Train stats after 128 examples: {'logps_train/chosen': '-137.72', 'loss/train': '137.72', 'examples_per_second': '16.356', 'grad_norm': '546.24', 'counters/examples': 128, 'counters/updates': 1}
+[GPU Monitor] GPU 0: 利用率 73% | 内存使用 52662.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 51814.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 53176.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 53176.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 81% | 内存使用 52232.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 53230.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 76% | 内存使用 53176.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 80% | 内存使用 53080.2 MB / 81920.0 MB
+Train stats after 256 examples: {'logps_train/chosen': '-126.46', 'loss/train': '126.46', 'examples_per_second': '23.206', 'grad_norm': '550.64', 'counters/examples': 256, 'counters/updates': 2}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 52662.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 51814.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 53176.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 53176.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 52232.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 99% | 内存使用 53230.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 53176.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 99% | 内存使用 53080.2 MB / 81920.0 MB
+Train stats after 384 examples: {'logps_train/chosen': '-138.79', 'loss/train': '138.79', 'examples_per_second': '25.309', 'grad_norm': '588.03', 'counters/examples': 384, 'counters/updates': 3}
+Train stats after 512 examples: {'logps_train/chosen': '-153', 'loss/train': '153', 'examples_per_second': '18.278', 'grad_norm': '547.55', 'counters/examples': 512, 'counters/updates': 4}
+[GPU Monitor] GPU 0: 利用率 9% | 内存使用 54950.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 48% | 内存使用 54278.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 0% | 内存使用 55870.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 0% | 内存使用 54654.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 30% | 内存使用 53886.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 36% | 内存使用 55548.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 27% | 内存使用 55670.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 0% | 内存使用 56090.2 MB / 81920.0 MB
+Train stats after 640 examples: {'logps_train/chosen': '-132.28', 'loss/train': '132.28', 'examples_per_second': '13.706', 'grad_norm': '513.44', 'counters/examples': 640, 'counters/updates': 5}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 64904.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 32% | 内存使用 64056.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 23% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 23% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 76% | 内存使用 64474.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 19% | 内存使用 65472.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 53% | 内存使用 65322.2 MB / 81920.0 MB
+Train stats after 768 examples: {'logps_train/chosen': '-116.2', 'loss/train': '116.2', 'examples_per_second': '24.049', 'grad_norm': '452.98', 'counters/examples': 768, 'counters/updates': 6}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 64904.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 64056.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 64474.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 99% | 内存使用 65472.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 99% | 内存使用 65322.2 MB / 81920.0 MB
+Train stats after 896 examples: {'logps_train/chosen': '-108.61', 'loss/train': '108.61', 'examples_per_second': '23.013', 'grad_norm': '432.49', 'counters/examples': 896, 'counters/updates': 7}
+Train stats after 1024 examples: {'logps_train/chosen': '-142.47', 'loss/train': '142.47', 'examples_per_second': '23.947', 'grad_norm': '500.06', 'counters/examples': 1024, 'counters/updates': 8}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 64904.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 64056.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 64474.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 65472.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 65322.2 MB / 81920.0 MB
+Train stats after 1152 examples: {'logps_train/chosen': '-113.33', 'loss/train': '113.33', 'examples_per_second': '21.975', 'grad_norm': '375.35', 'counters/examples': 1152, 'counters/updates': 9}
+Train stats after 1280 examples: {'logps_train/chosen': '-101.4', 'loss/train': '101.4', 'examples_per_second': '26.952', 'grad_norm': '342.22', 'counters/examples': 1280, 'counters/updates': 10}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 64904.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 64056.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 98% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 97% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 97% | 内存使用 64474.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 98% | 内存使用 65472.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 97% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 93% | 内存使用 65322.2 MB / 81920.0 MB
+Train stats after 1408 examples: {'logps_train/chosen': '-134.68', 'loss/train': '134.68', 'examples_per_second': '26.541', 'grad_norm': '362.1', 'counters/examples': 1408, 'counters/updates': 11}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 64904.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 64056.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 64474.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 99% | 内存使用 65472.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 99% | 内存使用 65322.2 MB / 81920.0 MB
+Train stats after 1536 examples: {'logps_train/chosen': '-131.49', 'loss/train': '131.49', 'examples_per_second': '23.181', 'grad_norm': '288.79', 'counters/examples': 1536, 'counters/updates': 12}
+Train stats after 1664 examples: {'logps_train/chosen': '-102.06', 'loss/train': '102.06', 'examples_per_second': '23.743', 'grad_norm': '248.56', 'counters/examples': 1664, 'counters/updates': 13}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 64904.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 64056.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 97% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 97% | 内存使用 64474.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 98% | 内存使用 65472.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 97% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 65322.2 MB / 81920.0 MB
+Train stats after 1792 examples: {'logps_train/chosen': '-132.22', 'loss/train': '132.22', 'examples_per_second': '21.013', 'grad_norm': '274.05', 'counters/examples': 1792, 'counters/updates': 14}
+Train stats after 1920 examples: {'logps_train/chosen': '-112.66', 'loss/train': '112.66', 'examples_per_second': '28.203', 'grad_norm': '234.23', 'counters/examples': 1920, 'counters/updates': 15}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 64904.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 64056.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 64474.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 99% | 内存使用 65472.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 99% | 内存使用 65322.2 MB / 81920.0 MB
+Train stats after 2048 examples: {'logps_train/chosen': '-113.28', 'loss/train': '113.28', 'examples_per_second': '17.159', 'grad_norm': '247.32', 'counters/examples': 2048, 'counters/updates': 16}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 64904.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 64056.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 98% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 98% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 64474.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 65472.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 98% | 内存使用 65418.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 65322.2 MB / 81920.0 MB
+Train stats after 2176 examples: {'logps_train/chosen': '-133.78', 'loss/train': '133.78', 'examples_per_second': '20.001', 'grad_norm': '324.94', 'counters/examples': 2176, 'counters/updates': 17}
+Train stats after 2304 examples: {'logps_train/chosen': '-114.09', 'loss/train': '114.09', 'examples_per_second': '26.915', 'grad_norm': '227.78', 'counters/examples': 2304, 'counters/updates': 18}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 66704.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 65856.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 97% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 97% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 98% | 内存使用 66274.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 98% | 内存使用 67272.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 97% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 98% | 内存使用 67122.2 MB / 81920.0 MB
+Train stats after 2432 examples: {'logps_train/chosen': '-122.02', 'loss/train': '122.02', 'examples_per_second': '13.616', 'grad_norm': '255.03', 'counters/examples': 2432, 'counters/updates': 19}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 66704.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 65856.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 98% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 66274.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 67272.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 67122.2 MB / 81920.0 MB
+Train stats after 2560 examples: {'logps_train/chosen': '-101.28', 'loss/train': '101.28', 'examples_per_second': '20.225', 'grad_norm': '215.45', 'counters/examples': 2560, 'counters/updates': 20}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 66704.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 65856.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 66274.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 98% | 内存使用 67272.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 98% | 内存使用 67122.2 MB / 81920.0 MB
+Train stats after 2688 examples: {'logps_train/chosen': '-120', 'loss/train': '120', 'examples_per_second': '27.518', 'grad_norm': '232.9', 'counters/examples': 2688, 'counters/updates': 21}
+Train stats after 2816 examples: {'logps_train/chosen': '-116.52', 'loss/train': '116.52', 'examples_per_second': '25.483', 'grad_norm': '224.29', 'counters/examples': 2816, 'counters/updates': 22}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 66704.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 65856.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 98% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 98% | 内存使用 66274.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 98% | 内存使用 67272.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 98% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 98% | 内存使用 67122.2 MB / 81920.0 MB
+Train stats after 2944 examples: {'logps_train/chosen': '-121.94', 'loss/train': '121.94', 'examples_per_second': '33.135', 'grad_norm': '205.9', 'counters/examples': 2944, 'counters/updates': 23}
+Train stats after 3072 examples: {'logps_train/chosen': '-128.04', 'loss/train': '128.04', 'examples_per_second': '29.595', 'grad_norm': '208.05', 'counters/examples': 3072, 'counters/updates': 24}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 66704.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 65856.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 66274.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 67272.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 97% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 67122.2 MB / 81920.0 MB
+Train stats after 3200 examples: {'logps_train/chosen': '-113.8', 'loss/train': '113.8', 'examples_per_second': '23.04', 'grad_norm': '194.74', 'counters/examples': 3200, 'counters/updates': 25}
+Train stats after 3328 examples: {'logps_train/chosen': '-112.98', 'loss/train': '112.98', 'examples_per_second': '31.061', 'grad_norm': '189.71', 'counters/examples': 3328, 'counters/updates': 26}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 66704.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 65856.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 66274.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 67272.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 67122.2 MB / 81920.0 MB
+Train stats after 3456 examples: {'logps_train/chosen': '-140.51', 'loss/train': '140.51', 'examples_per_second': '18.322', 'grad_norm': '211.67', 'counters/examples': 3456, 'counters/updates': 27}
+Train stats after 3584 examples: {'logps_train/chosen': '-126.58', 'loss/train': '126.58', 'examples_per_second': '27.491', 'grad_norm': '221.28', 'counters/examples': 3584, 'counters/updates': 28}
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 66704.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 0% | 内存使用 65856.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 0% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 8% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 36% | 内存使用 66274.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 18% | 内存使用 67272.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 0% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 13% | 内存使用 67122.2 MB / 81920.0 MB
+Train stats after 3712 examples: {'logps_train/chosen': '-122.72', 'loss/train': '122.72', 'examples_per_second': '22.967', 'grad_norm': '211.77', 'counters/examples': 3712, 'counters/updates': 29}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 66704.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 65856.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 66274.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 67272.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 67122.2 MB / 81920.0 MB
+Train stats after 3840 examples: {'logps_train/chosen': '-133.07', 'loss/train': '133.07', 'examples_per_second': '19.494', 'grad_norm': '224.99', 'counters/examples': 3840, 'counters/updates': 30}
+Train stats after 3968 examples: {'logps_train/chosen': '-112.2', 'loss/train': '112.2', 'examples_per_second': '20.286', 'grad_norm': '206.6', 'counters/examples': 3968, 'counters/updates': 31}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 66704.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 65856.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 91% | 内存使用 66274.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 67272.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 67122.2 MB / 81920.0 MB
+Train stats after 4096 examples: {'logps_train/chosen': '-116.33', 'loss/train': '116.33', 'examples_per_second': '28.354', 'grad_norm': '195', 'counters/examples': 4096, 'counters/updates': 32}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 66704.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 65856.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 97% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 66274.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 98% | 内存使用 67272.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 98% | 内存使用 67122.2 MB / 81920.0 MB
+Train stats after 4224 examples: {'logps_train/chosen': '-120.56', 'loss/train': '120.56', 'examples_per_second': '27.458', 'grad_norm': '201.34', 'counters/examples': 4224, 'counters/updates': 33}
+Train stats after 4352 examples: {'logps_train/chosen': '-114.51', 'loss/train': '114.51', 'examples_per_second': '27.754', 'grad_norm': '203.38', 'counters/examples': 4352, 'counters/updates': 34}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 66704.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 65856.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 66274.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 67272.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 98% | 内存使用 67122.2 MB / 81920.0 MB
+Train stats after 4480 examples: {'logps_train/chosen': '-149.67', 'loss/train': '149.67', 'examples_per_second': '14.931', 'grad_norm': '245.91', 'counters/examples': 4480, 'counters/updates': 35}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 66704.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 65856.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 98% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 98% | 内存使用 66274.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 99% | 内存使用 67272.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 97% | 内存使用 67218.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 67122.2 MB / 81920.0 MB
+Train stats after 4608 examples: {'logps_train/chosen': '-126.04', 'loss/train': '126.04', 'examples_per_second': '21.947', 'grad_norm': '220.3', 'counters/examples': 4608, 'counters/updates': 36}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 4736 examples: {'logps_train/chosen': '-114.94', 'loss/train': '114.94', 'examples_per_second': '12.863', 'grad_norm': '210.1', 'counters/examples': 4736, 'counters/updates': 37}
+Train stats after 4864 examples: {'logps_train/chosen': '-119.56', 'loss/train': '119.56', 'examples_per_second': '21.946', 'grad_norm': '217.8', 'counters/examples': 4864, 'counters/updates': 38}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 4992 examples: {'logps_train/chosen': '-142.75', 'loss/train': '142.75', 'examples_per_second': '24.052', 'grad_norm': '314.48', 'counters/examples': 4992, 'counters/updates': 39}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 97% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 5120 examples: {'logps_train/chosen': '-111.97', 'loss/train': '111.97', 'examples_per_second': '23.041', 'grad_norm': '217.86', 'counters/examples': 5120, 'counters/updates': 40}
+Train stats after 5248 examples: {'logps_train/chosen': '-135.3', 'loss/train': '135.3', 'examples_per_second': '26.966', 'grad_norm': '216.92', 'counters/examples': 5248, 'counters/updates': 41}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 99% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 5376 examples: {'logps_train/chosen': '-112.03', 'loss/train': '112.03', 'examples_per_second': '22.267', 'grad_norm': '202.84', 'counters/examples': 5376, 'counters/updates': 42}
+Train stats after 5504 examples: {'logps_train/chosen': '-101.16', 'loss/train': '101.16', 'examples_per_second': '27.068', 'grad_norm': '183.16', 'counters/examples': 5504, 'counters/updates': 43}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 98% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 97% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 97% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 98% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 5632 examples: {'logps_train/chosen': '-98.879', 'loss/train': '98.879', 'examples_per_second': '19.199', 'grad_norm': '170.99', 'counters/examples': 5632, 'counters/updates': 44}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 97% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 97% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 99% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 5760 examples: {'logps_train/chosen': '-117.76', 'loss/train': '117.76', 'examples_per_second': '24.275', 'grad_norm': '204.18', 'counters/examples': 5760, 'counters/updates': 45}
+Train stats after 5888 examples: {'logps_train/chosen': '-116.22', 'loss/train': '116.22', 'examples_per_second': '15.359', 'grad_norm': '196.38', 'counters/examples': 5888, 'counters/updates': 46}
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 0% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 82% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 0% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 14% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 66% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 72% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 9% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 6016 examples: {'logps_train/chosen': '-105.12', 'loss/train': '105.12', 'examples_per_second': '26.806', 'grad_norm': '188.29', 'counters/examples': 6016, 'counters/updates': 47}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+Train stats after 6144 examples: {'logps_train/chosen': '-119.11', 'loss/train': '119.11', 'examples_per_second': '26.378', 'grad_norm': '192.33', 'counters/examples': 6144, 'counters/updates': 48}
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 6272 examples: {'logps_train/chosen': '-102.01', 'loss/train': '102.01', 'examples_per_second': '26.199', 'grad_norm': '181.31', 'counters/examples': 6272, 'counters/updates': 49}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 97% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 97% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 97% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 99% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 6400 examples: {'logps_train/chosen': '-117.29', 'loss/train': '117.29', 'examples_per_second': '22.004', 'grad_norm': '221.88', 'counters/examples': 6400, 'counters/updates': 50}
+Train stats after 6528 examples: {'logps_train/chosen': '-126.45', 'loss/train': '126.45', 'examples_per_second': '26.793', 'grad_norm': '215.86', 'counters/examples': 6528, 'counters/updates': 51}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 98% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 98% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 97% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 6656 examples: {'logps_train/chosen': '-124.31', 'loss/train': '124.31', 'examples_per_second': '19.353', 'grad_norm': '230.25', 'counters/examples': 6656, 'counters/updates': 52}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 99% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 99% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 6784 examples: {'logps_train/chosen': '-137.43', 'loss/train': '137.43', 'examples_per_second': '19.995', 'grad_norm': '230.82', 'counters/examples': 6784, 'counters/updates': 53}
+Train stats after 6912 examples: {'logps_train/chosen': '-124.76', 'loss/train': '124.76', 'examples_per_second': '18.398', 'grad_norm': '197.7', 'counters/examples': 6912, 'counters/updates': 54}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 97% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 97% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 98% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 7040 examples: {'logps_train/chosen': '-122.24', 'loss/train': '122.24', 'examples_per_second': '29.799', 'grad_norm': '217.57', 'counters/examples': 7040, 'counters/updates': 55}
+Train stats after 7168 examples: {'logps_train/chosen': '-108.69', 'loss/train': '108.69', 'examples_per_second': '29.878', 'grad_norm': '185.56', 'counters/examples': 7168, 'counters/updates': 56}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 97% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 97% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 97% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 97% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 7296 examples: {'logps_train/chosen': '-122.88', 'loss/train': '122.88', 'examples_per_second': '17.061', 'grad_norm': '207.93', 'counters/examples': 7296, 'counters/updates': 57}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 7424 examples: {'logps_train/chosen': '-124.85', 'loss/train': '124.85', 'examples_per_second': '17.863', 'grad_norm': '195.89', 'counters/examples': 7424, 'counters/updates': 58}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 97% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 97% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 97% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 7552 examples: {'logps_train/chosen': '-111.19', 'loss/train': '111.19', 'examples_per_second': '26.676', 'grad_norm': '188.92', 'counters/examples': 7552, 'counters/updates': 59}
+Train stats after 7680 examples: {'logps_train/chosen': '-109.39', 'loss/train': '109.39', 'examples_per_second': '20.701', 'grad_norm': '197.24', 'counters/examples': 7680, 'counters/updates': 60}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 97% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 97% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 98% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 97% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 7808 examples: {'logps_train/chosen': '-104.23', 'loss/train': '104.23', 'examples_per_second': '16.295', 'grad_norm': '184.26', 'counters/examples': 7808, 'counters/updates': 61}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 98% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 98% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 98% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 7936 examples: {'logps_train/chosen': '-129.74', 'loss/train': '129.74', 'examples_per_second': '21.912', 'grad_norm': '206.6', 'counters/examples': 7936, 'counters/updates': 62}
+Train stats after 8064 examples: {'logps_train/chosen': '-108.63', 'loss/train': '108.63', 'examples_per_second': '27.476', 'grad_norm': '199.37', 'counters/examples': 8064, 'counters/updates': 63}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 99% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 98% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 8192 examples: {'logps_train/chosen': '-107.46', 'loss/train': '107.46', 'examples_per_second': '22.051', 'grad_norm': '193.11', 'counters/examples': 8192, 'counters/updates': 64}
+Train stats after 8320 examples: {'logps_train/chosen': '-108.96', 'loss/train': '108.96', 'examples_per_second': '23.184', 'grad_norm': '212.89', 'counters/examples': 8320, 'counters/updates': 65}
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 0% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 0% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 0% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 0% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 0% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 0% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 34% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 8448 examples: {'logps_train/chosen': '-125.31', 'loss/train': '125.31', 'examples_per_second': '30.068', 'grad_norm': '234.5', 'counters/examples': 8448, 'counters/updates': 66}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 97% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 8576 examples: {'logps_train/chosen': '-116.83', 'loss/train': '116.83', 'examples_per_second': '20.976', 'grad_norm': '220.89', 'counters/examples': 8576, 'counters/updates': 67}
+Train stats after 8704 examples: {'logps_train/chosen': '-124.95', 'loss/train': '124.95', 'examples_per_second': '27.903', 'grad_norm': '214.05', 'counters/examples': 8704, 'counters/updates': 68}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 8832 examples: {'logps_train/chosen': '-100.71', 'loss/train': '100.71', 'examples_per_second': '25.297', 'grad_norm': '204.18', 'counters/examples': 8832, 'counters/updates': 69}
+Train stats after 8960 examples: {'logps_train/chosen': '-120.6', 'loss/train': '120.6', 'examples_per_second': '24.101', 'grad_norm': '237.37', 'counters/examples': 8960, 'counters/updates': 70}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 97% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 98% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 98% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 98% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 9088 examples: {'logps_train/chosen': '-134.27', 'loss/train': '134.27', 'examples_per_second': '26.942', 'grad_norm': '228.15', 'counters/examples': 9088, 'counters/updates': 71}
+Train stats after 9216 examples: {'logps_train/chosen': '-108.64', 'loss/train': '108.64', 'examples_per_second': '20.988', 'grad_norm': '191.35', 'counters/examples': 9216, 'counters/updates': 72}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 69% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 85% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 86% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 99% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 9344 examples: {'logps_train/chosen': '-132.59', 'loss/train': '132.59', 'examples_per_second': '23.117', 'grad_norm': '209.07', 'counters/examples': 9344, 'counters/updates': 73}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 98% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 98% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 98% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 9472 examples: {'logps_train/chosen': '-114.28', 'loss/train': '114.28', 'examples_per_second': '22.184', 'grad_norm': '185.77', 'counters/examples': 9472, 'counters/updates': 74}
+Train stats after 9600 examples: {'logps_train/chosen': '-127.43', 'loss/train': '127.43', 'examples_per_second': '19.459', 'grad_norm': '228.32', 'counters/examples': 9600, 'counters/updates': 75}
+[GPU Monitor] GPU 0: 利用率 17% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 1% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 0% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 0% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 0% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 0% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 0% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 0% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 9728 examples: {'logps_train/chosen': '-118.43', 'loss/train': '118.43', 'examples_per_second': '29.53', 'grad_norm': '211.03', 'counters/examples': 9728, 'counters/updates': 76}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 99% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 99% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 99% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 99% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 99% | 内存使用 69004.2 MB / 81920.0 MB
+Train stats after 9856 examples: {'logps_train/chosen': '-124.84', 'loss/train': '124.84', 'examples_per_second': '17.166', 'grad_norm': '222.54', 'counters/examples': 9856, 'counters/updates': 77}
+Train stats after 9984 examples: {'logps_train/chosen': '-105.84', 'loss/train': '105.84', 'examples_per_second': '26.324', 'grad_norm': '202.81', 'counters/examples': 9984, 'counters/updates': 78}
+Finished generating 1 epochs on train split
+[GPU Monitor] GPU 0: 利用率 8% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 69004.2 MB / 81920.0 MB
+[GPU Monitor] GPU 0: 利用率 9% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 69004.2 MB / 81920.0 MB
+Writing checkpoint to /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache/root/llama3-8b-sftdpo-warmup-hh-helpful-sft/LATEST/policy.pt ...
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 69004.2 MB / 81920.0 MB
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 69004.2 MB / 81920.0 MB
+[GPU Monitor] GPU 0: 利用率 9% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 69004.2 MB / 81920.0 MB
+[GPU Monitor] GPU 0: 利用率 12% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 69004.2 MB / 81920.0 MB
+Writing checkpoint to /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache/root/llama3-8b-sftdpo-warmup-hh-helpful-sft/LATEST/optimizer.pt ...
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 69004.2 MB / 81920.0 MB
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 68586.2 MB / 81920.0 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67738.2 MB / 81920.0 MB
+[GPU Monitor] GPU 2: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 3: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 4: 利用率 100% | 内存使用 68156.2 MB / 81920.0 MB
+[GPU Monitor] GPU 5: 利用率 100% | 内存使用 69154.2 MB / 81920.0 MB
+[GPU Monitor] GPU 6: 利用率 100% | 内存使用 69100.2 MB / 81920.0 MB
+[GPU Monitor] GPU 7: 利用率 100% | 内存使用 69004.2 MB / 81920.0 MB
+Writing checkpoint to /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache/root/llama3-8b-sftdpo-warmup-hh-helpful-sft/LATEST/scheduler.pt ...
+t-20250727224157-jr2mh-worker-0:2480:2480 [2] NCCL INFO cudaDriverVersion 12040
+t-20250727224157-jr2mh-worker-0:2480:2480 [2] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250727224157-jr2mh-worker-0:2480:2480 [2] NCCL INFO Bootstrap : Using eth1:172.30.62.202<0>
+t-20250727224157-jr2mh-worker-0:2480:2480 [2] NCCL INFO NET/Plugin: Failed to find ncclNetPlugin_v8 symbol.
+t-20250727224157-jr2mh-worker-0:2480:2480 [2] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v6 (v6)
+t-20250727224157-jr2mh-worker-0:2480:2480 [2] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin_v8 symbol.
+t-20250727224157-jr2mh-worker-0:2480:2480 [2] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin symbol (>= v5). ncclCollNetPlugin symbols v4 and lower are not supported.
+t-20250727224157-jr2mh-worker-0:2480:2480 [2] NCCL INFO Comm config Blocking set to 1
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Plugin Path : /usr/local/nccl-rdma-sharp-plugins/lib/libnccl-net.so
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO P2P plugin IBext
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO NCCL_IB_PCI_RELAXED_ORDERING set by environment to 1.
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO NET/IB : Using [0]mlx5_1:1/RoCE [1]mlx5_2:1/RoCE [2]mlx5_3:1/RoCE [3]mlx5_4:1/RoCE [RO]; OOB eth1:172.30.62.202<0>
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Using non-device net plugin version 0
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Using network IBext
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO ncclCommInitRank comm 0x11b73bf0 rank 2 nranks 8 cudaDev 2 nvmlDev 2 busId 65000 commId 0x432918f850035c97 - Init START
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Setting affinity for GPU 2 to ffffffff,00000000,ffffffff
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO NVLS multicast support is not available on dev 2
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO comm 0x11b73bf0 rank 2 nRanks 8 nNodes 1 localRanks 8 localRank 2 MNNVL 0
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Trees [0] 3/-1/-1->2->1 [1] 3/-1/-1->2->1 [2] 3/-1/-1->2->1 [3] 3/-1/-1->2->1 [4] 3/-1/-1->2->1 [5] 3/-1/-1->2->1 [6] 3/-1/-1->2->1 [7] 3/-1/-1->2->1 [8] 3/-1/-1->2->1 [9] 3/-1/-1->2->1 [10] 3/-1/-1->2->1 [11] 3/-1/-1->2->1 [12] 3/-1/-1->2->1 [13] 3/-1/-1->2->1 [14] 3/-1/-1->2->1 [15] 3/-1/-1->2->1
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO P2P Chunksize set to 524288
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 00/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 01/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 02/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 03/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 04/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 05/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 06/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 07/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 08/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 09/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 10/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 11/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 12/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 13/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 14/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 15/0 : 2[2] -> 3[3] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Connected all rings
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 00/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 01/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 02/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 03/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 04/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 05/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 06/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 07/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 08/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 09/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 10/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 11/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 12/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 13/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 14/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Channel 15/0 : 2[2] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO Connected all trees
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO TUNER/Plugin: Failed to find ncclTunerPlugin_v2, using internal tuner instead.
+t-20250727224157-jr2mh-worker-0:2480:3546 [2] NCCL INFO ncclCommInitRank comm 0x11b73bf0 rank 2 nranks 8 cudaDev 2 nvmlDev 2 busId 65000 commId 0x432918f850035c97 - Init COMPLETE
+t-20250727224157-jr2mh-worker-0:2631:2631 [3] NCCL INFO cudaDriverVersion 12040
+t-20250727224157-jr2mh-worker-0:2631:2631 [3] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250727224157-jr2mh-worker-0:2631:2631 [3] NCCL INFO Bootstrap : Using eth1:172.30.62.202<0>
+t-20250727224157-jr2mh-worker-0:2631:2631 [3] NCCL INFO NET/Plugin: Failed to find ncclNetPlugin_v8 symbol.
+t-20250727224157-jr2mh-worker-0:2631:2631 [3] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v6 (v6)
+t-20250727224157-jr2mh-worker-0:2631:2631 [3] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin_v8 symbol.
+t-20250727224157-jr2mh-worker-0:2631:2631 [3] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin symbol (>= v5). ncclCollNetPlugin symbols v4 and lower are not supported.
+t-20250727224157-jr2mh-worker-0:2631:2631 [3] NCCL INFO Comm config Blocking set to 1
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Plugin Path : /usr/local/nccl-rdma-sharp-plugins/lib/libnccl-net.so
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO P2P plugin IBext
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO NCCL_IB_PCI_RELAXED_ORDERING set by environment to 1.
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO NET/IB : Using [0]mlx5_1:1/RoCE [1]mlx5_2:1/RoCE [2]mlx5_3:1/RoCE [3]mlx5_4:1/RoCE [RO]; OOB eth1:172.30.62.202<0>
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Using non-device net plugin version 0
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Using network IBext
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO ncclCommInitRank comm 0x12b88db0 rank 3 nranks 8 cudaDev 3 nvmlDev 3 busId 6a000 commId 0x432918f850035c97 - Init START
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Setting affinity for GPU 3 to ffffffff,00000000,ffffffff
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO NVLS multicast support is not available on dev 3
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO comm 0x12b88db0 rank 3 nRanks 8 nNodes 1 localRanks 8 localRank 3 MNNVL 0
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Trees [0] 4/-1/-1->3->2 [1] 4/-1/-1->3->2 [2] 4/-1/-1->3->2 [3] 4/-1/-1->3->2 [4] 4/-1/-1->3->2 [5] 4/-1/-1->3->2 [6] 4/-1/-1->3->2 [7] 4/-1/-1->3->2 [8] 4/-1/-1->3->2 [9] 4/-1/-1->3->2 [10] 4/-1/-1->3->2 [11] 4/-1/-1->3->2 [12] 4/-1/-1->3->2 [13] 4/-1/-1->3->2 [14] 4/-1/-1->3->2 [15] 4/-1/-1->3->2
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO P2P Chunksize set to 524288
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 00/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 01/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 02/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 03/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 04/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 05/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 06/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 07/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 08/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 09/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 10/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 11/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 12/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 13/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 14/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 15/0 : 3[3] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Connected all rings
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 00/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 01/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 02/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 03/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 04/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 05/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 06/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 07/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 08/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 09/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 10/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 11/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 12/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 13/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 14/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Channel 15/0 : 3[3] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO Connected all trees
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO TUNER/Plugin: Failed to find ncclTunerPlugin_v2, using internal tuner instead.
+t-20250727224157-jr2mh-worker-0:2631:3547 [3] NCCL INFO ncclCommInitRank comm 0x12b88db0 rank 3 nranks 8 cudaDev 3 nvmlDev 3 busId 6a000 commId 0x432918f850035c97 - Init COMPLETE
+t-20250727224157-jr2mh-worker-0:2928:2928 [5] NCCL INFO cudaDriverVersion 12040
+t-20250727224157-jr2mh-worker-0:2928:2928 [5] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250727224157-jr2mh-worker-0:2928:2928 [5] NCCL INFO Bootstrap : Using eth1:172.30.62.202<0>
+t-20250727224157-jr2mh-worker-0:2928:2928 [5] NCCL INFO NET/Plugin: Failed to find ncclNetPlugin_v8 symbol.
+t-20250727224157-jr2mh-worker-0:2928:2928 [5] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v6 (v6)
+t-20250727224157-jr2mh-worker-0:2928:2928 [5] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin_v8 symbol.
+t-20250727224157-jr2mh-worker-0:2928:2928 [5] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin symbol (>= v5). ncclCollNetPlugin symbols v4 and lower are not supported.
+t-20250727224157-jr2mh-worker-0:2928:2928 [5] NCCL INFO Comm config Blocking set to 1
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Plugin Path : /usr/local/nccl-rdma-sharp-plugins/lib/libnccl-net.so
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO P2P plugin IBext
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO NCCL_IB_PCI_RELAXED_ORDERING set by environment to 1.
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO NET/IB : Using [0]mlx5_1:1/RoCE [1]mlx5_2:1/RoCE [2]mlx5_3:1/RoCE [3]mlx5_4:1/RoCE [RO]; OOB eth1:172.30.62.202<0>
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Using non-device net plugin version 0
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Using network IBext
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO ncclCommInitRank comm 0x126a3020 rank 5 nranks 8 cudaDev 5 nvmlDev 5 busId a2000 commId 0x432918f850035c97 - Init START
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Setting affinity for GPU 5 to ffffffff,00000000,ffffffff,00000000
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO NVLS multicast support is not available on dev 5
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO comm 0x126a3020 rank 5 nRanks 8 nNodes 1 localRanks 8 localRank 5 MNNVL 0
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Trees [0] 6/-1/-1->5->4 [1] 6/-1/-1->5->4 [2] 6/-1/-1->5->4 [3] 6/-1/-1->5->4 [4] 6/-1/-1->5->4 [5] 6/-1/-1->5->4 [6] 6/-1/-1->5->4 [7] 6/-1/-1->5->4 [8] 6/-1/-1->5->4 [9] 6/-1/-1->5->4 [10] 6/-1/-1->5->4 [11] 6/-1/-1->5->4 [12] 6/-1/-1->5->4 [13] 6/-1/-1->5->4 [14] 6/-1/-1->5->4 [15] 6/-1/-1->5->4
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO P2P Chunksize set to 524288
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 00/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 01/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 02/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 03/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 04/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 05/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 06/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 07/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 08/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 09/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 10/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 11/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 12/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 13/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 14/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 15/0 : 5[5] -> 6[6] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Connected all rings
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 00/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 01/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 02/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 03/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 04/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 05/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 06/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 07/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 08/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 09/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 10/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 11/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 12/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 13/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 14/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Channel 15/0 : 5[5] -> 4[4] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO Connected all trees
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO TUNER/Plugin: Failed to find ncclTunerPlugin_v2, using internal tuner instead.
+t-20250727224157-jr2mh-worker-0:2928:3544 [5] NCCL INFO ncclCommInitRank comm 0x126a3020 rank 5 nranks 8 cudaDev 5 nvmlDev 5 busId a2000 commId 0x432918f850035c97 - Init COMPLETE
+t-20250727224157-jr2mh-worker-0:2395:2395 [1] NCCL INFO cudaDriverVersion 12040
+t-20250727224157-jr2mh-worker-0:2395:2395 [1] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250727224157-jr2mh-worker-0:2395:2395 [1] NCCL INFO Bootstrap : Using eth1:172.30.62.202<0>
+t-20250727224157-jr2mh-worker-0:2395:2395 [1] NCCL INFO NET/Plugin: Failed to find ncclNetPlugin_v8 symbol.
+t-20250727224157-jr2mh-worker-0:2395:2395 [1] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v6 (v6)
+t-20250727224157-jr2mh-worker-0:2395:2395 [1] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin_v8 symbol.
+t-20250727224157-jr2mh-worker-0:2395:2395 [1] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin symbol (>= v5). ncclCollNetPlugin symbols v4 and lower are not supported.
+t-20250727224157-jr2mh-worker-0:2395:2395 [1] NCCL INFO Comm config Blocking set to 1
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Plugin Path : /usr/local/nccl-rdma-sharp-plugins/lib/libnccl-net.so
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO P2P plugin IBext
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO NCCL_IB_PCI_RELAXED_ORDERING set by environment to 1.
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO NET/IB : Using [0]mlx5_1:1/RoCE [1]mlx5_2:1/RoCE [2]mlx5_3:1/RoCE [3]mlx5_4:1/RoCE [RO]; OOB eth1:172.30.62.202<0>
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Using non-device net plugin version 0
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Using network IBext
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO ncclCommInitRank comm 0xe7c5c10 rank 1 nranks 8 cudaDev 1 nvmlDev 1 busId 46000 commId 0x432918f850035c97 - Init START
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Setting affinity for GPU 1 to ffffffff,00000000,ffffffff
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO NVLS multicast support is not available on dev 1
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO comm 0xe7c5c10 rank 1 nRanks 8 nNodes 1 localRanks 8 localRank 1 MNNVL 0
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Trees [0] 2/-1/-1->1->0 [1] 2/-1/-1->1->0 [2] 2/-1/-1->1->0 [3] 2/-1/-1->1->0 [4] 2/-1/-1->1->0 [5] 2/-1/-1->1->0 [6] 2/-1/-1->1->0 [7] 2/-1/-1->1->0 [8] 2/-1/-1->1->0 [9] 2/-1/-1->1->0 [10] 2/-1/-1->1->0 [11] 2/-1/-1->1->0 [12] 2/-1/-1->1->0 [13] 2/-1/-1->1->0 [14] 2/-1/-1->1->0 [15] 2/-1/-1->1->0
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO P2P Chunksize set to 524288
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 00/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 01/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 02/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 03/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 04/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 05/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 06/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 07/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 08/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 09/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 10/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 11/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 12/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 13/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 14/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 15/0 : 1[1] -> 2[2] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Connected all rings
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 00/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 01/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 02/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 03/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 04/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 05/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 06/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 07/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 08/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 09/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 10/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 11/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 12/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 13/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 14/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Channel 15/0 : 1[1] -> 0[0] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO Connected all trees
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO TUNER/Plugin: Failed to find ncclTunerPlugin_v2, using internal tuner instead.
+t-20250727224157-jr2mh-worker-0:2395:3549 [1] NCCL INFO ncclCommInitRank comm 0xe7c5c10 rank 1 nranks 8 cudaDev 1 nvmlDev 1 busId 46000 commId 0x432918f850035c97 - Init COMPLETE
+t-20250727224157-jr2mh-worker-0:2308:2308 [0] NCCL INFO Comm config Blocking set to 1
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Plugin Path : /usr/local/nccl-rdma-sharp-plugins/lib/libnccl-net.so
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO P2P plugin IBext
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth1
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO NCCL_IB_PCI_RELAXED_ORDERING set by environment to 1.
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO NET/IB : Using [0]mlx5_1:1/RoCE [1]mlx5_2:1/RoCE [2]mlx5_3:1/RoCE [3]mlx5_4:1/RoCE [RO]; OOB eth1:172.30.62.202<0>
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Using non-device net plugin version 0
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Using network IBext
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO ncclCommInitRank comm 0xd0e3000 rank 0 nranks 8 cudaDev 0 nvmlDev 0 busId 40000 commId 0x432918f850035c97 - Init START
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Setting affinity for GPU 0 to ffffffff,00000000,ffffffff
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO NVLS multicast support is not available on dev 0
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO comm 0xd0e3000 rank 0 nRanks 8 nNodes 1 localRanks 8 localRank 0 MNNVL 0
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 00/16 :    0   1   2   3   4   5   6   7
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 01/16 :    0   1   2   3   4   5   6   7
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 02/16 :    0   1   2   3   4   5   6   7
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 03/16 :    0   1   2   3   4   5   6   7
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 04/16 :    0   1   2   3   4   5   6   7
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 05/16 :    0   1   2   3   4   5   6   7
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 06/16 :    0   1   2   3   4   5   6   7
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 07/16 :    0   1   2   3   4   5   6   7
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 08/16 :    0   1   2   3   4   5   6   7
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 09/16 :    0   1   2   3   4   5   6   7
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 10/16 :    0   1   2   3   4   5   6   7
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 11/16 :    0   1   2   3   4   5   6   7
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 12/16 :    0   1   2   3   4   5   6   7
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 13/16 :    0   1   2   3   4   5   6   7
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 14/16 :    0   1   2   3   4   5   6   7
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 15/16 :    0   1   2   3   4   5   6   7
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1 [2] 1/-1/-1->0->-1 [3] 1/-1/-1->0->-1 [4] 1/-1/-1->0->-1 [5] 1/-1/-1->0->-1 [6] 1/-1/-1->0->-1 [7] 1/-1/-1->0->-1 [8] 1/-1/-1->0->-1 [9] 1/-1/-1->0->-1 [10] 1/-1/-1->0->-1 [11] 1/-1/-1->0->-1 [12] 1/-1/-1->0->-1 [13] 1/-1/-1->0->-1 [14] 1/-1/-1->0->-1 [15] 1/-1/-1->0->-1
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO P2P Chunksize set to 524288
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 02/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 03/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 04/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 05/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 06/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 07/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 08/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 09/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 10/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 11/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 12/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 13/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 14/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Channel 15/0 : 0[0] -> 1[1] via P2P/CUMEM/read
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Connected all rings
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO Connected all trees
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO TUNER/Plugin: Failed to find ncclTunerPlugin_v2, using internal tuner instead.
+t-20250727224157-jr2mh-worker-0:2308:3543 [0] NCCL INFO ncclCommInitRank comm 0xd0e3000 rank 0 nranks 8 cudaDev 0 nvmlDev 0 busId 40000 commId 0x432918f850035c97 - Init COMPLETE

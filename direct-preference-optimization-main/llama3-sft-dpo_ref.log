@@ -1,0 +1,1168 @@
+no FSDP port specified; using open port for FSDP: 50567
+seed: 0
+exp_name: llama3-8b-sftdpo-warmup-hh-helpful-ref-1-dpo
+batch_size: 32
+eval_batch_size: 16
+debug: false
+fsdp_port: 50567
+datasets:
+- /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/dataset/hh-help-10000.jsonl
+wandb:
+  enabled: true
+  entity: null
+  project: direct-preference-optimization
+local_dirs:
+- /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache
+sample_during_eval: false
+n_eval_model_samples: 16
+do_first_eval: true
+local_run_dir: /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache/root/llama3-8b-sftdpo-warmup-hh-helpful-ref-1-dpo
+lr: 5.0e-06
+gradient_accumulation_steps: 16
+max_grad_norm: 10.0
+max_length: 2048
+max_prompt_length: 512
+n_epochs: 1
+n_examples: null
+n_eval_examples: 256
+trainer: FSDPTrainer
+optimizer: RMSprop
+warmup_steps: 150
+activation_checkpointing: false
+eval_every: 20000
+minimum_log_interval_secs: 1.0
+model:
+  name_or_path: /fs-computility/llmit_d/shared/zhangchi/wjc/Llama3-8B-Base
+  tokenizer_name_or_path: /fs-computility/llmit_d/shared/zhangchi/wjc/Llama3-8B-Base
+  archive: /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache/root/llama3-8b-sftdpo-warmup-hh-helpful-sft/LATEST/policy.pt
+  block_name: LlamaDecoderLayer
+  reference_name_or_path: /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/turn/llama3-8b-hh-helpful-sft-warmup
+  policy_dtype: bfloat16
+  fsdp_policy_mp: bfloat16
+  reference_dtype: bfloat16
+loss:
+  name: dpo
+  beta: 0.1
+  label_smoothing: 0
+  reference_free: false
+
+================================================================================
+Writing to di-20250722172454-p54jz:/fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache/root/llama3-8b-sftdpo-warmup-hh-helpful-ref-1-dpo
+================================================================================
+building policy
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00, 11.10it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 14.35it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 13.73it/s]
+building reference model
+Loading checkpoint shards:   0%|          | 0/7 [00:00<?, ?it/s]Loading checkpoint shards:  14%|█▍        | 1/7 [00:03<00:20,  3.40s/it]Loading checkpoint shards:  29%|██▊       | 2/7 [00:08<00:20,  4.19s/it]Loading checkpoint shards:  43%|████▎     | 3/7 [00:13<00:18,  4.74s/it]Loading checkpoint shards:  57%|█████▋    | 4/7 [00:18<00:14,  5.00s/it]Loading checkpoint shards:  71%|███████▏  | 5/7 [00:22<00:09,  4.64s/it]Loading checkpoint shards:  86%|████████▌ | 6/7 [00:27<00:04,  4.75s/it]Loading checkpoint shards: 100%|██████████| 7/7 [00:29<00:00,  3.63s/it]Loading checkpoint shards: 100%|██████████| 7/7 [00:29<00:00,  4.17s/it]
+loading pre-trained weights at step 9984 from /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache/root/llama3-8b-sftdpo-warmup-hh-helpful-sft/LATEST/policy.pt with metrics {}
+loaded pre-trained weights
+starting 2 processes for FSDP training
+setting RLIMIT_NOFILE soft limit to 1048576 from 1048576
+[rank1]:[W730 11:45:17.295674255 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank0]:[W730 11:45:18.221623020 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+0 initializing distributed
+Creating trainer on process 0 with world size 2
+Loading tokenizer /fs-computility/llmit_d/shared/zhangchi/wjc/Llama3-8B-Base
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 3.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 0% | 内存使用 15.0 MB / 81251.2 MB
+Loaded train data iterator
+FINISHED 256 EXAMPLES on test split
+Loaded 16 eval batches of size 16
+Sharding policy with FSDP...
+Sharding reference model with FSDP...
+Loaded model on rank 0
+Using RMSprop optimizer
+=== Running evaluation after 0 train examples ===
+Computing eval metrics:   0%|          | 0/16 [00:00<?, ?it/s]Computing eval metrics:   6%|▋         | 1/16 [00:04<01:11,  4.75s/it]Computing eval metrics:  12%|█▎        | 2/16 [00:07<00:48,  3.46s/it]Computing eval metrics:  19%|█▉        | 3/16 [00:08<00:30,  2.31s/it]Computing eval metrics:  25%|██▌       | 4/16 [00:12<00:38,  3.20s/it]Computing eval metrics:  31%|███▏      | 5/16 [00:14<00:28,  2.55s/it]Computing eval metrics:  38%|███▊      | 6/16 [00:15<00:21,  2.10s/it]Computing eval metrics:  44%|████▍     | 7/16 [00:17<00:17,  1.95s/it]Computing eval metrics:  50%|█████     | 8/16 [00:18<00:13,  1.69s/it]Computing eval metrics:  56%|█████▋    | 9/16 [00:19<00:10,  1.56s/it]Computing eval metrics:  62%|██████▎   | 10/16 [00:20<00:09,  1.53s/it]Computing eval metrics:  69%|██████▉   | 11/16 [00:22<00:07,  1.48s/it]Computing eval metrics:  75%|███████▌  | 12/16 [00:23<00:05,  1.48s/it]Computing eval metrics:  81%|████████▏ | 13/16 [00:25<00:04,  1.45s/it]Computing eval metrics:  88%|████████▊ | 14/16 [00:26<00:02,  1.32s/it]Computing eval metrics:  94%|█████████▍| 15/16 [00:27<00:01,  1.38s/it]Computing eval metrics: 100%|██████████| 16/16 [00:30<00:00,  1.74s/it]Computing eval metrics: 100%|██████████| 16/16 [00:30<00:00,  1.89s/it]
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:690: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+/root/miniconda3/envs/DPO/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py:863: UserWarning: `_get_pg_default_device` will be deprecated, it only stays for backward-compatiblity reason. If you need to find a device for object collectives, please use `_get_object_coll_device`. If you need to query the device types supported by group, please use `_device_capability(group)`. 
+  warnings.warn(
+1 initializing distributed
+Creating trainer on process 1 with world size 2
+[GPU Monitor] GPU 0: 利用率 85% | 内存使用 35545.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 35545.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 50863.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 50867.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 71767.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 71767.0 MB / 81251.2 MB
+Eval after 0 examples: {'rewards_eval/chosen': '0.0018993', 'rewards_eval/rejected': '0.00023924', 'rewards_eval/accuracies': '0.52344', 'rewards_eval/margins': '0.00166', 'logps_eval/rejected': '-115.63', 'logps_eval/chosen': '-119.47', 'loss/eval': '0.69256'}
+[GPU Monitor] GPU 0: 利用率 95% | 内存使用 76617.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 95% | 内存使用 76617.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 77577.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 77577.0 MB / 81251.2 MB
+Train stats after 32 examples: {'rewards_train/chosen': '0.0029278', 'rewards_train/rejected': '-0.0075236', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.010451', 'logps_train/rejected': '-127.25', 'logps_train/chosen': '-154.02', 'loss/train': '0.68809', 'examples_per_second': '1.639', 'grad_norm': '26.375', 'counters/examples': 32, 'counters/updates': 1}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 67137.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67137.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 59279.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 60115.0 MB / 81251.2 MB
+Train stats after 64 examples: {'rewards_train/chosen': '0.0046262', 'rewards_train/rejected': '0.0013812', 'rewards_train/accuracies': '0.5625', 'rewards_train/margins': '0.003245', 'logps_train/rejected': '-123.6', 'logps_train/chosen': '-105.96', 'loss/train': '0.69171', 'examples_per_second': '1.8384', 'grad_norm': '26.375', 'counters/examples': 64, 'counters/updates': 2}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80057.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 80475.0 MB / 81251.2 MB
+Train stats after 96 examples: {'rewards_train/chosen': '-0.0026196', 'rewards_train/rejected': '-0.0045331', 'rewards_train/accuracies': '0.40625', 'rewards_train/margins': '0.0019135', 'logps_train/rejected': '-127.27', 'logps_train/chosen': '-120.38', 'loss/train': '0.69259', 'examples_per_second': '3.5212', 'grad_norm': '25.75', 'counters/examples': 96, 'counters/updates': 3}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 80057.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 80475.0 MB / 81251.2 MB
+Train stats after 128 examples: {'rewards_train/chosen': '-0.005498', 'rewards_train/rejected': '0.0029453', 'rewards_train/accuracies': '0.34375', 'rewards_train/margins': '-0.0084433', 'logps_train/rejected': '-130.08', 'logps_train/chosen': '-119.1', 'loss/train': '0.69752', 'examples_per_second': '3.2329', 'grad_norm': '26.375', 'counters/examples': 128, 'counters/updates': 4}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80057.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80475.0 MB / 81251.2 MB
+Train stats after 160 examples: {'rewards_train/chosen': '-0.0022316', 'rewards_train/rejected': '-0.0016728', 'rewards_train/accuracies': '0.5', 'rewards_train/margins': '-0.00055875', 'logps_train/rejected': '-94.042', 'logps_train/chosen': '-127.2', 'loss/train': '0.69364', 'examples_per_second': '3.4698', 'grad_norm': '31.625', 'counters/examples': 160, 'counters/updates': 5}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 80057.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80475.0 MB / 81251.2 MB
+Train stats after 192 examples: {'rewards_train/chosen': '0.0036264', 'rewards_train/rejected': '-0.0036778', 'rewards_train/accuracies': '0.59375', 'rewards_train/margins': '0.0073042', 'logps_train/rejected': '-95.308', 'logps_train/chosen': '-93.883', 'loss/train': '0.68969', 'examples_per_second': '3.4746', 'grad_norm': '22.375', 'counters/examples': 192, 'counters/updates': 6}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80057.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80475.0 MB / 81251.2 MB
+Train stats after 224 examples: {'rewards_train/chosen': '0.015493', 'rewards_train/rejected': '0.0027543', 'rewards_train/accuracies': '0.59375', 'rewards_train/margins': '0.012739', 'logps_train/rejected': '-109.45', 'logps_train/chosen': '-120.56', 'loss/train': '0.68709', 'examples_per_second': '3.5269', 'grad_norm': '24.875', 'counters/examples': 224, 'counters/updates': 7}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80889.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80889.0 MB / 81251.2 MB
+Train stats after 256 examples: {'rewards_train/chosen': '0.0031332', 'rewards_train/rejected': '0.0093352', 'rewards_train/accuracies': '0.46875', 'rewards_train/margins': '-0.006202', 'logps_train/rejected': '-118.02', 'logps_train/chosen': '-114.55', 'loss/train': '0.69652', 'examples_per_second': '2.3551', 'grad_norm': '25.375', 'counters/examples': 256, 'counters/updates': 8}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 80889.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80889.0 MB / 81251.2 MB
+Train stats after 288 examples: {'rewards_train/chosen': '-0.0020955', 'rewards_train/rejected': '0.0024629', 'rewards_train/accuracies': '0.53125', 'rewards_train/margins': '-0.0045584', 'logps_train/rejected': '-131.94', 'logps_train/chosen': '-130.27', 'loss/train': '0.69584', 'examples_per_second': '2.5441', 'grad_norm': '27.375', 'counters/examples': 288, 'counters/updates': 9}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80889.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80889.0 MB / 81251.2 MB
+Train stats after 320 examples: {'rewards_train/chosen': '-0.00089256', 'rewards_train/rejected': '-0.0022089', 'rewards_train/accuracies': '0.53125', 'rewards_train/margins': '0.0013164', 'logps_train/rejected': '-131.58', 'logps_train/chosen': '-148.72', 'loss/train': '0.69271', 'examples_per_second': '3.4575', 'grad_norm': '26.875', 'counters/examples': 320, 'counters/updates': 10}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80889.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80889.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80889.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80889.0 MB / 81251.2 MB
+Train stats after 352 examples: {'rewards_train/chosen': '0.0092493', 'rewards_train/rejected': '-0.0095802', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.018829', 'logps_train/rejected': '-141.96', 'logps_train/chosen': '-123.2', 'loss/train': '0.68406', 'examples_per_second': '2.6938', 'grad_norm': '26.375', 'counters/examples': 352, 'counters/updates': 11}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80889.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80889.0 MB / 81251.2 MB
+Train stats after 384 examples: {'rewards_train/chosen': '0.0013487', 'rewards_train/rejected': '-0.0015357', 'rewards_train/accuracies': '0.40625', 'rewards_train/margins': '0.0028844', 'logps_train/rejected': '-76.387', 'logps_train/chosen': '-102.53', 'loss/train': '0.69197', 'examples_per_second': '2.8672', 'grad_norm': '21', 'counters/examples': 384, 'counters/updates': 12}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80889.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80889.0 MB / 81251.2 MB
+Train stats after 416 examples: {'rewards_train/chosen': '0.0077681', 'rewards_train/rejected': '0.0016729', 'rewards_train/accuracies': '0.53125', 'rewards_train/margins': '0.0060952', 'logps_train/rejected': '-128.37', 'logps_train/chosen': '-166.9', 'loss/train': '0.69032', 'examples_per_second': '2.5212', 'grad_norm': '26.875', 'counters/examples': 416, 'counters/updates': 13}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 80889.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80889.0 MB / 81251.2 MB
+Train stats after 448 examples: {'rewards_train/chosen': '-0.0051432', 'rewards_train/rejected': '-0.0019173', 'rewards_train/accuracies': '0.53125', 'rewards_train/margins': '-0.0032259', 'logps_train/rejected': '-133.79', 'logps_train/chosen': '-141.51', 'loss/train': '0.69521', 'examples_per_second': '3.4823', 'grad_norm': '27.375', 'counters/examples': 448, 'counters/updates': 14}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 80889.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 80889.0 MB / 81251.2 MB
+Train stats after 480 examples: {'rewards_train/chosen': '0.010709', 'rewards_train/rejected': '0.0065073', 'rewards_train/accuracies': '0.4375', 'rewards_train/margins': '0.0042022', 'logps_train/rejected': '-101.41', 'logps_train/chosen': '-118.9', 'loss/train': '0.69146', 'examples_per_second': '2.2881', 'grad_norm': '25.125', 'counters/examples': 480, 'counters/updates': 15}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 72145.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 72981.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80923.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 66629.0 MB / 81251.2 MB
+Train stats after 512 examples: {'rewards_train/chosen': '-0.0014766', 'rewards_train/rejected': '-0.0029923', 'rewards_train/accuracies': '0.5', 'rewards_train/margins': '0.0015157', 'logps_train/rejected': '-126.35', 'logps_train/chosen': '-126.38', 'loss/train': '0.69279', 'examples_per_second': '1.6563', 'grad_norm': '26.125', 'counters/examples': 512, 'counters/updates': 16}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 66205.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 66623.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 79665.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80083.0 MB / 81251.2 MB
+Train stats after 544 examples: {'rewards_train/chosen': '-0.004497', 'rewards_train/rejected': '-0.0069648', 'rewards_train/accuracies': '0.5625', 'rewards_train/margins': '0.0024678', 'logps_train/rejected': '-117.66', 'logps_train/chosen': '-117.85', 'loss/train': '0.6922', 'examples_per_second': '2.1714', 'grad_norm': '25.875', 'counters/examples': 544, 'counters/updates': 17}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 73087.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 73087.0 MB / 81251.2 MB
+Train stats after 576 examples: {'rewards_train/chosen': '0.014711', 'rewards_train/rejected': '-0.0058361', 'rewards_train/accuracies': '0.625', 'rewards_train/margins': '0.020548', 'logps_train/rejected': '-88.513', 'logps_train/chosen': '-135.21', 'loss/train': '0.68313', 'examples_per_second': '2.4488', 'grad_norm': '25.625', 'counters/examples': 576, 'counters/updates': 18}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 73087.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 73087.0 MB / 81251.2 MB
+Train stats after 608 examples: {'rewards_train/chosen': '0.0028095', 'rewards_train/rejected': '-0.010829', 'rewards_train/accuracies': '0.5625', 'rewards_train/margins': '0.013638', 'logps_train/rejected': '-86.29', 'logps_train/chosen': '-89.191', 'loss/train': '0.68668', 'examples_per_second': '3.4997', 'grad_norm': '22.375', 'counters/examples': 608, 'counters/updates': 19}
+[GPU Monitor] GPU 0: 利用率 88% | 内存使用 81109.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80913.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 72999.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 93% | 内存使用 72321.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 75577.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 89% | 内存使用 79961.0 MB / 81251.2 MB
+Train stats after 640 examples: {'rewards_train/chosen': '0.0034238', 'rewards_train/rejected': '0.0041248', 'rewards_train/accuracies': '0.46875', 'rewards_train/margins': '-0.000701', 'logps_train/rejected': '-132.82', 'logps_train/chosen': '-136.18', 'loss/train': '0.69392', 'examples_per_second': '0.89437', 'grad_norm': '28.75', 'counters/examples': 640, 'counters/updates': 20}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 44977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 57963.0 MB / 81251.2 MB
+Train stats after 672 examples: {'rewards_train/chosen': '0.0071096', 'rewards_train/rejected': '-0.004103', 'rewards_train/accuracies': '0.53125', 'rewards_train/margins': '0.011213', 'logps_train/rejected': '-96.946', 'logps_train/chosen': '-85.229', 'loss/train': '0.68813', 'examples_per_second': '3.5436', 'grad_norm': '22', 'counters/examples': 672, 'counters/updates': 21}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 73059.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 75345.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 73477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 75763.0 MB / 81251.2 MB
+Train stats after 704 examples: {'rewards_train/chosen': '0.012025', 'rewards_train/rejected': '-0.004627', 'rewards_train/accuracies': '0.5', 'rewards_train/margins': '0.016652', 'logps_train/rejected': '-109.69', 'logps_train/chosen': '-124.76', 'loss/train': '0.68562', 'examples_per_second': '2.4267', 'grad_norm': '24.75', 'counters/examples': 704, 'counters/updates': 22}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 73477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 75763.0 MB / 81251.2 MB
+Train stats after 736 examples: {'rewards_train/chosen': '0.014287', 'rewards_train/rejected': '-0.0062236', 'rewards_train/accuracies': '0.5625', 'rewards_train/margins': '0.020511', 'logps_train/rejected': '-106.31', 'logps_train/chosen': '-98.773', 'loss/train': '0.68327', 'examples_per_second': '3.6974', 'grad_norm': '23.875', 'counters/examples': 736, 'counters/updates': 23}
+Train stats after 768 examples: {'rewards_train/chosen': '0.0054427', 'rewards_train/rejected': '0.0046313', 'rewards_train/accuracies': '0.5625', 'rewards_train/margins': '0.00081145', 'logps_train/rejected': '-98.623', 'logps_train/chosen': '-104.3', 'loss/train': '0.69337', 'examples_per_second': '3.7272', 'grad_norm': '24.125', 'counters/examples': 768, 'counters/updates': 24}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 73479.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 75763.0 MB / 81251.2 MB
+Train stats after 800 examples: {'rewards_train/chosen': '0.0074112', 'rewards_train/rejected': '-0.010394', 'rewards_train/accuracies': '0.59375', 'rewards_train/margins': '0.017805', 'logps_train/rejected': '-96.623', 'logps_train/chosen': '-110.67', 'loss/train': '0.68481', 'examples_per_second': '3.4557', 'grad_norm': '23', 'counters/examples': 800, 'counters/updates': 25}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 73479.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 76181.0 MB / 81251.2 MB
+Train stats after 832 examples: {'rewards_train/chosen': '0.0043838', 'rewards_train/rejected': '-0.0084008', 'rewards_train/accuracies': '0.53125', 'rewards_train/margins': '0.012785', 'logps_train/rejected': '-138.96', 'logps_train/chosen': '-81.996', 'loss/train': '0.68718', 'examples_per_second': '2.8001', 'grad_norm': '24.5', 'counters/examples': 832, 'counters/updates': 26}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 73479.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 76181.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 73479.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 76181.0 MB / 81251.2 MB
+Train stats after 864 examples: {'rewards_train/chosen': '0.020261', 'rewards_train/rejected': '-0.0062695', 'rewards_train/accuracies': '0.59375', 'rewards_train/margins': '0.026531', 'logps_train/rejected': '-81.863', 'logps_train/chosen': '-79.981', 'loss/train': '0.6804', 'examples_per_second': '2.8066', 'grad_norm': '20.375', 'counters/examples': 864, 'counters/updates': 27}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 77369.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 77617.0 MB / 81251.2 MB
+Train stats after 896 examples: {'rewards_train/chosen': '0.012753', 'rewards_train/rejected': '-0.023307', 'rewards_train/accuracies': '0.53125', 'rewards_train/margins': '0.03606', 'logps_train/rejected': '-169.17', 'logps_train/chosen': '-116.08', 'loss/train': '0.6763', 'examples_per_second': '2.2026', 'grad_norm': '27.875', 'counters/examples': 896, 'counters/updates': 28}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 77369.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 77617.0 MB / 81251.2 MB
+Train stats after 928 examples: {'rewards_train/chosen': '0.0082216', 'rewards_train/rejected': '-0.0045132', 'rewards_train/accuracies': '0.5625', 'rewards_train/margins': '0.012735', 'logps_train/rejected': '-111.32', 'logps_train/chosen': '-95.554', 'loss/train': '0.68791', 'examples_per_second': '2.811', 'grad_norm': '24.125', 'counters/examples': 928, 'counters/updates': 29}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 77369.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 77617.0 MB / 81251.2 MB
+Train stats after 960 examples: {'rewards_train/chosen': '0.0051055', 'rewards_train/rejected': '-0.0098527', 'rewards_train/accuracies': '0.59375', 'rewards_train/margins': '0.014958', 'logps_train/rejected': '-143.68', 'logps_train/chosen': '-147.99', 'loss/train': '0.68679', 'examples_per_second': '2.7063', 'grad_norm': '28.5', 'counters/examples': 960, 'counters/updates': 30}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 77369.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 77617.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 96% | 内存使用 77369.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 77617.0 MB / 81251.2 MB
+Train stats after 992 examples: {'rewards_train/chosen': '0.018673', 'rewards_train/rejected': '-0.019469', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.038143', 'logps_train/rejected': '-112.36', 'logps_train/chosen': '-107.46', 'loss/train': '0.67502', 'examples_per_second': '2.8483', 'grad_norm': '25.5', 'counters/examples': 992, 'counters/updates': 31}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 77369.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 77617.0 MB / 81251.2 MB
+Train stats after 1024 examples: {'rewards_train/chosen': '0.035224', 'rewards_train/rejected': '-0.032135', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.06736', 'logps_train/rejected': '-145.58', 'logps_train/chosen': '-167.06', 'loss/train': '0.66152', 'examples_per_second': '2.3774', 'grad_norm': '30.375', 'counters/examples': 1024, 'counters/updates': 32}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78475.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 79829.0 MB / 81251.2 MB
+Train stats after 1056 examples: {'rewards_train/chosen': '0.01452', 'rewards_train/rejected': '-0.022742', 'rewards_train/accuracies': '0.53125', 'rewards_train/margins': '0.037262', 'logps_train/rejected': '-93.134', 'logps_train/chosen': '-95.292', 'loss/train': '0.67584', 'examples_per_second': '2.0794', 'grad_norm': '22', 'counters/examples': 1056, 'counters/updates': 33}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78475.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 79829.0 MB / 81251.2 MB
+Train stats after 1088 examples: {'rewards_train/chosen': '0.021603', 'rewards_train/rejected': '-0.0026546', 'rewards_train/accuracies': '0.625', 'rewards_train/margins': '0.024258', 'logps_train/rejected': '-80.864', 'logps_train/chosen': '-105.15', 'loss/train': '0.68254', 'examples_per_second': '3.2231', 'grad_norm': '23.875', 'counters/examples': 1088, 'counters/updates': 34}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78475.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 79829.0 MB / 81251.2 MB
+Train stats after 1120 examples: {'rewards_train/chosen': '0.0066381', 'rewards_train/rejected': '-0.023127', 'rewards_train/accuracies': '0.5625', 'rewards_train/margins': '0.029765', 'logps_train/rejected': '-85.474', 'logps_train/chosen': '-96.835', 'loss/train': '0.67939', 'examples_per_second': '3.7244', 'grad_norm': '22.25', 'counters/examples': 1120, 'counters/updates': 35}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78475.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 79829.0 MB / 81251.2 MB
+Train stats after 1152 examples: {'rewards_train/chosen': '0.012645', 'rewards_train/rejected': '-0.043614', 'rewards_train/accuracies': '0.625', 'rewards_train/margins': '0.056258', 'logps_train/rejected': '-85.361', 'logps_train/chosen': '-104.23', 'loss/train': '0.66714', 'examples_per_second': '3.2541', 'grad_norm': '23.75', 'counters/examples': 1152, 'counters/updates': 36}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78475.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79829.0 MB / 81251.2 MB
+Train stats after 1184 examples: {'rewards_train/chosen': '0.0038305', 'rewards_train/rejected': '-0.029847', 'rewards_train/accuracies': '0.59375', 'rewards_train/margins': '0.033677', 'logps_train/rejected': '-119.06', 'logps_train/chosen': '-118.34', 'loss/train': '0.67756', 'examples_per_second': '2.6627', 'grad_norm': '24.875', 'counters/examples': 1184, 'counters/updates': 37}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78475.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 79829.0 MB / 81251.2 MB
+Train stats after 1216 examples: {'rewards_train/chosen': '0.021938', 'rewards_train/rejected': '-0.024726', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.046664', 'logps_train/rejected': '-106.86', 'logps_train/chosen': '-87.373', 'loss/train': '0.67265', 'examples_per_second': '3.4878', 'grad_norm': '21.625', 'counters/examples': 1216, 'counters/updates': 38}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 78475.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 79829.0 MB / 81251.2 MB
+Train stats after 1248 examples: {'rewards_train/chosen': '0.0024276', 'rewards_train/rejected': '-0.022375', 'rewards_train/accuracies': '0.53125', 'rewards_train/margins': '0.024803', 'logps_train/rejected': '-125.45', 'logps_train/chosen': '-91.285', 'loss/train': '0.68208', 'examples_per_second': '3.2743', 'grad_norm': '25.25', 'counters/examples': 1248, 'counters/updates': 39}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78475.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 79829.0 MB / 81251.2 MB
+Train stats after 1280 examples: {'rewards_train/chosen': '0.018634', 'rewards_train/rejected': '-0.044124', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.062758', 'logps_train/rejected': '-83.415', 'logps_train/chosen': '-63.431', 'loss/train': '0.66415', 'examples_per_second': '3.2348', 'grad_norm': '21.625', 'counters/examples': 1280, 'counters/updates': 40}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 78475.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 79829.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 78475.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79829.0 MB / 81251.2 MB
+Train stats after 1312 examples: {'rewards_train/chosen': '-0.0028546', 'rewards_train/rejected': '-0.088297', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.085442', 'logps_train/rejected': '-187.62', 'logps_train/chosen': '-122.41', 'loss/train': '0.6546', 'examples_per_second': '2.4217', 'grad_norm': '27.875', 'counters/examples': 1312, 'counters/updates': 41}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1344 examples: {'rewards_train/chosen': '0.029574', 'rewards_train/rejected': '-0.055055', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.084628', 'logps_train/rejected': '-144.8', 'logps_train/chosen': '-115.65', 'loss/train': '0.65456', 'examples_per_second': '3.6764', 'grad_norm': '26.625', 'counters/examples': 1344, 'counters/updates': 42}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1376 examples: {'rewards_train/chosen': '0.022412', 'rewards_train/rejected': '-0.054947', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.077359', 'logps_train/rejected': '-113.34', 'logps_train/chosen': '-120.96', 'loss/train': '0.6612', 'examples_per_second': '3.2515', 'grad_norm': '25', 'counters/examples': 1376, 'counters/updates': 43}
+Train stats after 1408 examples: {'rewards_train/chosen': '0.021964', 'rewards_train/rejected': '-0.040302', 'rewards_train/accuracies': '0.59375', 'rewards_train/margins': '0.062266', 'logps_train/rejected': '-126.85', 'logps_train/chosen': '-128.79', 'loss/train': '0.66697', 'examples_per_second': '3.4776', 'grad_norm': '26.125', 'counters/examples': 1408, 'counters/updates': 44}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 79833.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1440 examples: {'rewards_train/chosen': '0.038018', 'rewards_train/rejected': '-0.07801', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.11603', 'logps_train/rejected': '-166.59', 'logps_train/chosen': '-116.57', 'loss/train': '0.64242', 'examples_per_second': '2.8297', 'grad_norm': '29', 'counters/examples': 1440, 'counters/updates': 45}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1472 examples: {'rewards_train/chosen': '0.022453', 'rewards_train/rejected': '-0.031387', 'rewards_train/accuracies': '0.53125', 'rewards_train/margins': '0.05384', 'logps_train/rejected': '-88.337', 'logps_train/chosen': '-73.955', 'loss/train': '0.67186', 'examples_per_second': '2.2993', 'grad_norm': '21.25', 'counters/examples': 1472, 'counters/updates': 46}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1504 examples: {'rewards_train/chosen': '-0.001515', 'rewards_train/rejected': '-0.073967', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.072452', 'logps_train/rejected': '-120.83', 'logps_train/chosen': '-152.05', 'loss/train': '0.66426', 'examples_per_second': '3.4591', 'grad_norm': '25.875', 'counters/examples': 1504, 'counters/updates': 47}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1536 examples: {'rewards_train/chosen': '-0.0013778', 'rewards_train/rejected': '-0.058081', 'rewards_train/accuracies': '0.5625', 'rewards_train/margins': '0.056703', 'logps_train/rejected': '-150.69', 'logps_train/chosen': '-141.88', 'loss/train': '0.67584', 'examples_per_second': '2.6613', 'grad_norm': '29.5', 'counters/examples': 1536, 'counters/updates': 48}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1568 examples: {'rewards_train/chosen': '0.021446', 'rewards_train/rejected': '-0.052242', 'rewards_train/accuracies': '0.5625', 'rewards_train/margins': '0.073687', 'logps_train/rejected': '-102.45', 'logps_train/chosen': '-113.83', 'loss/train': '0.66335', 'examples_per_second': '3.2219', 'grad_norm': '24.875', 'counters/examples': 1568, 'counters/updates': 49}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1600 examples: {'rewards_train/chosen': '0.0063097', 'rewards_train/rejected': '-0.097577', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '0.10389', 'logps_train/rejected': '-97.1', 'logps_train/chosen': '-79.803', 'loss/train': '0.64779', 'examples_per_second': '2.5048', 'grad_norm': '24.5', 'counters/examples': 1600, 'counters/updates': 50}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1632 examples: {'rewards_train/chosen': '0.015556', 'rewards_train/rejected': '-0.061652', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.077207', 'logps_train/rejected': '-88.953', 'logps_train/chosen': '-80.92', 'loss/train': '0.65829', 'examples_per_second': '3.2138', 'grad_norm': '26.125', 'counters/examples': 1632, 'counters/updates': 51}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79833.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1664 examples: {'rewards_train/chosen': '0.013072', 'rewards_train/rejected': '-0.086708', 'rewards_train/accuracies': '0.625', 'rewards_train/margins': '0.09978', 'logps_train/rejected': '-81.028', 'logps_train/chosen': '-96.769', 'loss/train': '0.65001', 'examples_per_second': '2.3949', 'grad_norm': '23.125', 'counters/examples': 1664, 'counters/updates': 52}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1696 examples: {'rewards_train/chosen': '-0.053224', 'rewards_train/rejected': '-0.095186', 'rewards_train/accuracies': '0.5', 'rewards_train/margins': '0.041962', 'logps_train/rejected': '-103.32', 'logps_train/chosen': '-110.81', 'loss/train': '0.67868', 'examples_per_second': '3.2143', 'grad_norm': '24.625', 'counters/examples': 1696, 'counters/updates': 53}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1728 examples: {'rewards_train/chosen': '-0.028605', 'rewards_train/rejected': '-0.07574', 'rewards_train/accuracies': '0.53125', 'rewards_train/margins': '0.047135', 'logps_train/rejected': '-119.97', 'logps_train/chosen': '-137.31', 'loss/train': '0.67676', 'examples_per_second': '2.0803', 'grad_norm': '26.875', 'counters/examples': 1728, 'counters/updates': 54}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1760 examples: {'rewards_train/chosen': '0.052719', 'rewards_train/rejected': '-0.073834', 'rewards_train/accuracies': '0.5625', 'rewards_train/margins': '0.12655', 'logps_train/rejected': '-124.12', 'logps_train/chosen': '-130.78', 'loss/train': '0.64636', 'examples_per_second': '3.2863', 'grad_norm': '25.875', 'counters/examples': 1760, 'counters/updates': 55}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1792 examples: {'rewards_train/chosen': '-0.013948', 'rewards_train/rejected': '-0.083272', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.069324', 'logps_train/rejected': '-120.62', 'logps_train/chosen': '-103.27', 'loss/train': '0.66684', 'examples_per_second': '3.2209', 'grad_norm': '25.625', 'counters/examples': 1792, 'counters/updates': 56}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1824 examples: {'rewards_train/chosen': '0.027974', 'rewards_train/rejected': '-0.1256', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.15357', 'logps_train/rejected': '-110.31', 'logps_train/chosen': '-127.07', 'loss/train': '0.6259', 'examples_per_second': '3.6974', 'grad_norm': '26', 'counters/examples': 1824, 'counters/updates': 57}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1856 examples: {'rewards_train/chosen': '0.0023189', 'rewards_train/rejected': '-0.17871', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.18103', 'logps_train/rejected': '-125.91', 'logps_train/chosen': '-113.46', 'loss/train': '0.61612', 'examples_per_second': '2.827', 'grad_norm': '24.25', 'counters/examples': 1856, 'counters/updates': 58}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1888 examples: {'rewards_train/chosen': '0.0057896', 'rewards_train/rejected': '-0.10076', 'rewards_train/accuracies': '0.625', 'rewards_train/margins': '0.10655', 'logps_train/rejected': '-105.19', 'logps_train/chosen': '-104.37', 'loss/train': '0.65161', 'examples_per_second': '2.8664', 'grad_norm': '25', 'counters/examples': 1888, 'counters/updates': 59}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1920 examples: {'rewards_train/chosen': '-0.021268', 'rewards_train/rejected': '-0.12819', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.10693', 'logps_train/rejected': '-103.35', 'logps_train/chosen': '-78.966', 'loss/train': '0.64782', 'examples_per_second': '3.2511', 'grad_norm': '26.875', 'counters/examples': 1920, 'counters/updates': 60}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79833.0 MB / 81251.2 MB
+Train stats after 1952 examples: {'rewards_train/chosen': '-0.092718', 'rewards_train/rejected': '-0.15963', 'rewards_train/accuracies': '0.53125', 'rewards_train/margins': '0.066907', 'logps_train/rejected': '-87.361', 'logps_train/chosen': '-102.16', 'loss/train': '0.66917', 'examples_per_second': '3.4457', 'grad_norm': '24.625', 'counters/examples': 1952, 'counters/updates': 61}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 62033.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80889.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 66359.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 67649.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 75013.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 75049.0 MB / 81251.2 MB
+Train stats after 1984 examples: {'rewards_train/chosen': '0.028376', 'rewards_train/rejected': '-0.1973', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.22568', 'logps_train/rejected': '-115.41', 'logps_train/chosen': '-110.81', 'loss/train': '0.59594', 'examples_per_second': '1.4547', 'grad_norm': '24.375', 'counters/examples': 1984, 'counters/updates': 62}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 80405.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 79749.0 MB / 81251.2 MB
+Train stats after 2016 examples: {'rewards_train/chosen': '0.088972', 'rewards_train/rejected': '-0.12428', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.21325', 'logps_train/rejected': '-132.56', 'logps_train/chosen': '-118.61', 'loss/train': '0.6112', 'examples_per_second': '2.122', 'grad_norm': '25.25', 'counters/examples': 2016, 'counters/updates': 63}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80407.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 81005.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 80407.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 81005.0 MB / 81251.2 MB
+Train stats after 2048 examples: {'rewards_train/chosen': '-0.076367', 'rewards_train/rejected': '-0.24713', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.17076', 'logps_train/rejected': '-112.25', 'logps_train/chosen': '-87.633', 'loss/train': '0.62531', 'examples_per_second': '2.1066', 'grad_norm': '25.625', 'counters/examples': 2048, 'counters/updates': 64}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 81217.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 70649.0 MB / 81251.2 MB
+Train stats after 2080 examples: {'rewards_train/chosen': '-0.027175', 'rewards_train/rejected': '-0.17231', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.14513', 'logps_train/rejected': '-106.47', 'logps_train/chosen': '-110.95', 'loss/train': '0.63511', 'examples_per_second': '1.6749', 'grad_norm': '25.5', 'counters/examples': 2080, 'counters/updates': 65}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 49485.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79347.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 78405.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 78979.0 MB / 81251.2 MB
+Train stats after 2112 examples: {'rewards_train/chosen': '-0.097738', 'rewards_train/rejected': '-0.23797', 'rewards_train/accuracies': '0.625', 'rewards_train/margins': '0.14024', 'logps_train/rejected': '-157.88', 'logps_train/chosen': '-121.6', 'loss/train': '0.63881', 'examples_per_second': '2.5641', 'grad_norm': '29', 'counters/examples': 2112, 'counters/updates': 66}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78405.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78979.0 MB / 81251.2 MB
+Train stats after 2144 examples: {'rewards_train/chosen': '-0.18948', 'rewards_train/rejected': '-0.23916', 'rewards_train/accuracies': '0.46875', 'rewards_train/margins': '0.049688', 'logps_train/rejected': '-118.98', 'logps_train/chosen': '-160.21', 'loss/train': '0.68654', 'examples_per_second': '3.2775', 'grad_norm': '29.875', 'counters/examples': 2144, 'counters/updates': 67}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78405.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78979.0 MB / 81251.2 MB
+Train stats after 2176 examples: {'rewards_train/chosen': '-0.070747', 'rewards_train/rejected': '-0.25469', 'rewards_train/accuracies': '0.59375', 'rewards_train/margins': '0.18394', 'logps_train/rejected': '-111.44', 'logps_train/chosen': '-96.381', 'loss/train': '0.64765', 'examples_per_second': '2.8583', 'grad_norm': '25.25', 'counters/examples': 2176, 'counters/updates': 68}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78405.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78979.0 MB / 81251.2 MB
+Train stats after 2208 examples: {'rewards_train/chosen': '-0.13709', 'rewards_train/rejected': '-0.29029', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.15319', 'logps_train/rejected': '-130.39', 'logps_train/chosen': '-127.12', 'loss/train': '0.63513', 'examples_per_second': '3.0755', 'grad_norm': '27.5', 'counters/examples': 2208, 'counters/updates': 69}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78405.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78979.0 MB / 81251.2 MB
+Train stats after 2240 examples: {'rewards_train/chosen': '-0.083016', 'rewards_train/rejected': '-0.28766', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.20465', 'logps_train/rejected': '-111.34', 'logps_train/chosen': '-110.23', 'loss/train': '0.60985', 'examples_per_second': '2.6783', 'grad_norm': '24', 'counters/examples': 2240, 'counters/updates': 70}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78431.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 79003.0 MB / 81251.2 MB
+Train stats after 2272 examples: {'rewards_train/chosen': '-0.13873', 'rewards_train/rejected': '-0.23781', 'rewards_train/accuracies': '0.625', 'rewards_train/margins': '0.099084', 'logps_train/rejected': '-86.475', 'logps_train/chosen': '-88.422', 'loss/train': '0.65982', 'examples_per_second': '3.954', 'grad_norm': '27', 'counters/examples': 2272, 'counters/updates': 71}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78431.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 79005.0 MB / 81251.2 MB
+Train stats after 2304 examples: {'rewards_train/chosen': '-0.067178', 'rewards_train/rejected': '-0.36599', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '0.29881', 'logps_train/rejected': '-122.37', 'logps_train/chosen': '-110.69', 'loss/train': '0.57461', 'examples_per_second': '3.4971', 'grad_norm': '23.875', 'counters/examples': 2304, 'counters/updates': 72}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 63881.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80203.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 76049.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 60617.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 76049.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 71843.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 60481.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 69233.0 MB / 81251.2 MB
+Train stats after 2336 examples: {'rewards_train/chosen': '-0.16804', 'rewards_train/rejected': '-0.24432', 'rewards_train/accuracies': '0.625', 'rewards_train/margins': '0.076285', 'logps_train/rejected': '-99.277', 'logps_train/chosen': '-131.16', 'loss/train': '0.67748', 'examples_per_second': '0.80627', 'grad_norm': '26.875', 'counters/examples': 2336, 'counters/updates': 73}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 79063.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 71635.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 79063.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 71635.0 MB / 81251.2 MB
+Train stats after 2368 examples: {'rewards_train/chosen': '-0.16432', 'rewards_train/rejected': '-0.33281', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.16849', 'logps_train/rejected': '-143.13', 'logps_train/chosen': '-111.24', 'loss/train': '0.62716', 'examples_per_second': '1.789', 'grad_norm': '27.125', 'counters/examples': 2368, 'counters/updates': 74}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 79063.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78251.0 MB / 81251.2 MB
+Train stats after 2400 examples: {'rewards_train/chosen': '-0.14561', 'rewards_train/rejected': '-0.25566', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.11005', 'logps_train/rejected': '-89.191', 'logps_train/chosen': '-102.13', 'loss/train': '0.66774', 'examples_per_second': '2.7585', 'grad_norm': '31', 'counters/examples': 2400, 'counters/updates': 75}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 79063.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 78251.0 MB / 81251.2 MB
+Train stats after 2432 examples: {'rewards_train/chosen': '-0.074402', 'rewards_train/rejected': '-0.2152', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.14079', 'logps_train/rejected': '-78.757', 'logps_train/chosen': '-117.67', 'loss/train': '0.65145', 'examples_per_second': '3.1098', 'grad_norm': '27', 'counters/examples': 2432, 'counters/updates': 76}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 79063.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 78251.0 MB / 81251.2 MB
+Train stats after 2464 examples: {'rewards_train/chosen': '-0.035803', 'rewards_train/rejected': '-0.21675', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.18095', 'logps_train/rejected': '-125.73', 'logps_train/chosen': '-128.15', 'loss/train': '0.64761', 'examples_per_second': '3.2914', 'grad_norm': '27.75', 'counters/examples': 2464, 'counters/updates': 77}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 81047.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80659.0 MB / 81251.2 MB
+Train stats after 2496 examples: {'rewards_train/chosen': '-0.087396', 'rewards_train/rejected': '-0.23713', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.14973', 'logps_train/rejected': '-111.63', 'logps_train/chosen': '-100.21', 'loss/train': '0.64106', 'examples_per_second': '2.016', 'grad_norm': '27', 'counters/examples': 2496, 'counters/updates': 78}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 81047.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80659.0 MB / 81251.2 MB
+Train stats after 2528 examples: {'rewards_train/chosen': '-0.021054', 'rewards_train/rejected': '-0.23041', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.20935', 'logps_train/rejected': '-91.732', 'logps_train/chosen': '-68.347', 'loss/train': '0.60711', 'examples_per_second': '3.2291', 'grad_norm': '21.375', 'counters/examples': 2528, 'counters/updates': 79}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 81047.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80659.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 81047.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80659.0 MB / 81251.2 MB
+Train stats after 2560 examples: {'rewards_train/chosen': '-0.15686', 'rewards_train/rejected': '-0.27921', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.12235', 'logps_train/rejected': '-87.006', 'logps_train/chosen': '-66.901', 'loss/train': '0.64085', 'examples_per_second': '2.3287', 'grad_norm': '22.75', 'counters/examples': 2560, 'counters/updates': 80}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 81047.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80659.0 MB / 81251.2 MB
+Train stats after 2592 examples: {'rewards_train/chosen': '-0.028721', 'rewards_train/rejected': '-0.25129', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.22257', 'logps_train/rejected': '-122.02', 'logps_train/chosen': '-113.27', 'loss/train': '0.6134', 'examples_per_second': '3.0805', 'grad_norm': '26.75', 'counters/examples': 2592, 'counters/updates': 81}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 81047.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80659.0 MB / 81251.2 MB
+Train stats after 2624 examples: {'rewards_train/chosen': '-0.201', 'rewards_train/rejected': '-0.32457', 'rewards_train/accuracies': '0.625', 'rewards_train/margins': '0.12357', 'logps_train/rejected': '-92.259', 'logps_train/chosen': '-98.95', 'loss/train': '0.656', 'examples_per_second': '3.28', 'grad_norm': '24.875', 'counters/examples': 2624, 'counters/updates': 82}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 81047.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80659.0 MB / 81251.2 MB
+Train stats after 2656 examples: {'rewards_train/chosen': '-0.19706', 'rewards_train/rejected': '-0.37347', 'rewards_train/accuracies': '0.59375', 'rewards_train/margins': '0.17641', 'logps_train/rejected': '-118.18', 'logps_train/chosen': '-144.98', 'loss/train': '0.63619', 'examples_per_second': '3.1109', 'grad_norm': '28.125', 'counters/examples': 2656, 'counters/updates': 83}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 81047.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80659.0 MB / 81251.2 MB
+Train stats after 2688 examples: {'rewards_train/chosen': '-0.11417', 'rewards_train/rejected': '-0.33359', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.21942', 'logps_train/rejected': '-116.2', 'logps_train/chosen': '-95.198', 'loss/train': '0.60978', 'examples_per_second': '2.8103', 'grad_norm': '25.625', 'counters/examples': 2688, 'counters/updates': 84}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 81047.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 95% | 内存使用 80659.0 MB / 81251.2 MB
+Train stats after 2720 examples: {'rewards_train/chosen': '-0.012188', 'rewards_train/rejected': '-0.44235', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.43016', 'logps_train/rejected': '-148.92', 'logps_train/chosen': '-87.861', 'loss/train': '0.53349', 'examples_per_second': '3.2206', 'grad_norm': '22.25', 'counters/examples': 2720, 'counters/updates': 85}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 81047.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80659.0 MB / 81251.2 MB
+Train stats after 2752 examples: {'rewards_train/chosen': '-0.14493', 'rewards_train/rejected': '-0.44205', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.29712', 'logps_train/rejected': '-114.99', 'logps_train/chosen': '-106.35', 'loss/train': '0.58311', 'examples_per_second': '3.4863', 'grad_norm': '23.375', 'counters/examples': 2752, 'counters/updates': 86}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 81047.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80659.0 MB / 81251.2 MB
+Train stats after 2784 examples: {'rewards_train/chosen': '-0.193', 'rewards_train/rejected': '-0.51459', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.32159', 'logps_train/rejected': '-106.86', 'logps_train/chosen': '-121.47', 'loss/train': '0.59045', 'examples_per_second': '3.2337', 'grad_norm': '28.75', 'counters/examples': 2784, 'counters/updates': 87}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 81047.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80659.0 MB / 81251.2 MB
+Train stats after 2816 examples: {'rewards_train/chosen': '-0.12732', 'rewards_train/rejected': '-0.62878', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.50146', 'logps_train/rejected': '-149.81', 'logps_train/chosen': '-127.2', 'loss/train': '0.53666', 'examples_per_second': '2.4113', 'grad_norm': '32.75', 'counters/examples': 2816, 'counters/updates': 88}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 81047.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80659.0 MB / 81251.2 MB
+Train stats after 2848 examples: {'rewards_train/chosen': '-0.11983', 'rewards_train/rejected': '-0.57382', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.454', 'logps_train/rejected': '-130.69', 'logps_train/chosen': '-109.12', 'loss/train': '0.52536', 'examples_per_second': '3.2354', 'grad_norm': '24.625', 'counters/examples': 2848, 'counters/updates': 89}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 81071.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80683.0 MB / 81251.2 MB
+Train stats after 2880 examples: {'rewards_train/chosen': '-0.34823', 'rewards_train/rejected': '-0.82794', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.47971', 'logps_train/rejected': '-142.04', 'logps_train/chosen': '-120.74', 'loss/train': '0.54583', 'examples_per_second': '3.6487', 'grad_norm': '26.125', 'counters/examples': 2880, 'counters/updates': 90}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 81071.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80683.0 MB / 81251.2 MB
+Train stats after 2912 examples: {'rewards_train/chosen': '-0.35421', 'rewards_train/rejected': '-0.72742', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.37321', 'logps_train/rejected': '-108.49', 'logps_train/chosen': '-96.924', 'loss/train': '0.56542', 'examples_per_second': '3.6688', 'grad_norm': '26.125', 'counters/examples': 2912, 'counters/updates': 91}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 81071.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 80683.0 MB / 81251.2 MB
+Train stats after 2944 examples: {'rewards_train/chosen': '-0.73537', 'rewards_train/rejected': '-0.90581', 'rewards_train/accuracies': '0.5', 'rewards_train/margins': '0.17044', 'logps_train/rejected': '-128.02', 'logps_train/chosen': '-137.85', 'loss/train': '0.70254', 'examples_per_second': '3.2187', 'grad_norm': '38.25', 'counters/examples': 2944, 'counters/updates': 92}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 81071.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80683.0 MB / 81251.2 MB
+Train stats after 2976 examples: {'rewards_train/chosen': '-0.28165', 'rewards_train/rejected': '-0.54075', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.2591', 'logps_train/rejected': '-112.11', 'logps_train/chosen': '-131.64', 'loss/train': '0.60344', 'examples_per_second': '3.4393', 'grad_norm': '30.375', 'counters/examples': 2976, 'counters/updates': 93}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 81071.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80683.0 MB / 81251.2 MB
+Train stats after 3008 examples: {'rewards_train/chosen': '-0.39442', 'rewards_train/rejected': '-0.65122', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.25679', 'logps_train/rejected': '-119.5', 'logps_train/chosen': '-127.28', 'loss/train': '0.62157', 'examples_per_second': '3.4665', 'grad_norm': '29.625', 'counters/examples': 3008, 'counters/updates': 94}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 81071.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80683.0 MB / 81251.2 MB
+Train stats after 3040 examples: {'rewards_train/chosen': '-0.21363', 'rewards_train/rejected': '-0.63386', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.42022', 'logps_train/rejected': '-139.01', 'logps_train/chosen': '-120.15', 'loss/train': '0.54351', 'examples_per_second': '3.0758', 'grad_norm': '25.875', 'counters/examples': 3040, 'counters/updates': 95}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 81071.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80683.0 MB / 81251.2 MB
+Train stats after 3072 examples: {'rewards_train/chosen': '-0.37299', 'rewards_train/rejected': '-0.69294', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.31995', 'logps_train/rejected': '-107.08', 'logps_train/chosen': '-89.13', 'loss/train': '0.57464', 'examples_per_second': '3.0829', 'grad_norm': '25.375', 'counters/examples': 3072, 'counters/updates': 96}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 81071.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80683.0 MB / 81251.2 MB
+Train stats after 3104 examples: {'rewards_train/chosen': '-0.5489', 'rewards_train/rejected': '-0.81353', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.26463', 'logps_train/rejected': '-132.69', 'logps_train/chosen': '-145.74', 'loss/train': '0.61999', 'examples_per_second': '2.3103', 'grad_norm': '33.25', 'counters/examples': 3104, 'counters/updates': 97}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 81071.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80683.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 81071.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80683.0 MB / 81251.2 MB
+Train stats after 3136 examples: {'rewards_train/chosen': '-0.27952', 'rewards_train/rejected': '-0.66026', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.38074', 'logps_train/rejected': '-119.17', 'logps_train/chosen': '-99.757', 'loss/train': '0.58422', 'examples_per_second': '2.2914', 'grad_norm': '26.375', 'counters/examples': 3136, 'counters/updates': 98}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 81071.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 80683.0 MB / 81251.2 MB
+Train stats after 3168 examples: {'rewards_train/chosen': '-0.49994', 'rewards_train/rejected': '-0.69466', 'rewards_train/accuracies': '0.59375', 'rewards_train/margins': '0.19471', 'logps_train/rejected': '-124.76', 'logps_train/chosen': '-89.252', 'loss/train': '0.64397', 'examples_per_second': '3.0613', 'grad_norm': '28.5', 'counters/examples': 3168, 'counters/updates': 99}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 81071.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80683.0 MB / 81251.2 MB
+Train stats after 3200 examples: {'rewards_train/chosen': '-0.28098', 'rewards_train/rejected': '-0.56754', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.28656', 'logps_train/rejected': '-96.115', 'logps_train/chosen': '-93.273', 'loss/train': '0.59247', 'examples_per_second': '3.0723', 'grad_norm': '25.875', 'counters/examples': 3200, 'counters/updates': 100}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 81071.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80683.0 MB / 81251.2 MB
+Train stats after 3232 examples: {'rewards_train/chosen': '-0.20595', 'rewards_train/rejected': '-0.56499', 'rewards_train/accuracies': '0.625', 'rewards_train/margins': '0.35904', 'logps_train/rejected': '-129.01', 'logps_train/chosen': '-110.84', 'loss/train': '0.5699', 'examples_per_second': '3.0756', 'grad_norm': '23.375', 'counters/examples': 3232, 'counters/updates': 101}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 81071.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80683.0 MB / 81251.2 MB
+Train stats after 3264 examples: {'rewards_train/chosen': '-0.61149', 'rewards_train/rejected': '-0.97695', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.36546', 'logps_train/rejected': '-120.6', 'logps_train/chosen': '-117.97', 'loss/train': '0.59835', 'examples_per_second': '3.7202', 'grad_norm': '35', 'counters/examples': 3264, 'counters/updates': 102}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 81071.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80683.0 MB / 81251.2 MB
+Train stats after 3296 examples: {'rewards_train/chosen': '-0.49037', 'rewards_train/rejected': '-0.84777', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.3574', 'logps_train/rejected': '-122.63', 'logps_train/chosen': '-111.85', 'loss/train': '0.58887', 'examples_per_second': '3.2785', 'grad_norm': '29', 'counters/examples': 3296, 'counters/updates': 103}
+Train stats after 3328 examples: {'rewards_train/chosen': '-0.39635', 'rewards_train/rejected': '-0.6706', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.27425', 'logps_train/rejected': '-101.32', 'logps_train/chosen': '-101.37', 'loss/train': '0.60477', 'examples_per_second': '3.4378', 'grad_norm': '28', 'counters/examples': 3328, 'counters/updates': 104}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 81071.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80683.0 MB / 81251.2 MB
+Train stats after 3360 examples: {'rewards_train/chosen': '-0.42471', 'rewards_train/rejected': '-0.80475', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.38004', 'logps_train/rejected': '-135.06', 'logps_train/chosen': '-124.88', 'loss/train': '0.54523', 'examples_per_second': '3.2753', 'grad_norm': '27.875', 'counters/examples': 3360, 'counters/updates': 105}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 59229.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 57587.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 71117.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 71983.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 71535.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 71983.0 MB / 81251.2 MB
+Train stats after 3392 examples: {'rewards_train/chosen': '-0.56251', 'rewards_train/rejected': '-0.93941', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.3769', 'logps_train/rejected': '-145.83', 'logps_train/chosen': '-157.3', 'loss/train': '0.59571', 'examples_per_second': '1.5352', 'grad_norm': '38', 'counters/examples': 3392, 'counters/updates': 106}
+Train stats after 3424 examples: {'rewards_train/chosen': '-0.25054', 'rewards_train/rejected': '-0.7105', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.45996', 'logps_train/rejected': '-108.06', 'logps_train/chosen': '-85.703', 'loss/train': '0.51914', 'examples_per_second': '3.6521', 'grad_norm': '27.25', 'counters/examples': 3424, 'counters/updates': 107}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80871.0 MB / 81251.2 MB
+Train stats after 3456 examples: {'rewards_train/chosen': '-0.48221', 'rewards_train/rejected': '-1.0375', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.55528', 'logps_train/rejected': '-187.43', 'logps_train/chosen': '-159.61', 'loss/train': '0.51764', 'examples_per_second': '3.0869', 'grad_norm': '32.25', 'counters/examples': 3456, 'counters/updates': 108}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 75825.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 74853.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 76661.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 75271.0 MB / 81251.2 MB
+Train stats after 3488 examples: {'rewards_train/chosen': '-0.31249', 'rewards_train/rejected': '-0.98833', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.67584', 'logps_train/rejected': '-147.58', 'logps_train/chosen': '-144.97', 'loss/train': '0.49342', 'examples_per_second': '2.856', 'grad_norm': '28.875', 'counters/examples': 3488, 'counters/updates': 109}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 76661.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 75271.0 MB / 81251.2 MB
+Train stats after 3520 examples: {'rewards_train/chosen': '-0.72189', 'rewards_train/rejected': '-0.97031', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.24842', 'logps_train/rejected': '-103.37', 'logps_train/chosen': '-95.234', 'loss/train': '0.71394', 'examples_per_second': '2.799', 'grad_norm': '46.5', 'counters/examples': 3520, 'counters/updates': 110}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 76661.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 76107.0 MB / 81251.2 MB
+Train stats after 3552 examples: {'rewards_train/chosen': '-0.28944', 'rewards_train/rejected': '-0.81463', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '0.5252', 'logps_train/rejected': '-124.43', 'logps_train/chosen': '-127.49', 'loss/train': '0.52908', 'examples_per_second': '2.8071', 'grad_norm': '29.5', 'counters/examples': 3552, 'counters/updates': 111}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 76661.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 76107.0 MB / 81251.2 MB
+Train stats after 3584 examples: {'rewards_train/chosen': '-0.45666', 'rewards_train/rejected': '-0.96325', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.50658', 'logps_train/rejected': '-136.91', 'logps_train/chosen': '-113.31', 'loss/train': '0.55442', 'examples_per_second': '3.2103', 'grad_norm': '25.5', 'counters/examples': 3584, 'counters/updates': 112}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78489.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78505.0 MB / 81251.2 MB
+Train stats after 3616 examples: {'rewards_train/chosen': '-0.56665', 'rewards_train/rejected': '-1.1493', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.58261', 'logps_train/rejected': '-175.5', 'logps_train/chosen': '-171.15', 'loss/train': '0.53076', 'examples_per_second': '2.2857', 'grad_norm': '29.375', 'counters/examples': 3616, 'counters/updates': 113}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78511.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78527.0 MB / 81251.2 MB
+Train stats after 3648 examples: {'rewards_train/chosen': '-0.60262', 'rewards_train/rejected': '-0.88295', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.28033', 'logps_train/rejected': '-109.57', 'logps_train/chosen': '-85.259', 'loss/train': '0.60207', 'examples_per_second': '3.9198', 'grad_norm': '27.875', 'counters/examples': 3648, 'counters/updates': 114}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78511.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78527.0 MB / 81251.2 MB
+Train stats after 3680 examples: {'rewards_train/chosen': '-0.81212', 'rewards_train/rejected': '-1.3304', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.51828', 'logps_train/rejected': '-122.4', 'logps_train/chosen': '-104.82', 'loss/train': '0.55618', 'examples_per_second': '3.7341', 'grad_norm': '27.75', 'counters/examples': 3680, 'counters/updates': 115}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 78511.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 78527.0 MB / 81251.2 MB
+Train stats after 3712 examples: {'rewards_train/chosen': '-1.057', 'rewards_train/rejected': '-1.4787', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.42179', 'logps_train/rejected': '-152.87', 'logps_train/chosen': '-132.56', 'loss/train': '0.60909', 'examples_per_second': '3.2347', 'grad_norm': '35', 'counters/examples': 3712, 'counters/updates': 116}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78511.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78527.0 MB / 81251.2 MB
+Train stats after 3744 examples: {'rewards_train/chosen': '-0.44058', 'rewards_train/rejected': '-0.96411', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.52353', 'logps_train/rejected': '-118.9', 'logps_train/chosen': '-106.08', 'loss/train': '0.53134', 'examples_per_second': '2.5503', 'grad_norm': '26.125', 'counters/examples': 3744, 'counters/updates': 117}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 46413.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 71683.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 81029.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 69091.0 MB / 81251.2 MB
+Train stats after 3776 examples: {'rewards_train/chosen': '-0.72825', 'rewards_train/rejected': '-1.0983', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.37009', 'logps_train/rejected': '-109.41', 'logps_train/chosen': '-126.69', 'loss/train': '0.6052', 'examples_per_second': '1.7039', 'grad_norm': '33.25', 'counters/examples': 3776, 'counters/updates': 118}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80569.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 76259.0 MB / 81251.2 MB
+Train stats after 3808 examples: {'rewards_train/chosen': '-0.78645', 'rewards_train/rejected': '-1.197', 'rewards_train/accuracies': '0.59375', 'rewards_train/margins': '0.41054', 'logps_train/rejected': '-162.76', 'logps_train/chosen': '-136.67', 'loss/train': '0.6125', 'examples_per_second': '2.804', 'grad_norm': '34', 'counters/examples': 3808, 'counters/updates': 119}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 80569.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 76259.0 MB / 81251.2 MB
+Train stats after 3840 examples: {'rewards_train/chosen': '-0.51537', 'rewards_train/rejected': '-1.1279', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.61248', 'logps_train/rejected': '-163.75', 'logps_train/chosen': '-138.87', 'loss/train': '0.50573', 'examples_per_second': '3.2319', 'grad_norm': '27.625', 'counters/examples': 3840, 'counters/updates': 120}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80569.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 76259.0 MB / 81251.2 MB
+Train stats after 3872 examples: {'rewards_train/chosen': '-0.62489', 'rewards_train/rejected': '-1.3035', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.67856', 'logps_train/rejected': '-117.63', 'logps_train/chosen': '-103.92', 'loss/train': '0.48451', 'examples_per_second': '3.511', 'grad_norm': '25.75', 'counters/examples': 3872, 'counters/updates': 121}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 77227.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 81011.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 79735.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 62741.0 MB / 81251.2 MB
+Train stats after 3904 examples: {'rewards_train/chosen': '-0.55616', 'rewards_train/rejected': '-1.21', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '0.65379', 'logps_train/rejected': '-146.15', 'logps_train/chosen': '-130.95', 'loss/train': '0.4637', 'examples_per_second': '1.8399', 'grad_norm': '25.625', 'counters/examples': 3904, 'counters/updates': 122}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 77643.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78919.0 MB / 81251.2 MB
+Train stats after 3936 examples: {'rewards_train/chosen': '-1.2248', 'rewards_train/rejected': '-1.685', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.46014', 'logps_train/rejected': '-101.02', 'logps_train/chosen': '-84.668', 'loss/train': '0.59329', 'examples_per_second': '3.4281', 'grad_norm': '27.375', 'counters/examples': 3936, 'counters/updates': 123}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80569.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 77865.0 MB / 81251.2 MB
+Train stats after 3968 examples: {'rewards_train/chosen': '-0.98074', 'rewards_train/rejected': '-1.6412', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.66048', 'logps_train/rejected': '-137.14', 'logps_train/chosen': '-124.52', 'loss/train': '0.54667', 'examples_per_second': '2.7766', 'grad_norm': '31.625', 'counters/examples': 3968, 'counters/updates': 124}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80569.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 77865.0 MB / 81251.2 MB
+Train stats after 4000 examples: {'rewards_train/chosen': '-0.78804', 'rewards_train/rejected': '-1.418', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.62995', 'logps_train/rejected': '-134.09', 'logps_train/chosen': '-103.54', 'loss/train': '0.52341', 'examples_per_second': '3.24', 'grad_norm': '26.75', 'counters/examples': 4000, 'counters/updates': 125}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 80569.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 77865.0 MB / 81251.2 MB
+Train stats after 4032 examples: {'rewards_train/chosen': '-0.99849', 'rewards_train/rejected': '-1.273', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.27451', 'logps_train/rejected': '-161.24', 'logps_train/chosen': '-152.25', 'loss/train': '0.67124', 'examples_per_second': '2.8651', 'grad_norm': '35', 'counters/examples': 4032, 'counters/updates': 126}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80569.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 77865.0 MB / 81251.2 MB
+Train stats after 4064 examples: {'rewards_train/chosen': '-0.7916', 'rewards_train/rejected': '-1.3692', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.57764', 'logps_train/rejected': '-123.16', 'logps_train/chosen': '-106.5', 'loss/train': '0.52408', 'examples_per_second': '3.117', 'grad_norm': '24.75', 'counters/examples': 4064, 'counters/updates': 127}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80569.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 77865.0 MB / 81251.2 MB
+Train stats after 4096 examples: {'rewards_train/chosen': '-0.77487', 'rewards_train/rejected': '-1.2082', 'rewards_train/accuracies': '0.625', 'rewards_train/margins': '0.43334', 'logps_train/rejected': '-131.68', 'logps_train/chosen': '-87.219', 'loss/train': '0.58203', 'examples_per_second': '3.235', 'grad_norm': '30.5', 'counters/examples': 4096, 'counters/updates': 128}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80569.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 77865.0 MB / 81251.2 MB
+Train stats after 4128 examples: {'rewards_train/chosen': '-0.84094', 'rewards_train/rejected': '-1.3498', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.50882', 'logps_train/rejected': '-126.1', 'logps_train/chosen': '-127.54', 'loss/train': '0.60728', 'examples_per_second': '3.2195', 'grad_norm': '33', 'counters/examples': 4128, 'counters/updates': 129}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 80569.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 77865.0 MB / 81251.2 MB
+Train stats after 4160 examples: {'rewards_train/chosen': '-0.78039', 'rewards_train/rejected': '-1.5294', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.74905', 'logps_train/rejected': '-107.47', 'logps_train/chosen': '-104.16', 'loss/train': '0.4642', 'examples_per_second': '3.5237', 'grad_norm': '23', 'counters/examples': 4160, 'counters/updates': 130}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 80569.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 77865.0 MB / 81251.2 MB
+Train stats after 4192 examples: {'rewards_train/chosen': '-0.90817', 'rewards_train/rejected': '-1.2832', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.37504', 'logps_train/rejected': '-130.13', 'logps_train/chosen': '-117.11', 'loss/train': '0.6381', 'examples_per_second': '2.801', 'grad_norm': '34', 'counters/examples': 4192, 'counters/updates': 131}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80569.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 77865.0 MB / 81251.2 MB
+Train stats after 4224 examples: {'rewards_train/chosen': '-0.8528', 'rewards_train/rejected': '-1.062', 'rewards_train/accuracies': '0.4375', 'rewards_train/margins': '0.20922', 'logps_train/rejected': '-133.53', 'logps_train/chosen': '-120.27', 'loss/train': '0.7033', 'examples_per_second': '3.2321', 'grad_norm': '38', 'counters/examples': 4224, 'counters/updates': 132}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 75681.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78283.0 MB / 81251.2 MB
+Train stats after 4256 examples: {'rewards_train/chosen': '-0.51078', 'rewards_train/rejected': '-1.0617', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.55094', 'logps_train/rejected': '-127.93', 'logps_train/chosen': '-119.43', 'loss/train': '0.50609', 'examples_per_second': '2.6917', 'grad_norm': '24.875', 'counters/examples': 4256, 'counters/updates': 133}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 75683.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 78283.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 76101.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78283.0 MB / 81251.2 MB
+Train stats after 4288 examples: {'rewards_train/chosen': '-0.59694', 'rewards_train/rejected': '-1.1264', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '0.52942', 'logps_train/rejected': '-116.54', 'logps_train/chosen': '-89.034', 'loss/train': '0.51105', 'examples_per_second': '2.5396', 'grad_norm': '27.75', 'counters/examples': 4288, 'counters/updates': 134}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 76101.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78283.0 MB / 81251.2 MB
+Train stats after 4320 examples: {'rewards_train/chosen': '-0.77707', 'rewards_train/rejected': '-1.3146', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.53751', 'logps_train/rejected': '-100.38', 'logps_train/chosen': '-106.24', 'loss/train': '0.54957', 'examples_per_second': '3.5285', 'grad_norm': '33.5', 'counters/examples': 4320, 'counters/updates': 135}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 76101.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 78283.0 MB / 81251.2 MB
+Train stats after 4352 examples: {'rewards_train/chosen': '-0.64963', 'rewards_train/rejected': '-1.3708', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.72116', 'logps_train/rejected': '-140.42', 'logps_train/chosen': '-121.45', 'loss/train': '0.50215', 'examples_per_second': '2.807', 'grad_norm': '28.5', 'counters/examples': 4352, 'counters/updates': 136}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 76101.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 78283.0 MB / 81251.2 MB
+Train stats after 4384 examples: {'rewards_train/chosen': '-0.89108', 'rewards_train/rejected': '-1.4799', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.58885', 'logps_train/rejected': '-161.45', 'logps_train/chosen': '-186.05', 'loss/train': '0.53526', 'examples_per_second': '2.8085', 'grad_norm': '37', 'counters/examples': 4384, 'counters/updates': 137}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 76101.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78283.0 MB / 81251.2 MB
+Train stats after 4416 examples: {'rewards_train/chosen': '-0.71395', 'rewards_train/rejected': '-1.2592', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.54526', 'logps_train/rejected': '-117.32', 'logps_train/chosen': '-111.65', 'loss/train': '0.52695', 'examples_per_second': '3.2923', 'grad_norm': '26.625', 'counters/examples': 4416, 'counters/updates': 138}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 49801.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 45153.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 77267.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 74307.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 56323.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 54007.0 MB / 81251.2 MB
+Train stats after 4448 examples: {'rewards_train/chosen': '-0.83753', 'rewards_train/rejected': '-1.5066', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.66904', 'logps_train/rejected': '-186.87', 'logps_train/chosen': '-185.52', 'loss/train': '0.53313', 'examples_per_second': '0.97812', 'grad_norm': '34.5', 'counters/examples': 4448, 'counters/updates': 139}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 80967.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 67663.0 MB / 81251.2 MB
+Train stats after 4480 examples: {'rewards_train/chosen': '-0.74038', 'rewards_train/rejected': '-1.1815', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.44115', 'logps_train/rejected': '-113.32', 'logps_train/chosen': '-112.16', 'loss/train': '0.57519', 'examples_per_second': '3.1941', 'grad_norm': '29.375', 'counters/examples': 4480, 'counters/updates': 140}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 73047.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 68917.0 MB / 81251.2 MB
+Train stats after 4512 examples: {'rewards_train/chosen': '-0.93607', 'rewards_train/rejected': '-1.2035', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.26743', 'logps_train/rejected': '-99.275', 'logps_train/chosen': '-129.55', 'loss/train': '0.62757', 'examples_per_second': '3.2649', 'grad_norm': '32.25', 'counters/examples': 4512, 'counters/updates': 141}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 73467.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 69337.0 MB / 81251.2 MB
+Train stats after 4544 examples: {'rewards_train/chosen': '-0.91311', 'rewards_train/rejected': '-1.5585', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.64538', 'logps_train/rejected': '-100.03', 'logps_train/chosen': '-106.95', 'loss/train': '0.50199', 'examples_per_second': '3.6759', 'grad_norm': '25.75', 'counters/examples': 4544, 'counters/updates': 142}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 77649.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78439.0 MB / 81251.2 MB
+Train stats after 4576 examples: {'rewards_train/chosen': '-0.64364', 'rewards_train/rejected': '-1.3768', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.73313', 'logps_train/rejected': '-142.65', 'logps_train/chosen': '-114.3', 'loss/train': '0.4787', 'examples_per_second': '2.1833', 'grad_norm': '25.125', 'counters/examples': 4576, 'counters/updates': 143}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 77649.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78439.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 77649.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 78439.0 MB / 81251.2 MB
+Train stats after 4608 examples: {'rewards_train/chosen': '-0.98481', 'rewards_train/rejected': '-1.7711', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.78627', 'logps_train/rejected': '-141.91', 'logps_train/chosen': '-151.87', 'loss/train': '0.44855', 'examples_per_second': '2.5103', 'grad_norm': '34.5', 'counters/examples': 4608, 'counters/updates': 144}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 77649.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78439.0 MB / 81251.2 MB
+Train stats after 4640 examples: {'rewards_train/chosen': '-1.1364', 'rewards_train/rejected': '-1.4901', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.35373', 'logps_train/rejected': '-112.11', 'logps_train/chosen': '-109.59', 'loss/train': '0.58622', 'examples_per_second': '3.47', 'grad_norm': '30.5', 'counters/examples': 4640, 'counters/updates': 145}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 76845.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 81029.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 72515.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 90% | 内存使用 63847.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 72595.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 55% | 内存使用 80055.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 73993.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 53531.0 MB / 81251.2 MB
+Train stats after 4672 examples: {'rewards_train/chosen': '-0.91363', 'rewards_train/rejected': '-1.7844', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.87075', 'logps_train/rejected': '-141.48', 'logps_train/chosen': '-99.706', 'loss/train': '0.47646', 'examples_per_second': '0.81798', 'grad_norm': '29.875', 'counters/examples': 4672, 'counters/updates': 146}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 77525.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 72115.0 MB / 81251.2 MB
+Train stats after 4704 examples: {'rewards_train/chosen': '-0.92205', 'rewards_train/rejected': '-1.806', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.88393', 'logps_train/rejected': '-127.78', 'logps_train/chosen': '-126.79', 'loss/train': '0.47516', 'examples_per_second': '2.6276', 'grad_norm': '24.625', 'counters/examples': 4704, 'counters/updates': 147}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 77525.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 72115.0 MB / 81251.2 MB
+Train stats after 4736 examples: {'rewards_train/chosen': '-0.89806', 'rewards_train/rejected': '-1.784', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.88593', 'logps_train/rejected': '-141.7', 'logps_train/chosen': '-112.48', 'loss/train': '0.44229', 'examples_per_second': '3.2592', 'grad_norm': '28.625', 'counters/examples': 4736, 'counters/updates': 148}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 58747.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80563.0 MB / 81251.2 MB
+Train stats after 4768 examples: {'rewards_train/chosen': '-1.3619', 'rewards_train/rejected': '-2.2689', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.90699', 'logps_train/rejected': '-165.17', 'logps_train/chosen': '-149.72', 'loss/train': '0.49848', 'examples_per_second': '1.8945', 'grad_norm': '33.5', 'counters/examples': 4768, 'counters/updates': 149}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 74951.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 4800 examples: {'rewards_train/chosen': '-1.9385', 'rewards_train/rejected': '-2.6423', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.70383', 'logps_train/rejected': '-129.04', 'logps_train/chosen': '-119.41', 'loss/train': '0.49752', 'examples_per_second': '3.7038', 'grad_norm': '27', 'counters/examples': 4800, 'counters/updates': 150}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 76205.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 4832 examples: {'rewards_train/chosen': '-1.5668', 'rewards_train/rejected': '-2.2843', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.71744', 'logps_train/rejected': '-129.92', 'logps_train/chosen': '-99.543', 'loss/train': '0.50502', 'examples_per_second': '3.5232', 'grad_norm': '30.375', 'counters/examples': 4832, 'counters/updates': 151}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80803.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80587.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80803.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 4864 examples: {'rewards_train/chosen': '-1.8808', 'rewards_train/rejected': '-2.6036', 'rewards_train/accuracies': '0.625', 'rewards_train/margins': '0.72279', 'logps_train/rejected': '-156.86', 'logps_train/chosen': '-131.67', 'loss/train': '0.70259', 'examples_per_second': '2.0935', 'grad_norm': '47.25', 'counters/examples': 4864, 'counters/updates': 152}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80803.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 4896 examples: {'rewards_train/chosen': '-0.93656', 'rewards_train/rejected': '-1.565', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.6284', 'logps_train/rejected': '-104', 'logps_train/chosen': '-142.49', 'loss/train': '0.52873', 'examples_per_second': '3.963', 'grad_norm': '31.5', 'counters/examples': 4896, 'counters/updates': 153}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80803.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 4928 examples: {'rewards_train/chosen': '-1.4113', 'rewards_train/rejected': '-1.777', 'rewards_train/accuracies': '0.53125', 'rewards_train/margins': '0.36572', 'logps_train/rejected': '-142.7', 'logps_train/chosen': '-151.89', 'loss/train': '0.66774', 'examples_per_second': '2.2989', 'grad_norm': '37.75', 'counters/examples': 4928, 'counters/updates': 154}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 80803.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 4960 examples: {'rewards_train/chosen': '-1.0076', 'rewards_train/rejected': '-1.4608', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.45319', 'logps_train/rejected': '-148.01', 'logps_train/chosen': '-140.77', 'loss/train': '0.55552', 'examples_per_second': '2.7194', 'grad_norm': '33.75', 'counters/examples': 4960, 'counters/updates': 155}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 80803.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 4992 examples: {'rewards_train/chosen': '-1.1658', 'rewards_train/rejected': '-1.6318', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.46599', 'logps_train/rejected': '-121.32', 'logps_train/chosen': '-142.21', 'loss/train': '0.56285', 'examples_per_second': '2.4253', 'grad_norm': '36.25', 'counters/examples': 4992, 'counters/updates': 156}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 80803.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 5024 examples: {'rewards_train/chosen': '-0.75358', 'rewards_train/rejected': '-1.4316', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.67803', 'logps_train/rejected': '-81.031', 'logps_train/chosen': '-96.555', 'loss/train': '0.51107', 'examples_per_second': '3.7028', 'grad_norm': '22.5', 'counters/examples': 5024, 'counters/updates': 157}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80803.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80587.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80803.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 5056 examples: {'rewards_train/chosen': '-0.7829', 'rewards_train/rejected': '-1.5276', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.74471', 'logps_train/rejected': '-173.03', 'logps_train/chosen': '-143.6', 'loss/train': '0.49787', 'examples_per_second': '2.3131', 'grad_norm': '32.75', 'counters/examples': 5056, 'counters/updates': 158}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80803.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 5088 examples: {'rewards_train/chosen': '-0.78679', 'rewards_train/rejected': '-1.3941', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.60733', 'logps_train/rejected': '-116.25', 'logps_train/chosen': '-104.87', 'loss/train': '0.5251', 'examples_per_second': '3.6637', 'grad_norm': '24.125', 'counters/examples': 5088, 'counters/updates': 159}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80803.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 5120 examples: {'rewards_train/chosen': '-0.89079', 'rewards_train/rejected': '-1.5058', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.615', 'logps_train/rejected': '-105.1', 'logps_train/chosen': '-94.082', 'loss/train': '0.53325', 'examples_per_second': '2.712', 'grad_norm': '29.5', 'counters/examples': 5120, 'counters/updates': 160}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80803.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 5152 examples: {'rewards_train/chosen': '-0.70702', 'rewards_train/rejected': '-1.4943', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.78732', 'logps_train/rejected': '-113.37', 'logps_train/chosen': '-149.85', 'loss/train': '0.50449', 'examples_per_second': '3.0654', 'grad_norm': '28.625', 'counters/examples': 5152, 'counters/updates': 161}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80803.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 5184 examples: {'rewards_train/chosen': '-0.85033', 'rewards_train/rejected': '-1.6261', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.77574', 'logps_train/rejected': '-138.86', 'logps_train/chosen': '-106.99', 'loss/train': '0.487', 'examples_per_second': '3.0914', 'grad_norm': '25.25', 'counters/examples': 5184, 'counters/updates': 162}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80803.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 5216 examples: {'rewards_train/chosen': '-0.84625', 'rewards_train/rejected': '-1.3437', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.49742', 'logps_train/rejected': '-127.83', 'logps_train/chosen': '-150.63', 'loss/train': '0.58758', 'examples_per_second': '2.6753', 'grad_norm': '33.25', 'counters/examples': 5216, 'counters/updates': 163}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80803.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 5248 examples: {'rewards_train/chosen': '-0.89032', 'rewards_train/rejected': '-1.5924', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.70206', 'logps_train/rejected': '-133.42', 'logps_train/chosen': '-113.97', 'loss/train': '0.48151', 'examples_per_second': '3.0441', 'grad_norm': '27.75', 'counters/examples': 5248, 'counters/updates': 164}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 81221.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80587.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 81221.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 5280 examples: {'rewards_train/chosen': '-0.7882', 'rewards_train/rejected': '-1.8915', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '1.1033', 'logps_train/rejected': '-141.79', 'logps_train/chosen': '-114.64', 'loss/train': '0.46204', 'examples_per_second': '2.0023', 'grad_norm': '26.5', 'counters/examples': 5280, 'counters/updates': 165}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 81221.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 5312 examples: {'rewards_train/chosen': '-0.92292', 'rewards_train/rejected': '-1.6773', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.75443', 'logps_train/rejected': '-117.15', 'logps_train/chosen': '-109.41', 'loss/train': '0.46566', 'examples_per_second': '3.1055', 'grad_norm': '25.125', 'counters/examples': 5312, 'counters/updates': 166}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 81221.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 5344 examples: {'rewards_train/chosen': '-1.0623', 'rewards_train/rejected': '-1.7339', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.6716', 'logps_train/rejected': '-158.79', 'logps_train/chosen': '-117.34', 'loss/train': '0.49603', 'examples_per_second': '2.671', 'grad_norm': '24.5', 'counters/examples': 5344, 'counters/updates': 167}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 81221.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 5376 examples: {'rewards_train/chosen': '-1.1204', 'rewards_train/rejected': '-1.3516', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.23128', 'logps_train/rejected': '-116.5', 'logps_train/chosen': '-99.793', 'loss/train': '0.6805', 'examples_per_second': '2.724', 'grad_norm': '38.25', 'counters/examples': 5376, 'counters/updates': 168}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 81221.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 5408 examples: {'rewards_train/chosen': '-0.62312', 'rewards_train/rejected': '-1.4375', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '0.81437', 'logps_train/rejected': '-96.133', 'logps_train/chosen': '-98.377', 'loss/train': '0.46249', 'examples_per_second': '3.6609', 'grad_norm': '23', 'counters/examples': 5408, 'counters/updates': 169}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 81221.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 5440 examples: {'rewards_train/chosen': '-1.1316', 'rewards_train/rejected': '-1.6135', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.48191', 'logps_train/rejected': '-97.129', 'logps_train/chosen': '-116.92', 'loss/train': '0.5607', 'examples_per_second': '2.8592', 'grad_norm': '29', 'counters/examples': 5440, 'counters/updates': 170}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 81221.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 5472 examples: {'rewards_train/chosen': '-1.0331', 'rewards_train/rejected': '-1.9003', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.86725', 'logps_train/rejected': '-119.61', 'logps_train/chosen': '-95.28', 'loss/train': '0.44167', 'examples_per_second': '2.6761', 'grad_norm': '26.625', 'counters/examples': 5472, 'counters/updates': 171}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 81221.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 5504 examples: {'rewards_train/chosen': '-1.4756', 'rewards_train/rejected': '-2.1195', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.64397', 'logps_train/rejected': '-92.999', 'logps_train/chosen': '-98.25', 'loss/train': '0.58068', 'examples_per_second': '3.6933', 'grad_norm': '36.25', 'counters/examples': 5504, 'counters/updates': 172}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 81221.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80587.0 MB / 81251.2 MB
+Train stats after 5536 examples: {'rewards_train/chosen': '-0.95722', 'rewards_train/rejected': '-1.3089', 'rewards_train/accuracies': '0.5625', 'rewards_train/margins': '0.35164', 'logps_train/rejected': '-92.625', 'logps_train/chosen': '-92.621', 'loss/train': '0.63692', 'examples_per_second': '3.2596', 'grad_norm': '26.625', 'counters/examples': 5536, 'counters/updates': 173}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 70737.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 70691.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80771.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79889.0 MB / 81251.2 MB
+Train stats after 5568 examples: {'rewards_train/chosen': '-0.84741', 'rewards_train/rejected': '-1.456', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.60856', 'logps_train/rejected': '-102.96', 'logps_train/chosen': '-91.259', 'loss/train': '0.53445', 'examples_per_second': '1.7825', 'grad_norm': '25.875', 'counters/examples': 5568, 'counters/updates': 174}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 76997.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80705.0 MB / 81251.2 MB
+Train stats after 5600 examples: {'rewards_train/chosen': '-1.2458', 'rewards_train/rejected': '-1.7301', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.48424', 'logps_train/rejected': '-123.1', 'logps_train/chosen': '-108.73', 'loss/train': '0.63444', 'examples_per_second': '2.6465', 'grad_norm': '32.75', 'counters/examples': 5600, 'counters/updates': 175}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 77415.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 81123.0 MB / 81251.2 MB
+Train stats after 5632 examples: {'rewards_train/chosen': '-0.71412', 'rewards_train/rejected': '-1.2103', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.49613', 'logps_train/rejected': '-110.55', 'logps_train/chosen': '-99.024', 'loss/train': '0.53844', 'examples_per_second': '3.247', 'grad_norm': '26', 'counters/examples': 5632, 'counters/updates': 176}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 77837.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 81123.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 77837.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 81123.0 MB / 81251.2 MB
+Train stats after 5664 examples: {'rewards_train/chosen': '-1.28', 'rewards_train/rejected': '-1.7508', 'rewards_train/accuracies': '0.5625', 'rewards_train/margins': '0.4708', 'logps_train/rejected': '-137.73', 'logps_train/chosen': '-111.8', 'loss/train': '0.65789', 'examples_per_second': '2.1996', 'grad_norm': '31.5', 'counters/examples': 5664, 'counters/updates': 177}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 77837.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 81123.0 MB / 81251.2 MB
+Train stats after 5696 examples: {'rewards_train/chosen': '-1.1927', 'rewards_train/rejected': '-2.0047', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.81197', 'logps_train/rejected': '-173.35', 'logps_train/chosen': '-145.33', 'loss/train': '0.47673', 'examples_per_second': '3.4441', 'grad_norm': '29', 'counters/examples': 5696, 'counters/updates': 178}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 77837.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 81123.0 MB / 81251.2 MB
+Train stats after 5728 examples: {'rewards_train/chosen': '-0.75351', 'rewards_train/rejected': '-1.324', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.57044', 'logps_train/rejected': '-139.95', 'logps_train/chosen': '-113.66', 'loss/train': '0.51649', 'examples_per_second': '2.2827', 'grad_norm': '33.5', 'counters/examples': 5728, 'counters/updates': 179}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 77837.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 81123.0 MB / 81251.2 MB
+Train stats after 5760 examples: {'rewards_train/chosen': '-1.0607', 'rewards_train/rejected': '-1.8072', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.7465', 'logps_train/rejected': '-124.86', 'logps_train/chosen': '-98.326', 'loss/train': '0.49496', 'examples_per_second': '3.0529', 'grad_norm': '31.875', 'counters/examples': 5760, 'counters/updates': 180}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 77837.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 81123.0 MB / 81251.2 MB
+Train stats after 5792 examples: {'rewards_train/chosen': '-1.1324', 'rewards_train/rejected': '-1.7057', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.57332', 'logps_train/rejected': '-127.72', 'logps_train/chosen': '-92.415', 'loss/train': '0.50691', 'examples_per_second': '3.2571', 'grad_norm': '32.5', 'counters/examples': 5792, 'counters/updates': 181}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 77837.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 81123.0 MB / 81251.2 MB
+Train stats after 5824 examples: {'rewards_train/chosen': '-1.1379', 'rewards_train/rejected': '-2.1593', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '1.0214', 'logps_train/rejected': '-122.23', 'logps_train/chosen': '-105.71', 'loss/train': '0.44346', 'examples_per_second': '2.3965', 'grad_norm': '28', 'counters/examples': 5824, 'counters/updates': 182}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 79687.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80413.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 67879.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80331.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78529.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 77703.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 77719.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78999.0 MB / 81251.2 MB
+Train stats after 5856 examples: {'rewards_train/chosen': '-1.4618', 'rewards_train/rejected': '-2.39', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.92818', 'logps_train/rejected': '-158.81', 'logps_train/chosen': '-131.33', 'loss/train': '0.51677', 'examples_per_second': '0.98418', 'grad_norm': '36', 'counters/examples': 5856, 'counters/updates': 183}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 75703.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 72229.0 MB / 81251.2 MB
+Train stats after 5888 examples: {'rewards_train/chosen': '-1.28', 'rewards_train/rejected': '-2.166', 'rewards_train/accuracies': '0.90625', 'rewards_train/margins': '0.88594', 'logps_train/rejected': '-136.14', 'logps_train/chosen': '-138.94', 'loss/train': '0.46807', 'examples_per_second': '2.6232', 'grad_norm': '32.25', 'counters/examples': 5888, 'counters/updates': 184}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 75703.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 72229.0 MB / 81251.2 MB
+Train stats after 5920 examples: {'rewards_train/chosen': '-1.5156', 'rewards_train/rejected': '-2.0783', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.56266', 'logps_train/rejected': '-132.78', 'logps_train/chosen': '-102.54', 'loss/train': '0.57791', 'examples_per_second': '3.4582', 'grad_norm': '28.625', 'counters/examples': 5920, 'counters/updates': 185}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 75703.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 72229.0 MB / 81251.2 MB
+Train stats after 5952 examples: {'rewards_train/chosen': '-1.2837', 'rewards_train/rejected': '-2.2222', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.93849', 'logps_train/rejected': '-148.14', 'logps_train/chosen': '-127.29', 'loss/train': '0.49927', 'examples_per_second': '3.2595', 'grad_norm': '32.25', 'counters/examples': 5952, 'counters/updates': 186}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 75733.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 72259.0 MB / 81251.2 MB
+Train stats after 5984 examples: {'rewards_train/chosen': '-1.4486', 'rewards_train/rejected': '-2.6076', 'rewards_train/accuracies': '0.875', 'rewards_train/margins': '1.1589', 'logps_train/rejected': '-152.15', 'logps_train/chosen': '-95.712', 'loss/train': '0.39526', 'examples_per_second': '3.6645', 'grad_norm': '36.75', 'counters/examples': 5984, 'counters/updates': 187}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 75733.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 72259.0 MB / 81251.2 MB
+Train stats after 6016 examples: {'rewards_train/chosen': '-1.4285', 'rewards_train/rejected': '-1.8891', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.46062', 'logps_train/rejected': '-93.65', 'logps_train/chosen': '-83.131', 'loss/train': '0.60819', 'examples_per_second': '2.7068', 'grad_norm': '35', 'counters/examples': 6016, 'counters/updates': 188}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 75733.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 72259.0 MB / 81251.2 MB
+Train stats after 6048 examples: {'rewards_train/chosen': '-1.565', 'rewards_train/rejected': '-2.2073', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.64227', 'logps_train/rejected': '-125.02', 'logps_train/chosen': '-123.64', 'loss/train': '0.61376', 'examples_per_second': '3.0566', 'grad_norm': '39.75', 'counters/examples': 6048, 'counters/updates': 189}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 75733.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 72259.0 MB / 81251.2 MB
+Train stats after 6080 examples: {'rewards_train/chosen': '-0.98602', 'rewards_train/rejected': '-2.069', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '1.083', 'logps_train/rejected': '-146.58', 'logps_train/chosen': '-128.29', 'loss/train': '0.49458', 'examples_per_second': '2.8481', 'grad_norm': '29.125', 'counters/examples': 6080, 'counters/updates': 190}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 75733.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 73511.0 MB / 81251.2 MB
+Train stats after 6112 examples: {'rewards_train/chosen': '-0.93028', 'rewards_train/rejected': '-1.6527', 'rewards_train/accuracies': '0.90625', 'rewards_train/margins': '0.72238', 'logps_train/rejected': '-100.66', 'logps_train/chosen': '-115.14', 'loss/train': '0.45687', 'examples_per_second': '2.5379', 'grad_norm': '26.625', 'counters/examples': 6112, 'counters/updates': 191}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 75733.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 73511.0 MB / 81251.2 MB
+Train stats after 6144 examples: {'rewards_train/chosen': '-1.0733', 'rewards_train/rejected': '-2.2168', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '1.1435', 'logps_train/rejected': '-142.66', 'logps_train/chosen': '-120.88', 'loss/train': '0.44504', 'examples_per_second': '3.0897', 'grad_norm': '27.375', 'counters/examples': 6144, 'counters/updates': 192}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 75733.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 73511.0 MB / 81251.2 MB
+Train stats after 6176 examples: {'rewards_train/chosen': '-1.0788', 'rewards_train/rejected': '-1.9509', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '0.87207', 'logps_train/rejected': '-144.48', 'logps_train/chosen': '-118.75', 'loss/train': '0.44295', 'examples_per_second': '3.4644', 'grad_norm': '27.125', 'counters/examples': 6176, 'counters/updates': 193}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 75733.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 73511.0 MB / 81251.2 MB
+Train stats after 6208 examples: {'rewards_train/chosen': '-1.1605', 'rewards_train/rejected': '-2.2288', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '1.0682', 'logps_train/rejected': '-115.87', 'logps_train/chosen': '-103.87', 'loss/train': '0.43072', 'examples_per_second': '2.5582', 'grad_norm': '26', 'counters/examples': 6208, 'counters/updates': 194}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 76151.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 73511.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 76151.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 73511.0 MB / 81251.2 MB
+Train stats after 6240 examples: {'rewards_train/chosen': '-1.6911', 'rewards_train/rejected': '-2.5365', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.84537', 'logps_train/rejected': '-133.63', 'logps_train/chosen': '-124.18', 'loss/train': '0.45084', 'examples_per_second': '2.6812', 'grad_norm': '31.625', 'counters/examples': 6240, 'counters/updates': 195}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 76151.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 73511.0 MB / 81251.2 MB
+Train stats after 6272 examples: {'rewards_train/chosen': '-1.7103', 'rewards_train/rejected': '-2.397', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.68671', 'logps_train/rejected': '-114.02', 'logps_train/chosen': '-77.476', 'loss/train': '0.53466', 'examples_per_second': '3.4846', 'grad_norm': '34.5', 'counters/examples': 6272, 'counters/updates': 196}
+Train stats after 6304 examples: {'rewards_train/chosen': '-1.3238', 'rewards_train/rejected': '-2.2932', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '0.96943', 'logps_train/rejected': '-116.74', 'logps_train/chosen': '-120.93', 'loss/train': '0.41119', 'examples_per_second': '3.4647', 'grad_norm': '28', 'counters/examples': 6304, 'counters/updates': 197}
+[GPU Monitor] GPU 0: 利用率 95% | 内存使用 76569.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 76013.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78029.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78097.0 MB / 81251.2 MB
+Train stats after 6336 examples: {'rewards_train/chosen': '-1.3249', 'rewards_train/rejected': '-2.7987', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '1.4739', 'logps_train/rejected': '-155.42', 'logps_train/chosen': '-108.78', 'loss/train': '0.39315', 'examples_per_second': '2.1864', 'grad_norm': '30.5', 'counters/examples': 6336, 'counters/updates': 198}
+[GPU Monitor] GPU 0: 利用率 74% | 内存使用 78029.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 26% | 内存使用 78097.0 MB / 81251.2 MB
+Train stats after 6368 examples: {'rewards_train/chosen': '-1.9606', 'rewards_train/rejected': '-2.8875', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.92693', 'logps_train/rejected': '-147.55', 'logps_train/chosen': '-123.01', 'loss/train': '0.50883', 'examples_per_second': '2.6311', 'grad_norm': '33', 'counters/examples': 6368, 'counters/updates': 199}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78029.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78097.0 MB / 81251.2 MB
+Train stats after 6400 examples: {'rewards_train/chosen': '-1.5313', 'rewards_train/rejected': '-2.6323', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '1.1009', 'logps_train/rejected': '-143.27', 'logps_train/chosen': '-110.98', 'loss/train': '0.45814', 'examples_per_second': '3.0559', 'grad_norm': '27.375', 'counters/examples': 6400, 'counters/updates': 200}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78029.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78097.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78029.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 78097.0 MB / 81251.2 MB
+Train stats after 6432 examples: {'rewards_train/chosen': '-1.3249', 'rewards_train/rejected': '-2.2739', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.94909', 'logps_train/rejected': '-158.6', 'logps_train/chosen': '-120.96', 'loss/train': '0.47003', 'examples_per_second': '2.4102', 'grad_norm': '30.75', 'counters/examples': 6432, 'counters/updates': 201}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78029.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78097.0 MB / 81251.2 MB
+Train stats after 6464 examples: {'rewards_train/chosen': '-1.6817', 'rewards_train/rejected': '-2.7554', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '1.0737', 'logps_train/rejected': '-171.43', 'logps_train/chosen': '-143.29', 'loss/train': '0.47233', 'examples_per_second': '2.5568', 'grad_norm': '33.5', 'counters/examples': 6464, 'counters/updates': 202}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78029.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78097.0 MB / 81251.2 MB
+Train stats after 6496 examples: {'rewards_train/chosen': '-1.1294', 'rewards_train/rejected': '-2.1452', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '1.0158', 'logps_train/rejected': '-121.36', 'logps_train/chosen': '-108.81', 'loss/train': '0.41134', 'examples_per_second': '2.7057', 'grad_norm': '25.875', 'counters/examples': 6496, 'counters/updates': 203}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78029.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78097.0 MB / 81251.2 MB
+Train stats after 6528 examples: {'rewards_train/chosen': '-1.6266', 'rewards_train/rejected': '-2.415', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.7884', 'logps_train/rejected': '-148.91', 'logps_train/chosen': '-135.52', 'loss/train': '0.56645', 'examples_per_second': '3.2437', 'grad_norm': '35.5', 'counters/examples': 6528, 'counters/updates': 204}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80193.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78097.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80193.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78097.0 MB / 81251.2 MB
+Train stats after 6560 examples: {'rewards_train/chosen': '-1.666', 'rewards_train/rejected': '-2.3609', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.69498', 'logps_train/rejected': '-157.78', 'logps_train/chosen': '-137.17', 'loss/train': '0.53569', 'examples_per_second': '2.0918', 'grad_norm': '32.25', 'counters/examples': 6560, 'counters/updates': 205}
+Train stats after 6592 examples: {'rewards_train/chosen': '-1.1617', 'rewards_train/rejected': '-1.8881', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.72638', 'logps_train/rejected': '-151.79', 'logps_train/chosen': '-114.49', 'loss/train': '0.49358', 'examples_per_second': '3.436', 'grad_norm': '35.5', 'counters/examples': 6592, 'counters/updates': 206}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80193.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 78097.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80193.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78097.0 MB / 81251.2 MB
+Train stats after 6624 examples: {'rewards_train/chosen': '-1.4126', 'rewards_train/rejected': '-2.7084', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '1.2958', 'logps_train/rejected': '-198.18', 'logps_train/chosen': '-161.21', 'loss/train': '0.43406', 'examples_per_second': '2.8323', 'grad_norm': '25.75', 'counters/examples': 6624, 'counters/updates': 207}
+Train stats after 6656 examples: {'rewards_train/chosen': '-1.9061', 'rewards_train/rejected': '-2.9664', 'rewards_train/accuracies': '0.875', 'rewards_train/margins': '1.0603', 'logps_train/rejected': '-143.25', 'logps_train/chosen': '-118.61', 'loss/train': '0.39428', 'examples_per_second': '3.7193', 'grad_norm': '30', 'counters/examples': 6656, 'counters/updates': 208}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 53793.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 51655.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 61963.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80995.0 MB / 81251.2 MB
+Train stats after 6688 examples: {'rewards_train/chosen': '-1.4917', 'rewards_train/rejected': '-2.4345', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.94273', 'logps_train/rejected': '-180.84', 'logps_train/chosen': '-158.07', 'loss/train': '0.51447', 'examples_per_second': '1.6036', 'grad_norm': '36.75', 'counters/examples': 6688, 'counters/updates': 209}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78977.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80995.0 MB / 81251.2 MB
+Train stats after 6720 examples: {'rewards_train/chosen': '-1.5388', 'rewards_train/rejected': '-2.122', 'rewards_train/accuracies': '0.625', 'rewards_train/margins': '0.58326', 'logps_train/rejected': '-125.46', 'logps_train/chosen': '-129.24', 'loss/train': '0.59713', 'examples_per_second': '3.214', 'grad_norm': '40.75', 'counters/examples': 6720, 'counters/updates': 210}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 56225.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 72757.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 75505.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 73175.0 MB / 81251.2 MB
+Train stats after 6752 examples: {'rewards_train/chosen': '-1.4735', 'rewards_train/rejected': '-2.6475', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '1.174', 'logps_train/rejected': '-167.51', 'logps_train/chosen': '-117.3', 'loss/train': '0.46458', 'examples_per_second': '2.991', 'grad_norm': '31.625', 'counters/examples': 6752, 'counters/updates': 211}
+Train stats after 6784 examples: {'rewards_train/chosen': '-1.0311', 'rewards_train/rejected': '-2.0453', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '1.0142', 'logps_train/rejected': '-157.69', 'logps_train/chosen': '-137.09', 'loss/train': '0.43043', 'examples_per_second': '3.256', 'grad_norm': '27.375', 'counters/examples': 6784, 'counters/updates': 212}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 75505.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 73175.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 69299.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 65589.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 70135.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 68463.0 MB / 81251.2 MB
+Train stats after 6816 examples: {'rewards_train/chosen': '-1.3344', 'rewards_train/rejected': '-2.218', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.88358', 'logps_train/rejected': '-144.87', 'logps_train/chosen': '-111.72', 'loss/train': '0.44951', 'examples_per_second': '1.5688', 'grad_norm': '30.625', 'counters/examples': 6816, 'counters/updates': 213}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 74397.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 71261.0 MB / 81251.2 MB
+Train stats after 6848 examples: {'rewards_train/chosen': '-1.6714', 'rewards_train/rejected': '-3.0528', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '1.3814', 'logps_train/rejected': '-181.89', 'logps_train/chosen': '-127.85', 'loss/train': '0.35232', 'examples_per_second': '1.7277', 'grad_norm': '29.5', 'counters/examples': 6848, 'counters/updates': 214}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 65145.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 62405.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 70133.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 67083.0 MB / 81251.2 MB
+Train stats after 6880 examples: {'rewards_train/chosen': '-1.8094', 'rewards_train/rejected': '-2.4969', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.68743', 'logps_train/rejected': '-130.56', 'logps_train/chosen': '-123.89', 'loss/train': '0.62541', 'examples_per_second': '1.6085', 'grad_norm': '41.5', 'counters/examples': 6880, 'counters/updates': 215}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 57235.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80919.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 77593.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78403.0 MB / 81251.2 MB
+Train stats after 6912 examples: {'rewards_train/chosen': '-1.8563', 'rewards_train/rejected': '-2.7486', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.89234', 'logps_train/rejected': '-140.17', 'logps_train/chosen': '-141.47', 'loss/train': '0.51155', 'examples_per_second': '2.7778', 'grad_norm': '32.75', 'counters/examples': 6912, 'counters/updates': 216}
+Train stats after 6944 examples: {'rewards_train/chosen': '-1.3599', 'rewards_train/rejected': '-2.4603', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '1.1004', 'logps_train/rejected': '-160.06', 'logps_train/chosen': '-127.85', 'loss/train': '0.40659', 'examples_per_second': '3.4978', 'grad_norm': '28', 'counters/examples': 6944, 'counters/updates': 217}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 77621.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 78429.0 MB / 81251.2 MB
+Train stats after 6976 examples: {'rewards_train/chosen': '-1.4397', 'rewards_train/rejected': '-2.2897', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.84998', 'logps_train/rejected': '-126.51', 'logps_train/chosen': '-129.89', 'loss/train': '0.50673', 'examples_per_second': '3.7024', 'grad_norm': '33.75', 'counters/examples': 6976, 'counters/updates': 218}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 77621.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78429.0 MB / 81251.2 MB
+Train stats after 7008 examples: {'rewards_train/chosen': '-1.025', 'rewards_train/rejected': '-1.7624', 'rewards_train/accuracies': '0.625', 'rewards_train/margins': '0.73737', 'logps_train/rejected': '-100.2', 'logps_train/chosen': '-84.212', 'loss/train': '0.54316', 'examples_per_second': '3.1038', 'grad_norm': '27.375', 'counters/examples': 7008, 'counters/updates': 219}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 77621.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78429.0 MB / 81251.2 MB
+Train stats after 7040 examples: {'rewards_train/chosen': '-1.6431', 'rewards_train/rejected': '-2.3068', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.66375', 'logps_train/rejected': '-114.1', 'logps_train/chosen': '-147.82', 'loss/train': '0.57525', 'examples_per_second': '3.5017', 'grad_norm': '41.25', 'counters/examples': 7040, 'counters/updates': 220}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 77621.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78429.0 MB / 81251.2 MB
+Train stats after 7072 examples: {'rewards_train/chosen': '-1.2276', 'rewards_train/rejected': '-2.3267', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '1.0991', 'logps_train/rejected': '-134.57', 'logps_train/chosen': '-89.038', 'loss/train': '0.39327', 'examples_per_second': '3.0939', 'grad_norm': '20.875', 'counters/examples': 7072, 'counters/updates': 221}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 77621.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 78429.0 MB / 81251.2 MB
+Train stats after 7104 examples: {'rewards_train/chosen': '-1.5345', 'rewards_train/rejected': '-2.4615', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.92695', 'logps_train/rejected': '-126.2', 'logps_train/chosen': '-90.737', 'loss/train': '0.43201', 'examples_per_second': '3.0884', 'grad_norm': '29', 'counters/examples': 7104, 'counters/updates': 222}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 77621.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78429.0 MB / 81251.2 MB
+Train stats after 7136 examples: {'rewards_train/chosen': '-1.8965', 'rewards_train/rejected': '-3.3375', 'rewards_train/accuracies': '0.9375', 'rewards_train/margins': '1.441', 'logps_train/rejected': '-139.36', 'logps_train/chosen': '-93.869', 'loss/train': '0.34241', 'examples_per_second': '3.2222', 'grad_norm': '27', 'counters/examples': 7136, 'counters/updates': 223}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 77621.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78429.0 MB / 81251.2 MB
+Train stats after 7168 examples: {'rewards_train/chosen': '-1.7809', 'rewards_train/rejected': '-3.0285', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '1.2476', 'logps_train/rejected': '-172.13', 'logps_train/chosen': '-178.48', 'loss/train': '0.46656', 'examples_per_second': '3.1045', 'grad_norm': '51.75', 'counters/examples': 7168, 'counters/updates': 224}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 54839.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 67341.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 76543.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 92% | 内存使用 78813.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 78507.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80717.0 MB / 81251.2 MB
+Train stats after 7200 examples: {'rewards_train/chosen': '-1.822', 'rewards_train/rejected': '-3.1528', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '1.3308', 'logps_train/rejected': '-215.27', 'logps_train/chosen': '-147.98', 'loss/train': '0.42846', 'examples_per_second': '1.0292', 'grad_norm': '34.25', 'counters/examples': 7200, 'counters/updates': 225}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 70957.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79169.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 78477.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 78593.0 MB / 81251.2 MB
+Train stats after 7232 examples: {'rewards_train/chosen': '-2.1629', 'rewards_train/rejected': '-3.0022', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.83925', 'logps_train/rejected': '-121.45', 'logps_train/chosen': '-102.7', 'loss/train': '0.64313', 'examples_per_second': '2.7286', 'grad_norm': '33.75', 'counters/examples': 7232, 'counters/updates': 226}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78895.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78593.0 MB / 81251.2 MB
+Train stats after 7264 examples: {'rewards_train/chosen': '-1.6812', 'rewards_train/rejected': '-2.396', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.71473', 'logps_train/rejected': '-133.35', 'logps_train/chosen': '-112.25', 'loss/train': '0.52415', 'examples_per_second': '2.6979', 'grad_norm': '34', 'counters/examples': 7264, 'counters/updates': 227}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 72923.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 71393.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80507.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80257.0 MB / 81251.2 MB
+Train stats after 7296 examples: {'rewards_train/chosen': '-1.9371', 'rewards_train/rejected': '-3.3219', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '1.3847', 'logps_train/rejected': '-172.07', 'logps_train/chosen': '-146.06', 'loss/train': '0.38308', 'examples_per_second': '1.511', 'grad_norm': '27.875', 'counters/examples': 7296, 'counters/updates': 228}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 76413.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 79583.0 MB / 81251.2 MB
+Train stats after 7328 examples: {'rewards_train/chosen': '-1.6933', 'rewards_train/rejected': '-2.71', 'rewards_train/accuracies': '0.875', 'rewards_train/margins': '1.0167', 'logps_train/rejected': '-159.75', 'logps_train/chosen': '-112.84', 'loss/train': '0.43484', 'examples_per_second': '2.1702', 'grad_norm': '30.375', 'counters/examples': 7328, 'counters/updates': 229}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 76413.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 79583.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 76413.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79583.0 MB / 81251.2 MB
+Train stats after 7360 examples: {'rewards_train/chosen': '-1.6933', 'rewards_train/rejected': '-2.4539', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.76059', 'logps_train/rejected': '-118.88', 'logps_train/chosen': '-127.08', 'loss/train': '0.56725', 'examples_per_second': '2.5363', 'grad_norm': '34.25', 'counters/examples': 7360, 'counters/updates': 230}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 76435.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79607.0 MB / 81251.2 MB
+Train stats after 7392 examples: {'rewards_train/chosen': '-1.8673', 'rewards_train/rejected': '-2.6466', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.7793', 'logps_train/rejected': '-132.57', 'logps_train/chosen': '-112.59', 'loss/train': '0.52308', 'examples_per_second': '3.9532', 'grad_norm': '29.375', 'counters/examples': 7392, 'counters/updates': 231}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 70541.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 71691.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 70541.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 71537.0 MB / 81251.2 MB
+Train stats after 7424 examples: {'rewards_train/chosen': '-1.7869', 'rewards_train/rejected': '-2.7118', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.92491', 'logps_train/rejected': '-179.66', 'logps_train/chosen': '-159.19', 'loss/train': '0.5459', 'examples_per_second': '1.5029', 'grad_norm': '39', 'counters/examples': 7424, 'counters/updates': 232}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 74137.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 75951.0 MB / 81251.2 MB
+Train stats after 7456 examples: {'rewards_train/chosen': '-1.0964', 'rewards_train/rejected': '-2.1666', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '1.0702', 'logps_train/rejected': '-168.8', 'logps_train/chosen': '-128.18', 'loss/train': '0.4001', 'examples_per_second': '2.9938', 'grad_norm': '25.5', 'counters/examples': 7456, 'counters/updates': 233}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 74973.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 77205.0 MB / 81251.2 MB
+Train stats after 7488 examples: {'rewards_train/chosen': '-1.594', 'rewards_train/rejected': '-2.3051', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.71103', 'logps_train/rejected': '-121.87', 'logps_train/chosen': '-85.225', 'loss/train': '0.54237', 'examples_per_second': '2.828', 'grad_norm': '30.25', 'counters/examples': 7488, 'counters/updates': 234}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 75811.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 77625.0 MB / 81251.2 MB
+Train stats after 7520 examples: {'rewards_train/chosen': '-1.2672', 'rewards_train/rejected': '-2.6455', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '1.3783', 'logps_train/rejected': '-169.02', 'logps_train/chosen': '-116.16', 'loss/train': '0.36856', 'examples_per_second': '2.6731', 'grad_norm': '25.375', 'counters/examples': 7520, 'counters/updates': 235}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 75835.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 77649.0 MB / 81251.2 MB
+Train stats after 7552 examples: {'rewards_train/chosen': '-1.9468', 'rewards_train/rejected': '-3.126', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '1.1792', 'logps_train/rejected': '-200.88', 'logps_train/chosen': '-122.34', 'loss/train': '0.52852', 'examples_per_second': '3.7323', 'grad_norm': '51.25', 'counters/examples': 7552, 'counters/updates': 236}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80145.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80813.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80145.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80813.0 MB / 81251.2 MB
+Train stats after 7584 examples: {'rewards_train/chosen': '-1.7506', 'rewards_train/rejected': '-3.0673', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '1.3167', 'logps_train/rejected': '-148.63', 'logps_train/chosen': '-124.33', 'loss/train': '0.39798', 'examples_per_second': '1.9777', 'grad_norm': '30.5', 'counters/examples': 7584, 'counters/updates': 237}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80145.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 80813.0 MB / 81251.2 MB
+Train stats after 7616 examples: {'rewards_train/chosen': '-1.5754', 'rewards_train/rejected': '-2.5876', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '1.0122', 'logps_train/rejected': '-123.77', 'logps_train/chosen': '-99.473', 'loss/train': '0.49406', 'examples_per_second': '3.2217', 'grad_norm': '33.25', 'counters/examples': 7616, 'counters/updates': 238}
+Train stats after 7648 examples: {'rewards_train/chosen': '-1.7129', 'rewards_train/rejected': '-2.8587', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '1.1458', 'logps_train/rejected': '-125.16', 'logps_train/chosen': '-113.26', 'loss/train': '0.42666', 'examples_per_second': '3.9569', 'grad_norm': '25.75', 'counters/examples': 7648, 'counters/updates': 239}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80167.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80813.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 80167.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 80813.0 MB / 81251.2 MB
+Train stats after 7680 examples: {'rewards_train/chosen': '-1.1044', 'rewards_train/rejected': '-2.0944', 'rewards_train/accuracies': '0.875', 'rewards_train/margins': '0.99002', 'logps_train/rejected': '-133.9', 'logps_train/chosen': '-107.4', 'loss/train': '0.39116', 'examples_per_second': '2.0931', 'grad_norm': '24.875', 'counters/examples': 7680, 'counters/updates': 240}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 49803.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80945.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 67257.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78103.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 81249.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80197.0 MB / 81251.2 MB
+Train stats after 7712 examples: {'rewards_train/chosen': '-2.0705', 'rewards_train/rejected': '-2.8779', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.80745', 'logps_train/rejected': '-113.1', 'logps_train/chosen': '-106.04', 'loss/train': '0.51523', 'examples_per_second': '1.1122', 'grad_norm': '32.75', 'counters/examples': 7712, 'counters/updates': 241}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 74493.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 77671.0 MB / 81251.2 MB
+Train stats after 7744 examples: {'rewards_train/chosen': '-1.8888', 'rewards_train/rejected': '-2.5254', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.63665', 'logps_train/rejected': '-119.38', 'logps_train/chosen': '-112.82', 'loss/train': '0.57638', 'examples_per_second': '2.7318', 'grad_norm': '31.875', 'counters/examples': 7744, 'counters/updates': 242}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 74521.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 77699.0 MB / 81251.2 MB
+Train stats after 7776 examples: {'rewards_train/chosen': '-2.0893', 'rewards_train/rejected': '-3.0218', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.93254', 'logps_train/rejected': '-128.03', 'logps_train/chosen': '-133.02', 'loss/train': '0.60008', 'examples_per_second': '3.6909', 'grad_norm': '79', 'counters/examples': 7776, 'counters/updates': 243}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 75357.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78117.0 MB / 81251.2 MB
+Train stats after 7808 examples: {'rewards_train/chosen': '-1.1291', 'rewards_train/rejected': '-2.4071', 'rewards_train/accuracies': '0.875', 'rewards_train/margins': '1.2779', 'logps_train/rejected': '-132.18', 'logps_train/chosen': '-88.109', 'loss/train': '0.35132', 'examples_per_second': '2.7003', 'grad_norm': '20.375', 'counters/examples': 7808, 'counters/updates': 244}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 7840 examples: {'rewards_train/chosen': '-1.742', 'rewards_train/rejected': '-2.5087', 'rewards_train/accuracies': '0.625', 'rewards_train/margins': '0.76679', 'logps_train/rejected': '-134.45', 'logps_train/chosen': '-116.82', 'loss/train': '0.64216', 'examples_per_second': '2.1984', 'grad_norm': '42.75', 'counters/examples': 7840, 'counters/updates': 245}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78535.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 7872 examples: {'rewards_train/chosen': '-1.5802', 'rewards_train/rejected': '-2.5399', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.95977', 'logps_train/rejected': '-170.33', 'logps_train/chosen': '-131.47', 'loss/train': '0.48936', 'examples_per_second': '3.1068', 'grad_norm': '33.75', 'counters/examples': 7872, 'counters/updates': 246}
+Train stats after 7904 examples: {'rewards_train/chosen': '-1.551', 'rewards_train/rejected': '-2.548', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.99703', 'logps_train/rejected': '-118.3', 'logps_train/chosen': '-144.67', 'loss/train': '0.49678', 'examples_per_second': '3.5163', 'grad_norm': '30.875', 'counters/examples': 7904, 'counters/updates': 247}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78535.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 7936 examples: {'rewards_train/chosen': '-1.1801', 'rewards_train/rejected': '-2.0502', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.87014', 'logps_train/rejected': '-133.22', 'logps_train/chosen': '-116.8', 'loss/train': '0.49317', 'examples_per_second': '2.4146', 'grad_norm': '28.375', 'counters/examples': 7936, 'counters/updates': 248}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 7968 examples: {'rewards_train/chosen': '-1.5388', 'rewards_train/rejected': '-2.4889', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.95003', 'logps_train/rejected': '-132.34', 'logps_train/chosen': '-108', 'loss/train': '0.46519', 'examples_per_second': '2.706', 'grad_norm': '24.5', 'counters/examples': 7968, 'counters/updates': 249}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 8000 examples: {'rewards_train/chosen': '-1.3733', 'rewards_train/rejected': '-1.9163', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.54295', 'logps_train/rejected': '-99.904', 'logps_train/chosen': '-104.76', 'loss/train': '0.59142', 'examples_per_second': '2.8683', 'grad_norm': '25', 'counters/examples': 8000, 'counters/updates': 250}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 8032 examples: {'rewards_train/chosen': '-1.3107', 'rewards_train/rejected': '-2.1198', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.80911', 'logps_train/rejected': '-137.28', 'logps_train/chosen': '-93.923', 'loss/train': '0.46092', 'examples_per_second': '2.8035', 'grad_norm': '25.625', 'counters/examples': 8032, 'counters/updates': 251}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 8064 examples: {'rewards_train/chosen': '-1.4239', 'rewards_train/rejected': '-2.4376', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '1.0138', 'logps_train/rejected': '-131.89', 'logps_train/chosen': '-111.35', 'loss/train': '0.42623', 'examples_per_second': '3.7332', 'grad_norm': '27.75', 'counters/examples': 8064, 'counters/updates': 252}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78535.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 8096 examples: {'rewards_train/chosen': '-1.4016', 'rewards_train/rejected': '-2.2895', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.88782', 'logps_train/rejected': '-134.81', 'logps_train/chosen': '-114.38', 'loss/train': '0.48767', 'examples_per_second': '2.1711', 'grad_norm': '27.625', 'counters/examples': 8096, 'counters/updates': 253}
+Train stats after 8128 examples: {'rewards_train/chosen': '-1.6579', 'rewards_train/rejected': '-2.2177', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.55982', 'logps_train/rejected': '-124.88', 'logps_train/chosen': '-101.05', 'loss/train': '0.58005', 'examples_per_second': '3.4269', 'grad_norm': '31.625', 'counters/examples': 8128, 'counters/updates': 254}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78535.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 8160 examples: {'rewards_train/chosen': '-1.3701', 'rewards_train/rejected': '-2.2718', 'rewards_train/accuracies': '0.875', 'rewards_train/margins': '0.90176', 'logps_train/rejected': '-104.4', 'logps_train/chosen': '-103', 'loss/train': '0.44294', 'examples_per_second': '2.8702', 'grad_norm': '26.125', 'counters/examples': 8160, 'counters/updates': 255}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 8192 examples: {'rewards_train/chosen': '-1.476', 'rewards_train/rejected': '-2.6523', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '1.1763', 'logps_train/rejected': '-144.33', 'logps_train/chosen': '-137.33', 'loss/train': '0.384', 'examples_per_second': '2.697', 'grad_norm': '25.875', 'counters/examples': 8192, 'counters/updates': 256}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 8224 examples: {'rewards_train/chosen': '-1.5929', 'rewards_train/rejected': '-2.8177', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '1.2248', 'logps_train/rejected': '-122.38', 'logps_train/chosen': '-109.3', 'loss/train': '0.40689', 'examples_per_second': '3.4681', 'grad_norm': '28.75', 'counters/examples': 8224, 'counters/updates': 257}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 8256 examples: {'rewards_train/chosen': '-1.6794', 'rewards_train/rejected': '-3.1277', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '1.4483', 'logps_train/rejected': '-135.34', 'logps_train/chosen': '-111.13', 'loss/train': '0.42954', 'examples_per_second': '3.4331', 'grad_norm': '29', 'counters/examples': 8256, 'counters/updates': 258}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 8288 examples: {'rewards_train/chosen': '-1.872', 'rewards_train/rejected': '-3.0157', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '1.1437', 'logps_train/rejected': '-142.95', 'logps_train/chosen': '-140.34', 'loss/train': '0.42802', 'examples_per_second': '2.3126', 'grad_norm': '32.75', 'counters/examples': 8288, 'counters/updates': 259}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 8320 examples: {'rewards_train/chosen': '-2.0219', 'rewards_train/rejected': '-2.8847', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.8629', 'logps_train/rejected': '-98.663', 'logps_train/chosen': '-90.193', 'loss/train': '0.51962', 'examples_per_second': '3.7619', 'grad_norm': '28.625', 'counters/examples': 8320, 'counters/updates': 260}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 8352 examples: {'rewards_train/chosen': '-2.0707', 'rewards_train/rejected': '-2.9309', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '0.86017', 'logps_train/rejected': '-152.22', 'logps_train/chosen': '-119.04', 'loss/train': '0.5358', 'examples_per_second': '2.696', 'grad_norm': '35.25', 'counters/examples': 8352, 'counters/updates': 261}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 8384 examples: {'rewards_train/chosen': '-2.2495', 'rewards_train/rejected': '-3.0468', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.79733', 'logps_train/rejected': '-148.11', 'logps_train/chosen': '-160.66', 'loss/train': '0.56339', 'examples_per_second': '3.1185', 'grad_norm': '42.75', 'counters/examples': 8384, 'counters/updates': 262}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 8416 examples: {'rewards_train/chosen': '-2.0999', 'rewards_train/rejected': '-2.6992', 'rewards_train/accuracies': '0.5625', 'rewards_train/margins': '0.59929', 'logps_train/rejected': '-146.21', 'logps_train/chosen': '-114.39', 'loss/train': '0.64503', 'examples_per_second': '3.4634', 'grad_norm': '41.5', 'counters/examples': 8416, 'counters/updates': 263}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 8448 examples: {'rewards_train/chosen': '-1.2533', 'rewards_train/rejected': '-2.2011', 'rewards_train/accuracies': '0.875', 'rewards_train/margins': '0.94782', 'logps_train/rejected': '-140.01', 'logps_train/chosen': '-126.26', 'loss/train': '0.44058', 'examples_per_second': '3.4231', 'grad_norm': '32.75', 'counters/examples': 8448, 'counters/updates': 264}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 8480 examples: {'rewards_train/chosen': '-1.674', 'rewards_train/rejected': '-2.6891', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '1.0151', 'logps_train/rejected': '-162.53', 'logps_train/chosen': '-134.88', 'loss/train': '0.4157', 'examples_per_second': '2.538', 'grad_norm': '28.125', 'counters/examples': 8480, 'counters/updates': 265}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 78535.0 MB / 81251.2 MB
+Train stats after 8512 examples: {'rewards_train/chosen': '-1.5678', 'rewards_train/rejected': '-2.7018', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '1.1339', 'logps_train/rejected': '-144.02', 'logps_train/chosen': '-105.69', 'loss/train': '0.42086', 'examples_per_second': '2.8577', 'grad_norm': '24.875', 'counters/examples': 8512, 'counters/updates': 266}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79617.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79617.0 MB / 81251.2 MB
+Train stats after 8544 examples: {'rewards_train/chosen': '-1.6105', 'rewards_train/rejected': '-2.4582', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '0.84775', 'logps_train/rejected': '-122.11', 'logps_train/chosen': '-117.1', 'loss/train': '0.53347', 'examples_per_second': '2.0992', 'grad_norm': '39.25', 'counters/examples': 8544, 'counters/updates': 267}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79617.0 MB / 81251.2 MB
+Train stats after 8576 examples: {'rewards_train/chosen': '-1.2929', 'rewards_train/rejected': '-2.6482', 'rewards_train/accuracies': '0.875', 'rewards_train/margins': '1.3553', 'logps_train/rejected': '-145.05', 'logps_train/chosen': '-108.92', 'loss/train': '0.36486', 'examples_per_second': '3.0855', 'grad_norm': '24', 'counters/examples': 8576, 'counters/updates': 268}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78841.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79617.0 MB / 81251.2 MB
+Train stats after 8608 examples: {'rewards_train/chosen': '-2.0127', 'rewards_train/rejected': '-2.9983', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.98562', 'logps_train/rejected': '-125.2', 'logps_train/chosen': '-125.67', 'loss/train': '0.49416', 'examples_per_second': '2.8422', 'grad_norm': '34.25', 'counters/examples': 8608, 'counters/updates': 269}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 78845.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 79619.0 MB / 81251.2 MB
+Train stats after 8640 examples: {'rewards_train/chosen': '-2.0223', 'rewards_train/rejected': '-3.0088', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '0.98658', 'logps_train/rejected': '-161.04', 'logps_train/chosen': '-128.02', 'loss/train': '0.44856', 'examples_per_second': '3.6798', 'grad_norm': '34.25', 'counters/examples': 8640, 'counters/updates': 270}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 78845.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 79619.0 MB / 81251.2 MB
+Train stats after 8672 examples: {'rewards_train/chosen': '-2.0916', 'rewards_train/rejected': '-3.2116', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '1.12', 'logps_train/rejected': '-159.75', 'logps_train/chosen': '-144.1', 'loss/train': '0.4445', 'examples_per_second': '3.0836', 'grad_norm': '37', 'counters/examples': 8672, 'counters/updates': 271}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 78845.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 79619.0 MB / 81251.2 MB
+Train stats after 8704 examples: {'rewards_train/chosen': '-1.3177', 'rewards_train/rejected': '-2.3547', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '1.0371', 'logps_train/rejected': '-134.01', 'logps_train/chosen': '-108.22', 'loss/train': '0.41672', 'examples_per_second': '2.5405', 'grad_norm': '28.125', 'counters/examples': 8704, 'counters/updates': 272}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78845.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 79619.0 MB / 81251.2 MB
+Train stats after 8736 examples: {'rewards_train/chosen': '-1.7699', 'rewards_train/rejected': '-2.8761', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '1.1062', 'logps_train/rejected': '-131.1', 'logps_train/chosen': '-109.47', 'loss/train': '0.46765', 'examples_per_second': '3.2416', 'grad_norm': '34.25', 'counters/examples': 8736, 'counters/updates': 273}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78845.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 79619.0 MB / 81251.2 MB
+Train stats after 8768 examples: {'rewards_train/chosen': '-1.4606', 'rewards_train/rejected': '-3.1877', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '1.727', 'logps_train/rejected': '-106.87', 'logps_train/chosen': '-105.95', 'loss/train': '0.29267', 'examples_per_second': '3.2574', 'grad_norm': '17.875', 'counters/examples': 8768, 'counters/updates': 274}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78845.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 79619.0 MB / 81251.2 MB
+Train stats after 8800 examples: {'rewards_train/chosen': '-2.1277', 'rewards_train/rejected': '-3.3657', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '1.238', 'logps_train/rejected': '-138.11', 'logps_train/chosen': '-106.17', 'loss/train': '0.44191', 'examples_per_second': '3.7266', 'grad_norm': '34.25', 'counters/examples': 8800, 'counters/updates': 275}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78845.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79619.0 MB / 81251.2 MB
+Train stats after 8832 examples: {'rewards_train/chosen': '-2.1791', 'rewards_train/rejected': '-3.5436', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '1.3645', 'logps_train/rejected': '-163.01', 'logps_train/chosen': '-108.13', 'loss/train': '0.38954', 'examples_per_second': '2.4228', 'grad_norm': '29.25', 'counters/examples': 8832, 'counters/updates': 276}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 78845.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79619.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 78845.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 79619.0 MB / 81251.2 MB
+Train stats after 8864 examples: {'rewards_train/chosen': '-1.4898', 'rewards_train/rejected': '-2.773', 'rewards_train/accuracies': '0.71875', 'rewards_train/margins': '1.2832', 'logps_train/rejected': '-122.45', 'logps_train/chosen': '-115.65', 'loss/train': '0.44629', 'examples_per_second': '2.8458', 'grad_norm': '32.75', 'counters/examples': 8864, 'counters/updates': 277}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 8896 examples: {'rewards_train/chosen': '-1.696', 'rewards_train/rejected': '-3.4562', 'rewards_train/accuracies': '0.875', 'rewards_train/margins': '1.7602', 'logps_train/rejected': '-152.59', 'logps_train/chosen': '-116.15', 'loss/train': '0.33028', 'examples_per_second': '2.0784', 'grad_norm': '27', 'counters/examples': 8896, 'counters/updates': 278}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 8928 examples: {'rewards_train/chosen': '-2.4683', 'rewards_train/rejected': '-3.6685', 'rewards_train/accuracies': '0.875', 'rewards_train/margins': '1.2002', 'logps_train/rejected': '-161.79', 'logps_train/chosen': '-120.34', 'loss/train': '0.41427', 'examples_per_second': '3.6638', 'grad_norm': '36.75', 'counters/examples': 8928, 'counters/updates': 279}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 8960 examples: {'rewards_train/chosen': '-1.9667', 'rewards_train/rejected': '-3.3704', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '1.4037', 'logps_train/rejected': '-153.81', 'logps_train/chosen': '-131.73', 'loss/train': '0.41884', 'examples_per_second': '2.6707', 'grad_norm': '38.75', 'counters/examples': 8960, 'counters/updates': 280}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 8992 examples: {'rewards_train/chosen': '-2.1943', 'rewards_train/rejected': '-3.5023', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '1.308', 'logps_train/rejected': '-168.1', 'logps_train/chosen': '-161.87', 'loss/train': '0.41657', 'examples_per_second': '2.7005', 'grad_norm': '35.75', 'counters/examples': 8992, 'counters/updates': 281}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80037.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9024 examples: {'rewards_train/chosen': '-2.3411', 'rewards_train/rejected': '-3.3743', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '1.0332', 'logps_train/rejected': '-159.79', 'logps_train/chosen': '-133.4', 'loss/train': '0.49221', 'examples_per_second': '2.5418', 'grad_norm': '36.5', 'counters/examples': 9024, 'counters/updates': 282}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9056 examples: {'rewards_train/chosen': '-2.2849', 'rewards_train/rejected': '-3.3491', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '1.0641', 'logps_train/rejected': '-198.87', 'logps_train/chosen': '-132.25', 'loss/train': '0.52405', 'examples_per_second': '3.0739', 'grad_norm': '38.75', 'counters/examples': 9056, 'counters/updates': 283}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9088 examples: {'rewards_train/chosen': '-1.8304', 'rewards_train/rejected': '-3.0943', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '1.2639', 'logps_train/rejected': '-155.89', 'logps_train/chosen': '-125.94', 'loss/train': '0.40191', 'examples_per_second': '2.8584', 'grad_norm': '26.75', 'counters/examples': 9088, 'counters/updates': 284}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9120 examples: {'rewards_train/chosen': '-2.0259', 'rewards_train/rejected': '-3.2913', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '1.2654', 'logps_train/rejected': '-156.45', 'logps_train/chosen': '-139.98', 'loss/train': '0.42167', 'examples_per_second': '3.4493', 'grad_norm': '32.75', 'counters/examples': 9120, 'counters/updates': 285}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9152 examples: {'rewards_train/chosen': '-2.3218', 'rewards_train/rejected': '-3.6954', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '1.3737', 'logps_train/rejected': '-141.8', 'logps_train/chosen': '-116.96', 'loss/train': '0.45477', 'examples_per_second': '2.0961', 'grad_norm': '32', 'counters/examples': 9152, 'counters/updates': 286}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9184 examples: {'rewards_train/chosen': '-1.732', 'rewards_train/rejected': '-2.995', 'rewards_train/accuracies': '0.96875', 'rewards_train/margins': '1.263', 'logps_train/rejected': '-123.66', 'logps_train/chosen': '-118.53', 'loss/train': '0.33483', 'examples_per_second': '3.4937', 'grad_norm': '25.125', 'counters/examples': 9184, 'counters/updates': 287}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9216 examples: {'rewards_train/chosen': '-2.3732', 'rewards_train/rejected': '-3.8137', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '1.4405', 'logps_train/rejected': '-145.85', 'logps_train/chosen': '-105.59', 'loss/train': '0.51338', 'examples_per_second': '3.4482', 'grad_norm': '36.5', 'counters/examples': 9216, 'counters/updates': 288}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9248 examples: {'rewards_train/chosen': '-1.4968', 'rewards_train/rejected': '-2.608', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '1.1113', 'logps_train/rejected': '-138.99', 'logps_train/chosen': '-126.86', 'loss/train': '0.46422', 'examples_per_second': '2.8297', 'grad_norm': '28', 'counters/examples': 9248, 'counters/updates': 289}
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9280 examples: {'rewards_train/chosen': '-2.1088', 'rewards_train/rejected': '-3.3739', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '1.2651', 'logps_train/rejected': '-129.98', 'logps_train/chosen': '-117.75', 'loss/train': '0.45475', 'examples_per_second': '2.5241', 'grad_norm': '38.75', 'counters/examples': 9280, 'counters/updates': 290}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80037.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9312 examples: {'rewards_train/chosen': '-1.6698', 'rewards_train/rejected': '-2.8448', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '1.175', 'logps_train/rejected': '-179.36', 'logps_train/chosen': '-130.33', 'loss/train': '0.41019', 'examples_per_second': '2.2957', 'grad_norm': '34.75', 'counters/examples': 9312, 'counters/updates': 291}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9344 examples: {'rewards_train/chosen': '-1.7865', 'rewards_train/rejected': '-3.0481', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '1.2617', 'logps_train/rejected': '-150.78', 'logps_train/chosen': '-130.05', 'loss/train': '0.40355', 'examples_per_second': '3.2363', 'grad_norm': '27.25', 'counters/examples': 9344, 'counters/updates': 292}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9376 examples: {'rewards_train/chosen': '-2.3282', 'rewards_train/rejected': '-4.0396', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '1.7114', 'logps_train/rejected': '-158.98', 'logps_train/chosen': '-128.26', 'loss/train': '0.37317', 'examples_per_second': '2.5316', 'grad_norm': '24.375', 'counters/examples': 9376, 'counters/updates': 293}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80037.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9408 examples: {'rewards_train/chosen': '-1.99', 'rewards_train/rejected': '-3.462', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '1.472', 'logps_train/rejected': '-181.26', 'logps_train/chosen': '-117.15', 'loss/train': '0.38925', 'examples_per_second': '2.1924', 'grad_norm': '33.5', 'counters/examples': 9408, 'counters/updates': 294}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9440 examples: {'rewards_train/chosen': '-2.1584', 'rewards_train/rejected': '-3.2927', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '1.1343', 'logps_train/rejected': '-151.41', 'logps_train/chosen': '-120.86', 'loss/train': '0.51832', 'examples_per_second': '3.0578', 'grad_norm': '37.75', 'counters/examples': 9440, 'counters/updates': 295}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 97% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9472 examples: {'rewards_train/chosen': '-1.6686', 'rewards_train/rejected': '-3.437', 'rewards_train/accuracies': '0.90625', 'rewards_train/margins': '1.7683', 'logps_train/rejected': '-169.26', 'logps_train/chosen': '-131.88', 'loss/train': '0.33096', 'examples_per_second': '2.7162', 'grad_norm': '25.25', 'counters/examples': 9472, 'counters/updates': 296}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9504 examples: {'rewards_train/chosen': '-1.7556', 'rewards_train/rejected': '-3.4065', 'rewards_train/accuracies': '0.90625', 'rewards_train/margins': '1.651', 'logps_train/rejected': '-185.64', 'logps_train/chosen': '-124.28', 'loss/train': '0.2953', 'examples_per_second': '2.3781', 'grad_norm': '24.125', 'counters/examples': 9504, 'counters/updates': 297}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9536 examples: {'rewards_train/chosen': '-2.1475', 'rewards_train/rejected': '-3.3114', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '1.1639', 'logps_train/rejected': '-139.29', 'logps_train/chosen': '-124.28', 'loss/train': '0.4745', 'examples_per_second': '2.8477', 'grad_norm': '35.75', 'counters/examples': 9536, 'counters/updates': 298}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80037.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 80383.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80037.0 MB / 81251.2 MB
+Train stats after 9568 examples: {'rewards_train/chosen': '-2.9034', 'rewards_train/rejected': '-4.2165', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '1.3131', 'logps_train/rejected': '-157.07', 'logps_train/chosen': '-137.36', 'loss/train': '0.62256', 'examples_per_second': '2.6562', 'grad_norm': '52.5', 'counters/examples': 9568, 'counters/updates': 299}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 80959.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 63413.0 MB / 81251.2 MB
+Train stats after 9600 examples: {'rewards_train/chosen': '-1.745', 'rewards_train/rejected': '-3.3649', 'rewards_train/accuracies': '0.875', 'rewards_train/margins': '1.6198', 'logps_train/rejected': '-171.08', 'logps_train/chosen': '-130.41', 'loss/train': '0.38878', 'examples_per_second': '1.776', 'grad_norm': '31.75', 'counters/examples': 9600, 'counters/updates': 300}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80959.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80933.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80959.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 80513.0 MB / 81251.2 MB
+Train stats after 9632 examples: {'rewards_train/chosen': '-1.551', 'rewards_train/rejected': '-3.3456', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '1.7946', 'logps_train/rejected': '-141.88', 'logps_train/chosen': '-137.15', 'loss/train': '0.31421', 'examples_per_second': '2.4436', 'grad_norm': '28.5', 'counters/examples': 9632, 'counters/updates': 301}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80959.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 79677.0 MB / 81251.2 MB
+Train stats after 9664 examples: {'rewards_train/chosen': '-2.112', 'rewards_train/rejected': '-3.3443', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '1.2323', 'logps_train/rejected': '-126.6', 'logps_train/chosen': '-123.21', 'loss/train': '0.49658', 'examples_per_second': '3.2514', 'grad_norm': '37', 'counters/examples': 9664, 'counters/updates': 302}
+Train stats after 9696 examples: {'rewards_train/chosen': '-1.7325', 'rewards_train/rejected': '-2.5839', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.85142', 'logps_train/rejected': '-113.03', 'logps_train/chosen': '-110.91', 'loss/train': '0.45455', 'examples_per_second': '3.7592', 'grad_norm': '26.75', 'counters/examples': 9696, 'counters/updates': 303}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80981.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 79703.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 97% | 内存使用 80981.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 80121.0 MB / 81251.2 MB
+Train stats after 9728 examples: {'rewards_train/chosen': '-1.9586', 'rewards_train/rejected': '-3.321', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '1.3623', 'logps_train/rejected': '-156.18', 'logps_train/chosen': '-116.92', 'loss/train': '0.3888', 'examples_per_second': '3.0735', 'grad_norm': '26.625', 'counters/examples': 9728, 'counters/updates': 304}
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 80981.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80121.0 MB / 81251.2 MB
+Train stats after 9760 examples: {'rewards_train/chosen': '-2.0362', 'rewards_train/rejected': '-3.505', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '1.4689', 'logps_train/rejected': '-182.97', 'logps_train/chosen': '-161.65', 'loss/train': '0.43364', 'examples_per_second': '3.1111', 'grad_norm': '33', 'counters/examples': 9760, 'counters/updates': 305}
+Train stats after 9792 examples: {'rewards_train/chosen': '-1.9556', 'rewards_train/rejected': '-2.8488', 'rewards_train/accuracies': '0.65625', 'rewards_train/margins': '0.89329', 'logps_train/rejected': '-130.79', 'logps_train/chosen': '-108.69', 'loss/train': '0.50059', 'examples_per_second': '3.4834', 'grad_norm': '31.875', 'counters/examples': 9792, 'counters/updates': 306}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80981.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 80957.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 80981.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78381.0 MB / 81251.2 MB
+Train stats after 9824 examples: {'rewards_train/chosen': '-2.3712', 'rewards_train/rejected': '-3.6033', 'rewards_train/accuracies': '0.8125', 'rewards_train/margins': '1.2321', 'logps_train/rejected': '-145.01', 'logps_train/chosen': '-108.77', 'loss/train': '0.45456', 'examples_per_second': '2.3704', 'grad_norm': '33', 'counters/examples': 9824, 'counters/updates': 307}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 75577.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 78111.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 63579.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 69013.0 MB / 81251.2 MB
+Train stats after 9856 examples: {'rewards_train/chosen': '-3.3218', 'rewards_train/rejected': '-4.2785', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '0.95669', 'logps_train/rejected': '-183.64', 'logps_train/chosen': '-154.27', 'loss/train': '0.52147', 'examples_per_second': '1.3876', 'grad_norm': '45', 'counters/examples': 9856, 'counters/updates': 308}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 73673.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 72667.0 MB / 81251.2 MB
+Train stats after 9888 examples: {'rewards_train/chosen': '-2.584', 'rewards_train/rejected': '-3.6045', 'rewards_train/accuracies': '0.78125', 'rewards_train/margins': '1.0205', 'logps_train/rejected': '-155.33', 'logps_train/chosen': '-132.11', 'loss/train': '0.53387', 'examples_per_second': '3.1412', 'grad_norm': '35.25', 'counters/examples': 9888, 'counters/updates': 309}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 74511.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 73085.0 MB / 81251.2 MB
+Train stats after 9920 examples: {'rewards_train/chosen': '-2.0517', 'rewards_train/rejected': '-3.0553', 'rewards_train/accuracies': '0.75', 'rewards_train/margins': '1.0037', 'logps_train/rejected': '-139.99', 'logps_train/chosen': '-118.24', 'loss/train': '0.52008', 'examples_per_second': '3.0563', 'grad_norm': '34.25', 'counters/examples': 9920, 'counters/updates': 310}
+[GPU Monitor] GPU 0: 利用率 100% | 内存使用 76185.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 75177.0 MB / 81251.2 MB
+Train stats after 9952 examples: {'rewards_train/chosen': '-1.9748', 'rewards_train/rejected': '-3.6337', 'rewards_train/accuracies': '0.84375', 'rewards_train/margins': '1.6589', 'logps_train/rejected': '-162.61', 'logps_train/chosen': '-116.9', 'loss/train': '0.31286', 'examples_per_second': '2.6807', 'grad_norm': '26.625', 'counters/examples': 9952, 'counters/updates': 311}
+[GPU Monitor] GPU 0: 利用率 99% | 内存使用 76185.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 99% | 内存使用 75177.0 MB / 81251.2 MB
+[GPU Monitor] GPU 0: 利用率 98% | 内存使用 76185.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 98% | 内存使用 75177.0 MB / 81251.2 MB
+Train stats after 9984 examples: {'rewards_train/chosen': '-2.2878', 'rewards_train/rejected': '-3.0842', 'rewards_train/accuracies': '0.6875', 'rewards_train/margins': '0.79647', 'logps_train/rejected': '-118.11', 'logps_train/chosen': '-96.332', 'loss/train': '0.56374', 'examples_per_second': '2.6644', 'grad_norm': '38.25', 'counters/examples': 9984, 'counters/updates': 312}
+Finished generating 1 epochs on train split
+[GPU Monitor] GPU 0: 利用率 12% | 内存使用 76185.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 75177.0 MB / 81251.2 MB
+Writing checkpoint to /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache/root/llama3-8b-sftdpo-warmup-hh-helpful-ref-1-dpo/LATEST/policy.pt ...
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 76185.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 75177.0 MB / 81251.2 MB
+Writing checkpoint to /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache/root/llama3-8b-sftdpo-warmup-hh-helpful-ref-1-dpo/LATEST/optimizer.pt ...
+[GPU Monitor] GPU 0: 利用率 0% | 内存使用 76185.0 MB / 81251.2 MB
+[GPU Monitor] GPU 1: 利用率 100% | 内存使用 75177.0 MB / 81251.2 MB
+Writing checkpoint to /fs-computility/llmit_d/shared/zhangchi/wjc/DPO/direct-preference-optimization-main/.cache/root/llama3-8b-sftdpo-warmup-hh-helpful-ref-1-dpo/LATEST/scheduler.pt ...
