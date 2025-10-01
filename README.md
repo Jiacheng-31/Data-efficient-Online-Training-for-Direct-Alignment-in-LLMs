@@ -16,7 +16,7 @@
   6. selects pairs →
   7. runs DPO training (FSDP).
 * **Plug-and-play with DPO** (based on the open repo by Rafailov et al.); supports DPO out-of-the-box.
-* **Reproducible workspace layout** with per-round caches, logs, and exported LoRA weights.
+* **Reproducible workspace layout** with per-round caches, logs, and exported weights.
 
 ---
 
