@@ -20,7 +20,7 @@
 
 ---
 
-## 🖼 Method Figure
+## 🖼 The framework of DOTA
 
 
 
