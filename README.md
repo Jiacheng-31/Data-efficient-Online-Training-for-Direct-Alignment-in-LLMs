@@ -1,4 +1,4 @@
-# DOTA: Data-Oriented Training for Online DAP (PFP + MAB)
+# DOTA: Data-efficient Online Training for Direct Alignment in LLMs (PFP + MAB)
 
 > Efficient online preference alignment with **Preference Perplexity (PFP)** and a **Multi-Armed Bandit (MAB)** sampler — wrapped in a single command.
 
@@ -166,7 +166,15 @@ If you use DPO:
 }
 ```
 
-If you find **DOTA (PFP + MAB)** useful, please consider citing our work (add your bib here).
+If you find **DOTA (PFP + MAB)** useful, please consider citing our work.
+```bibtex
+@inproceedings{DOTA,
+  title={Data-efficient Online Training for Direct Alignment in LLMs},
+  author={},
+  booktitle={ICLR},
+  year={2026}
+}
+```
 
 ---
 
