@@ -22,14 +22,10 @@
 
 ## 🖼 Method Figure
 
-Place your framework illustration here and reference it in the README:
 
-```markdown
-<!-- Convert PDF to PNG for GitHub rendering -->
+
 ![DOTA Framework](framework.png)
-```
 
-> Tip: keep the source PDF at `iclr2026/figures/framework.pdf` and commit a `framework.png` for GitHub preview.
 
 ---
 
