@@ -47,7 +47,7 @@ Optional but recommended:
 
 ```bash
 # 1) Clone your repo (this repo)
-git clone <YOUR_REPO_URL> DOTA
+git clone DOTA
 cd DOTA
 
 # 2) Create env
@@ -73,7 +73,8 @@ DPO/
 ├─ data_cluster/prompt/     # response generation (torchrun entry)
 │  └─ torch_run_model.py
 ├─ data_select/             # PPL computation & selection
-│  ├─ PPL-NEW.py
+│  ├─ compute-PPF.py
+│  ├─ dataselect.py
 │  └─ dataselect-random.py
 ├─ Reward/                  # reward scoring runner
 │  └─ run_reward_scoring.sh
