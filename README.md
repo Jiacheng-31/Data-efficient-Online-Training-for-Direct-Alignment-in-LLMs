@@ -73,7 +73,7 @@ DPO/
 ├─ data_cluster/prompt/     # response generation (torchrun entry)
 │  └─ torch_run_model.py
 ├─ data_select/             # PPL computation & selection
-│  ├─ compute-PPF.py
+│  ├─ compute-PFP.py
 │  ├─ dataselect.py
 │  └─ dataselect-random.py
 ├─ Reward/                  # reward scoring runner
